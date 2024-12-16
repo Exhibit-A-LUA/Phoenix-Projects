@@ -50,7 +50,9 @@ form input[type="text"] {
   @apply bg-emDark-dark font-brand font-regular text-white text-xs border border-white;
 }
 
-form input[type="text"], input[type="email"], input[type="password"]:focus {
+form input[type="text"],
+input[type="email"],
+input[type="password"]:focus {
   @apply focus:outline-none focus:border-emLavender focus:ring-0;
 }
 
@@ -75,9 +77,9 @@ form input[type="text"], input[type="email"], input[type="password"]:focus {
 }
 
 .syntax-area {
-  @apply bg-emSyntax border text-xs border-white h-auto;
-  border-left: none;
+  @apply bg-emSyntax text-xs border border-white h-auto;
   border-top: none;
+  border-left: none;
 }
 
 .syntax-numbers {

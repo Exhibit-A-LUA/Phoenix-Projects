@@ -1,4 +1,5 @@
 defmodule ElixirGistWeb.Router do
+  # alias ElixirGistWeb.AllGistsLive
   # alias ElixirGistWeb.GistLive
   # alias ElixirGistWeb.CreateGistLive
   use ElixirGistWeb, :router
@@ -70,6 +71,8 @@ defmodule ElixirGistWeb.Router do
       on_mount: [{ElixirGistWeb.UserAuth, :ensure_authenticated}] do
       live "/create", CreateGistLive
       live "/gist", GistLive
+      # ChatGPT recommends: The router works best with fully-qualified module names.
+      live "/all", AllGistsLive
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
     end
