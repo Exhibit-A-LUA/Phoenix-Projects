@@ -28,7 +28,12 @@
 </div>
 
 <div id="edit-section" style="display: none">
-  <.live_component module={GistFormComponent} id={@gist.id} current_user={@current_user} />
+  <.live_component
+    module={GistFormComponent}
+    id={@gist.id}
+    form={to_form(Gists.change_gist(@gist))}
+    current_user={@current_user}
+  />
 </div>
 
 <div id="syntax-section" style="display: block">
@@ -47,10 +52,10 @@
           >
             <img src="/images/delete.svg" alt="Delete Button" />
           </button>
-          <button 
-            id="edit-btn" 
-            class="px-1 interactive-img-btn" 
-            type="button" 
+          <button
+            id="edit-btn"
+            class="px-1 interactive-img-btn"
+            type="button"
             phx-hook="ToggleEdit"
           >
             <img src="/images/edit.svg" alt="Edit Button" />

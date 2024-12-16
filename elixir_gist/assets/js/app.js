@@ -132,7 +132,7 @@ Hooks.ToggleEdit = {
   mounted() {
     this.el.addEventListener("click", () => {
       let edit = document.getElementById("edit-section");
-      let syntax = document.getElementById("symtax-section")
+      let syntax = document.getElementById("syntax-section")
       if (edit && syntax) {
         edit.style.display = "block"
         syntax.style.display = "none"
