@@ -1,8 +1,8 @@
-defmodule DiabetesV1.ProductMainTypes.ProductMainType do
+defmodule DiabetesV1.ProductSubTypes.ProductSubType do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "product_main_types" do
+  schema "product_sub_types" do
     field :name, :string
     field :description, :string
 
@@ -10,8 +10,8 @@ defmodule DiabetesV1.ProductMainTypes.ProductMainType do
   end
 
   @doc false
-  def changeset(product_main_type, attrs) do
-    product_main_type
+  def changeset(product_sub_type, attrs) do
+    product_sub_type
     |> cast(attrs, [:name, :description])
     |> validate_required([:name, :description])
     |> unique_constraint(:name)
