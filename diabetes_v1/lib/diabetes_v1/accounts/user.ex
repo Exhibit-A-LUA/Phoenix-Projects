@@ -9,6 +9,7 @@ defmodule DiabetesV1.Accounts.User do
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
 
+    many_to_many :addresses, DiabetesV1.Addresses.Address, join_through: "user_addresses"
     timestamps(type: :utc_datetime)
   end
 
