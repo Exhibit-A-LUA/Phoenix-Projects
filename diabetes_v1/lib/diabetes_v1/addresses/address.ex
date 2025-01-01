@@ -10,7 +10,7 @@ defmodule DiabetesV1.Addresses.Address do
     field :country, :string
     field :telephone, :string
 
-    many_to_many :users, DiabetesV1.Accounts.User, join_through: "users_addresses"
+    many_to_many :users, DiabetesV1.Accounts.User, join_through: "user_addresses"
     timestamps(type: :utc_datetime)
   end
 

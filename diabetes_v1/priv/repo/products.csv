@@ -1,0 +1,11 @@
+id; main_type;sub_type;category; description;name;serving_g;serving_descr; calories_kcal;carbs_g;fibre_g; starch_g;sugars_g;sugar_alcohol_g; protein_g;fat_g;mono_g;trans_g;poly_g;sat_g;cholesterol_mg; calcium_mg; iron_mg;magnesium_mg;phosphorus_mg;potassium_mg;sodium_mg;zinc_mg;copper_mg;selenium_mcg;v_b9_folate_mcg;v_a_retinol_mcg; v_b1_thiamin_mg;v_b2_riboflavin_mg; v_b3_niacin_mg;v_b5_mg;v_b6_mg;v_b12_mg;v_c_ascorbic_acid_mg;v_d_mcg;v_k_mcg;v_e_mg;choline_mg;glycemic_index
+1;Basic Foods;Alcohol;Ale;;Beer;340;1 12oz Glass;99.4;3;;;;;0.7;;;;;;;;;;;;10.6;;;;;;;;;;;;;;;;;
+2;Basic Foods;Alcohol;Liqueur;;Kahlua;139.2;4 fluid ounces;467.7;65.2;;;53.3;;0.1;0.4;;;0.2;0.2;;1.4;0.1;4.2;8.4;41.8;11.1;;0.1;0.6;;;;;0.2;;;;;;;;1.1;66.7
+3;Basic Foods;Alcohol;Liqueur;;Tia Maria;139.2;4 fluid ounces;467.7;65.2;;;53.3;;0.1;0.4;;;0.2;0.2;;1.4;0.1;4.2;8.4;41.8;11.1;;0.1;0.6;;;;;0.2;;;;;;;;1.1;66.7
+4;Basic Foods;Alcohol;Spirit;;Brandy;41.7;1.5 fluid ounce;96.3;;;;;;;;;;;;;;;;1.7;0.8;0.4;;;;;;;;;;;;;;;;;0
+5;Basic Foods;Alcohol;Spirit;;Brandy Calvados;100;1 Serve;311;3.4;;;3.4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+6;Basic Foods;Alcohol;Spirit;;Rum;41.7;1.5 fluid ounce (1 tsp = 4.6g);96.3;;;;;;;;;;;;;;;;1.7;0.8;0.4;;;;;;;;;;;;;;;;;
+7;Basic Foods;Alcohol;Spirit;;Scotch Whiskey;42;1 Shot;105;;;;;;;;;;;;;;;;;0.4;;;;;;;;;;;;;;;;;;
+8;Basic Foods;Alcohol;Wine;;Cabernet Franc;147;1 Glass;122;4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;50
+9;Basic Foods;Alcohol;Wine;;Cabernet Sauvignon;147;1 Glass;122;4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;50
+10;Basic Foods;Alcohol;Wine;;Mirin;29;1 fl oz (1 tbsp = 30g);72;14;;;13;;0.1;;;;;;;0.9;;;;4.3;0.5;;;;;;;;;;;;;;;;;
