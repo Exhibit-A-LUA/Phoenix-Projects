@@ -95,11 +95,13 @@ defmodule DiabetesV1.Products.Product do
       :v_c_ascorbic_acid_mg,
       :v_d_mcg,
       :v_e_mg,
-      :v_k_mcg
+      :v_k_mcg,
+      :main_type_id,
+      :sub_type_id,
+      :category_id
     ])
     |> validate_required([
       :name,
-      :description,
       :serving_g,
       :serving_descr,
       :calories_kcal,
@@ -137,7 +139,10 @@ defmodule DiabetesV1.Products.Product do
       :v_c_ascorbic_acid_mg,
       :v_d_mcg,
       :v_e_mg,
-      :v_k_mcg
+      :v_k_mcg,
+      :main_type_id,
+      :sub_type_id,
+      :category_id
     ])
     |> unique_constraint(:name)
   end
