@@ -55,7 +55,7 @@ defmodule DiabetesV1.Products.Product do
   def changeset(product, attrs) do
     product
     |> cast(attrs, [
-      :id,
+      # :id,
       :name,
       :description,
       :serving_g,
