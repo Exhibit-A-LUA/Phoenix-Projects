@@ -14,7 +14,7 @@ defmodule DiabetesV1.ProductAliases.ProductAlias do
   @doc false
   def changeset(product_alias, attrs) do
     product_alias
-    |> cast(attrs, [:id, :product_id, :alias])
+    |> cast(attrs, [:product_id, :alias])
     |> validate_required([:product_id, :alias])
     |> unique_constraint(:alias)
   end
