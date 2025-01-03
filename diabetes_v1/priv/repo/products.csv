@@ -1,4 +1,4 @@
-"id"," main_type","sub_type","category","description","name","serving_g","serving_descr"," calories_kcal","carbs_g","fibre_g"," starch_g","sugars_g","sugar_alcohol_g"," protein_g","fat_g","mono_g","trans_g","poly_g","sat_g","cholesterol_mg"," calcium_mg"," iron_mg","magnesium_mg","phosphorus_mg","potassium_mg","sodium_mg","zinc_mg","copper_mg","selenium_mcg","v_b9_folate_mcg","v_a_retinol_mcg"," v_b1_thiamin_mg","v_b2_riboflavin_mg"," v_b3_niacin_mg","v_b5_mg","v_b6_mg","v_b12_mg","v_c_ascorbic_acid_mg","v_d_mcg","v_k_mcg","v_e_mg","choline_mg","glycemic_index"
+"id","main_type","sub_type","category","description","name","serving_g","serving_descr","calories_kcal","carbs_g","fibre_g","starch_g","sugars_g","sugar_alcohol_g","protein_g","fat_g","mono_g","trans_g","poly_g","sat_g","cholesterol_mg","calcium_mg","iron_mg","magnesium_mg","phosphorus_mg","potassium_mg","sodium_mg","zinc_mg","copper_mg","selenium_mcg","v_b9_folate_mcg","v_a_retinol_mcg"," v_b1_thiamin_mg","v_b2_riboflavin_mg","v_b3_niacin_mg","v_b5_mg","v_b6_mg","v_b12_mg","v_c_ascorbic_acid_mg","v_d_mcg","v_k_mcg","v_e_mg","choline_mg","glycemic_index"
 1,"Basic Foods","Alcohol","Ale",,"Beer",340,"1 12oz Glass",99.4,3,,,,,0.70,,,,,,,,,,,,10.60,,,,,,,,,,,,,,,,,
 2,"Basic Foods","Alcohol","Liqueur",,"Kahlua",139.2,"4 fluid ounces",467.7,65.2,,,53.30,,0.10,0.40,,,0.2,0.20,,1.40,0.1,4.2,8.4,41.8,11.10,,0.1,0.6,,,,,0.2,,,,,,,,1.1,66.7
 3,"Basic Foods","Alcohol","Liqueur",,"Tia Maria",139.2,"4 fluid ounces",467.7,65.2,,,53.30,,0.10,0.40,,,0.2,0.20,,1.40,0.1,4.2,8.4,41.8,11.10,,0.1,0.6,,,,,0.2,,,,,,,,1.1,66.7
@@ -833,9 +833,8 @@
 832,"Basic Foods","Vegetables","Lettuces",,"Lettuce Oak Leaf",163,"1 Head",21,3.6,1.80,,1.50,,2.20,0.40,,,0.2,0.10,,57.00,2,,,387.9,8.20,,,,,,,,,,,,,,,,,15
 833,"Basic Foods","Vegetables","Lettuces",,"Lettuce Radicchio",80,"2 Cup",18.4,3.6,0.70,,0.50,,1.10,0.20,,,0.1,0.10,,15.20,0.5,10.4,32,241.6,17.60,0.5,0.3,0.7,48,1.1,,,0.2,0.2,0.1,,6.4,,204.2,1.8,8.7,49.4
 834,"Basic Foods","Vegetables","Lettuces",,"Lettuce Romaine",47,"1 Cup Shredded",8,1.5,1.00,,0.60,,0.60,0.10,,,0.1,,,15.50,0.5,6.6,14.1,116.1,3.80,0.1,,0.2,63.9,204.9,,,0.1,,,,1.9,,48.2,0.1,,15
-835,"Basic Foods","Vegetables","Lettuces",,"Lettuce Speckled",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+835,"Basic Foods","Vegetables","Lettuces",,"Lettuce Speckled",100,"no description",15,2,1.00,,0.50,,1.20,0.20,,,,0.03,,36.00,0.6,13,29,194,28.00,,,,35,1110,,,,,,,4,,126,,,
 836,"Basic Foods","Vegetables","Lettuces",,"Lollo Rosso",100,"no description",16,2.3,0.90,,0.50,,1.30,0.20,,,,,,,1.4,,,,40.00,,,,,,,,0.6,,,,,,,,,15
-837,"Basic Foods","Vegetables","Lettuces",,"Speckled Lettuce",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 838,"Basic Foods","Vegetables","Mushrooms",,"Mushrooms Button",70,"1 Cup",15.4,2.3,0.70,0.4,1.40,0.6,2.20,0.20,,,0.1,,,2.10,0.4,6.3,60.2,222.6,3.50,0.4,0.2,6.5,11.9,,0.1,0.3,2.5,1.1,0.1,,1.5,0.1,,,12.1,12.5
 839,"Basic Foods","Vegetables","Mushrooms",,"Mushrooms Chestnut",87,"1 Whole",19,3.7,0.50,,1.50,,2.20,0.10,,,,,,16.00,0.4,,,389.8,5.20,,,,,,,,,,,,,0.1,,,,12
 840,"Basic Foods","Vegetables","Mushrooms",,"Mushrooms Oyster",86,"1 Cup",28.4,5.2,2.00,,1.00,,2.90,0.40,,,0.1,0.10,,2.60,1.1,15.5,103.2,361.2,15.50,0.7,0.2,2.2,32.7,2.1,0.1,0.3,4.3,1.1,0.1,,,0.6,,,41.9,51
@@ -851,7 +850,6 @@
 850,"Basic Foods","Vegetables","No Category",,"Okra",100,"1 Cup",33,7.5,3.20,,1.50,,1.90,0.20,,,,,,82.00,0.6,57,61,299,7.00,0.6,0.1,0.7,60,214.8,0.2,0.1,1,,0.2,,23,,31.3,0.3,,20
 851,"Basic Foods","Vegetables","No Category",,"Pumpkin",245,"1 Cup Mashed",49,12,2.70,,5.10,,1.80,0.20,,,,0.10,,37.00,1.4,,,563.5,2.50,,,,,,,,,,,,,,,,,75
 852,"Basic Foods","Vegetables","No Category",,"Radish",116,"1 Cup (Check)",18.6,3.9,1.90,,2.20,0.1,0.80,0.10,,,0.1,,,29.00,0.4,11.6,23.2,270.3,45.20,0.3,0.1,0.7,29,0.4,,0.1,0.3,0.2,0.1,,17.2,,1.6,,7.5,32
-853,"Basic Foods","Vegetables","No Category",,"Sauerkraut",29.5,"2 Tablespoons",5.6,1.3,0.90,,0.40,0.3,0.30,,,,,,,8.90,0.4,3.8,5.9,50.2,195.00,0.1,,0.2,7.1,0.3,,,,,,,4.3,,3.8,,3.1,15
 854,"Basic Foods","Vegetables","No Category",,"Water Chestnut",158,"1 Cup",79,19.4,4.00,,3.90,,1.40,0.10,,,,,,6.30,1.4,7.9,30,186.4,12.60,0.6,0.2,1.1,9.5,,,,0.6,,0.3,,2.1,,0.3,0.8,29.2,30.21
 855,"Basic Foods","Vegetables","No Category",,"Watercress",68,"2 Cup",7.5,0.9,0.30,0.1,0.10,,1.60,0.10,,,,,,81.60,0.1,14.3,40.8,224.4,27.90,0.1,0.1,0.6,6.1,108.5,0.1,0.1,0.1,0.2,0.1,,29.2,,170,0.7,6.1,45
 856,"Basic Foods","Vegetables","Onions",,"Green Onions",100,"1 Cup (1 tbsp = 6.51g)",32,7.3,2.60,,2.30,,1.80,0.20,,,0.1,,,72.00,1.5,20,37,276,16.00,0.4,0.1,0.6,64,50,0.1,0.1,0.5,,0.1,,18.8,,207,0.6,5.7,15
@@ -862,7 +860,6 @@
 861,"Basic Foods","Vegetables","Onions",,"Onions Sambar",100,"20 Pieces CHECK",63.4,7.5,0.90,,0.20,,2.20,2.90,0.9,,1.1,0.40,,,,,,63.9,3.00,,,,,,,,,,,,,,,,,15
 862,"Basic Foods","Vegetables","Onions",,"Onions White",160,"1 Cup (1 tbsp = 3.25g)",64,12.2,2.70,,6.80,,1.80,0.20,,,,0.10,,36.80,0.3,16,46.4,233.6,6.40,0.3,0.1,0.8,30.4,,0.1,,0.2,,0.2,,11.8,,0.6,,9.8,15
 863,"Basic Foods","Vegetables","Onions",,"Shallots",10,"1 Tablespoon",7.2,1.7,0.30,,0.80,,0.30,,,,,,,3.70,0.1,2.1,6,33.4,1.20,,,0.1,3.4,0.1,,,,,,,0.8,,0.1,,,48
-864,"Basic Foods","Vegetables","Peas",,"Peas",98,"1 Cup",41.2,7.4,1.60,,3.90,,2.70,0.20,,,0.2,,,42.10,2,23.5,51.9,196,3.90,0.3,0.1,0.7,41.2,52.9,0.22,0.1,0.6,,0.2,,58.8,,24.5,0.4,16.7,45
 865,"Basic Foods","Vegetables","Peas",,"Peas Snow",63,"1 Cup",26.5,4.8,1.60,0.7,2.50,,1.80,0.10,,,0.1,,,27.10,1.3,15.1,33.4,126,2.50,0.2,0.1,0.4,26.5,34.2,0.1,0.1,0.4,0.5,0.1,,37.8,,15.8,0.3,11,48.7
 866,"Basic Foods","Vegetables","Peas",,"Peas Sugar Snap",63,"1 Cup",27,4.8,1.60,,2.50,,1.80,0.10,,,,,,,1.3,,,126,2.50,,,,42,54,,,,,,,37.8,,25,,,5
 867,"Basic Foods","Vegetables","Peppers",,"Capers",8.6,"1 Tablespoon",2,0.4,0.30,,,,0.20,0.10,,,,,,3.40,0.1,2.8,0.9,3.4,254.90,,,0.1,2,0.6,,,0.1,,,,0.4,,2.1,0.1,0.6,20
@@ -911,7 +908,6 @@
 910,"Health Products","Supplements","Vitamins, Minerals, Essential Oils",,"Shilajit",1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 911,"Health Products","Supplements","Vitamins, Minerals, Essential Oils",,"Sole Water",5.04,"1 Teaspoon (1 Lime = 30g)",1.3,0.4,0.00,,0.10,,,,,,,,,0.70,,0.4,0.7,5.9,0.10,,,,0.5,0.1,,,,,,,1.5,,,,0.3,50
 912,"Health Products","Supplements","Vitamins, Minerals, Essential Oils",,"St. Johns Wort",1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-913,"Health Products","Supplements","Vitamins, Minerals, Essential Oils",,"StJohnsWort",1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 914,"Health Products","Supplements","Vitamins, Minerals, Essential Oils",,"Vit K2",1,"1 Capsule",0.74,0.02,0.00,,0.00,,0.01,0.07,,,,,,,,,,,,,,,,,,,,,,,,,100,,,
 915,"Health Products","Sweeteners","Sugars",,"Glucon D",100,"no description",368,92,,,92.00,,,,,,,,,114.00,,,57,,71.00,,,,,,,,,,,,40,,,,,
 916,"Medical","Pharmacy Products","Losenges",,"Strepsils",4,"1 Losenge",42,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -1317,7 +1313,7 @@
 1316,"Ready to Eat Meals and Food","Desserts and Sweets","Cakes",,"Profiteroles",28,"1 Ounce",79,5,,,3.00,,1.00,6.00,2,,,4.00,34,,,,,,29.00,,,,,,,,,,,,,,,,,
 1317,"Ready to Eat Meals and Food","Desserts and Sweets","Cakes",,"Red Velvet Cake",94,"no description",163,19,,,11.00,,3.00,8.00,,,,,,,,,,,139.00,,,,,,,,,,,,,,,,,54
 1318,"Ready to Eat Meals and Food","Desserts and Sweets","Cakes",,"Sponge Cake",38,"no description",110,23,,,14.00,,2.00,1.00,,,,,,,,,,,237.00,,,,,,,,,,,,,,,,,50
-1319,"Ready to Eat Meals and Food","Desserts and Sweets","Cakes",,"Strawberry Cheesecake",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1319,"Ready to Eat Meals and Food","Desserts and Sweets","Cakes",,"Strawberry Cheesecake",221,"1 Piece",482,59,1.80,,45.00,,5.80,26.00,8.7,0.3,1.7,12.00,67,96.00,0.9,,,229,377.00,,,,,,,,,,,,,0.4,,,0.4,
 1320,"Ready to Eat Meals and Food","Desserts and Sweets","Cakes",,"Strawberry Cream Cake",100,"no description",176,16,1.10,,16.00,,3.00,11.00,0.5,,3.5,6.00,65,40.00,0.5,10,55,125,30.00,0.3,,,15,,,0.1,,,,0,20,,,0.5,,70
 1321,"Ready to Eat Meals and Food","Desserts and Sweets","Cakes",,"Swiss Roll Cake",53,"no description",183,21,1.00,,17.00,,3.00,11.00,,,,,,,,,,,61.00,,,,,,,,,,,,,,,,,25
 1322,"Ready to Eat Meals and Food","Desserts and Sweets","Cakes",,"Tiramisu",86,"no description",252,16,,,7.00,,5.00,19.00,,,,,,,,,,,132.00,,,,,,,,,,,,,,,,,27
@@ -1460,7 +1456,6 @@
 1459,"Ready to Eat Meals and Food","Desserts and Sweets","Toaster Pastries",,"Frosted Strawberry Toaster Pastry low fat",50,"no description",182,37,3.00,,15.00,,2.00,3.00,,,,,,,,,,,179.00,,,,,,,,,,,,,,,,,49
 1460,"Ready to Eat Meals and Food","Desserts and Sweets","Toaster Pastries",,"Frosted Sugar Cinnamon Toaster Pastry",50,"no description",209,35,1.00,,16.00,,2.00,7.00,,,,,,,,,,,172.00,,,,,,,,,,,,,,,,,60
 1461,"Ready to Eat Meals and Food","Desserts and Sweets","Toaster Pastries",,"Fruit Toaster Pastry",54,"no description",210,38,1.00,,14.00,,2.00,5.00,,,,,,,,,,,180.00,,,,,,,,,,,,,,,,,59
-1462,"Ready to Eat Meals and Food","Desserts and Sweets","Toaster Pastries",,"Fruit Toaster Pastry",51,"no description",209,37,1.00,,15.00,,2.00,6.00,,,,,,,,,,,181.00,,,,,,,,,,,,,,,,,57
 1463,"Ready to Eat Meals and Food","Desserts and Sweets","Toaster Pastries",,"Gingerbread Toaster Pastry",50,"no description",197,35,1.00,,14.00,,2.00,5.00,,,,,,,,,,,217.00,,,,,,,,,,,,,,,,,59
 1464,"Ready to Eat Meals and Food","Desserts and Sweets","Toaster Pastries",,"Raspberry Toaster Pastry",52,"no description",207,37,1.00,,18.00,,2.00,6.00,,,,,,,,,,,166.00,,,,,,,,,,,,,,,,,54
 1465,"Ready to Eat Meals and Food","Desserts and Sweets","Toaster Pastries",,"Smores Toaster Pastry",52,"no description",204,36,1.00,,19.00,,3.00,5.00,,,,,,,,,,,213.00,,,,,,,,,,,,,,,,,60
@@ -1562,7 +1557,6 @@
 1561,"Ready to Eat Meals and Food","Indian Meals","Usal",,"Masoor Usal",121,"no description",155,21,4.00,,6.00,,5.00,6.00,,,,,,,,,,,326.00,,,,,,,,,,,,,,,,,32
 1562,"Ready to Eat Meals and Food","Indian Meals","Usal",,"Mixed Sprouts Usal",158,"no description",138,22,4.00,,7.00,,5.00,4.00,,,,,,,,,,,625.00,,,,,,,,,,,,,,,,,
 1563,"Ready to Eat Meals and Food","Indian Meals","Usal",,"Sev Usal",158,"no description",210,25,7.00,,6.00,,7.00,10.00,,,,,,,,,,,725.00,,,,,,,,,,,,,,,,,45
-1564,"Ready to Eat Meals and Food","Indian Meals","Usal",,"Sev Usal",158,"no description",210,25,7.00,,6.00,,7.00,10.00,,,,,,,,,,,725.00,,,,,,,,,,,,,,,,,45
 1565,"Ready to Eat Meals and Food","Indian Meals","Usal",,"Usal",121,"no description",119,14,3.00,,6.00,,3.00,6.00,,,,,,,,,,,327.00,,,,,,,,,,,,,,,,,19
 1566,"Ready to Eat Meals and Food","Indian Meals","Usal",,"Val Usal",135,"no description",119,16,6.00,,3.00,,6.00,4.00,,,,,,,,,,,345.00,,,,,,,,,,,,,,,,,35
 1567,"Ready to Eat Meals and Food","Indian Savoury Snacks","Chaat",,"Aloo Chaat",153,"no description",182,20,3.00,,3.00,,2.00,11.00,,,,,,,,,,,429.00,,,,,,,,,,,,,,,,,61
@@ -1661,7 +1655,6 @@
 1660,"Ready to Eat Meals and Food","Indian Sides","Papaddum",,"Papad",10,"no description",37,6,2.00,,,,3.00,,,,,,,,,,,,175.00,,,,,,,,,,,,,,,,,66
 1661,"Ready to Eat Meals and Food","Indian Sides","Papaddum",,"Rabodi",8,"no description",28,6,1.00,,,,1.00,,,,,,,,,,,,76.00,,,,,,,,,,,,,,,,,65
 1662,"Ready to Eat Meals and Food","Indian Sides","Papaddum",,"Ragi Papad",15,"no description",47,6,,,,,1.00,2.00,,,,,,,,,,,162.00,,,,,,,,,,,,,,,,,60
-1663,"Ready to Eat Meals and Food","Juices","Vegetable Juices",,"Vegetable Juice Cocktail",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 1664,"Ready to Eat Meals and Food","Kormas","Meat Kormas",,"Chicken Korma",242,"no description",251,8,3.00,,3.00,,31.00,10.00,,,,,,,,,,,484.00,,,,,,,,,,,,,,,,,31
 1665,"Ready to Eat Meals and Food","Kormas","Meat Kormas",,"Egg Korma",164,"no description",173,9,3.00,,3.00,,8.00,12.00,,,,,,,,,,,371.00,,,,,,,,,,,,,,,,,36
 1666,"Ready to Eat Meals and Food","Kormas","Meat Kormas",,"Mutton Korma",161,"no description",158,6,2.00,,2.00,,19.00,7.00,,,,,,,,,,,354.00,,,,,,,,,,,,,,,,,32
@@ -1699,7 +1692,6 @@
 1698,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chicken 65",121,"1 Medium",180,8,1.00,,1.00,,18.00,8.00,,,,2.50,80,80.00,1.4,,,250,368.00,,,,,90,,,,,,,1,,,,,35
 1699,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chicken Adai",67,"no description",147,15,3.00,,,,9.00,6.00,,,,,,,,,,,252.00,,,,,,,,,,,,,,,,,32
 1700,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chicken and Pumpkin Stew",192,"1 Cup",141,9,2.00,,4.00,,18.00,4.00,,,,,,,,,,,478.00,,,,,,,,,,,,,,,,,50
-1701,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chicken and veg stew with coconut milk Kerala�style",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 1702,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chicken Biriyani",205,"1 Can",292,31,1.40,,3.20,,20.00,9.40,2.9,0.1,4,1.70,48,,,,,461.7,419.00,,,,,,,,,,,,,,,,,
 1703,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chicken Borek",55,"no description",114,4,,,,,8.00,7.00,,,,,,,,,,,188.00,,,,,,,,,,,,,,,,,15
 1704,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chicken Breast Cooked",120,"1 Small Breast",198,,,,,,37.00,4.30,1.5,,0.9,1.20,102,18.00,1.2,,,307.2,89.00,,,,,,,,,,,,,0.1,,,,0
@@ -1733,9 +1725,7 @@
 1732,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chicken Vindaloo",160,"no description",177,9,2.00,,3.00,,16.00,9.00,,,,,,,,,,,408.00,,,,,,,,,,,,,,,,,38
 1733,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chicken Wings ITC Master Chef",100,"1 Serve",213,1.8,,,0.50,,20.40,13.80,,0.1,,4.80,119,,,,,,820.20,,,,,,,,,,,,,,,,,
 1734,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chilli Chicken",214,"1 Cup",277,21,2.80,,4.40,,21.00,12.00,6.6,0.1,2.5,2.00,90,,,,,,355.00,,,,,,,,,,,,,,,,,55
-1735,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chilli Chicken",181,"no description",181,9,1.00,,,,26.00,9.00,,,,,,,,,,,387.00,,,,,,,,,,,,,,,,,38
 1736,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chilli Garlic Chicken",100,"1 Serve",89,7.75,2.40,,2.25,,7.76,3.15,1.18,,0.75,0.85,19,24.00,1.17,,,243,388.00,,,,,21,,,,,,,42,,,,,
-1737,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Chilli Garlic Chicken",185,"no description",292,33,3.00,,2.00,,13.00,12.00,,,,,,,,,,,474.00,,,,,,,,,,,,,,,,,
 1738,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Crispy Honey Garlic Chicken Wings",100,"no description",1566.15,158.66,12.67,,76.81,,82.83,69.00,,,,,510.4,355.00,12.7,,,968.1,4800.79,,,,,,,,,,,,2.2,,,,,
 1739,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Dragon Chicken",123,"no description",137,5,1.00,,2.00,,18.00,5.00,,,,,,,,,,,315.00,,,,,,,,,,,,,,,,,35
 1740,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Chicken Meals",,"Drunken Chicken",100,"no description",240,14,,,,,23.00,10.00,,,,2.00,,,,,,,,,,,,,,,,,,,,,,,,
@@ -1805,7 +1795,6 @@
 1804,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Pork Meals",,"Pork Scrapple",50,"no description",107,7,,,,,4.00,6.00,,,,,,,,,,,241.00,,,,,,,,,,,,,,,,,45
 1805,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Pork Meals",,"Pork Skins",28,"no description",154,,,,,,17.00,9.00,,,,,,,,,,,515.00,,,,,,,,,,,,,,,,,0
 1806,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Pork Meals",,"Pork Vindaloo",179,"no description",183,5,1.00,,2.00,,20.00,9.00,,,,,,,,,,,512.00,,,,,,,,,,,,,,,,,35
-1807,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Pork Meals",,"Sausage Potatoes and Veggies In Gravy",150,"no description",162,13,2.00,,3.00,,7.00,9.00,,,,,,,,,,,676.00,,,,,,,,,,,,,,,,,61
 1808,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Prawns Shrimp Meals",,"Shrimp Cooked",85.05,"3 Ounce",84.2,0.2,,0.2,,,20.40,0.20,,,0.1,0.10,160.7,59.50,0.4,33.2,201.6,220.3,94.40,1.4,0.3,38,18.7,12.8,,,2.1,0.4,0.2,1.3,,,0.1,0.3,103.9,
 1809,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Seafood Meals",,"Baked Tilapia Fish",134,"no description",154,1,,,,,23.00,6.00,,,,,,,,,,,173.00,,,,,,,,,,,,,,,,,27
 1810,"Ready to Eat Meals and Food","Lunch and Dinner Meals","Seafood Meals",,"Batter Fried Prawns",22,"no description",40,3,1.00,,,,4.00,2.00,,,,,,,,,,,162.00,,,,,,,,,,,,,,,,,40
@@ -2040,7 +2029,6 @@
 2039,"Ready to Eat Meals and Food","Pitha or Paniyaram or Dumplings or Momo or Dim Sum or Gyoza","Meat",,"Chicken Dim Sum",33,"no description",61,8,,,,,3.00,2.00,,,,,,,,,,,118.00,,,,,,,,,,,,,,,,,48
 2040,"Ready to Eat Meals and Food","Pitha or Paniyaram or Dumplings or Momo or Dim Sum or Gyoza","Meat",,"Chicken Momo",39,"1 Momo",82,14,1.00,,0.40,,4.00,1.00,,,,0.40,11,,,,,102,70.00,,,,,,,,,,,,,,,,,45
 2041,"Ready to Eat Meals and Food","Pitha or Paniyaram or Dumplings or Momo or Dim Sum or Gyoza","Meat",,"Lamb Dim Sum",33,"no description",70,8,,,,,3.00,3.00,,,,,,,,,,,119.00,,,,,,,,,,,,,,,,,25
-2042,"Ready to Eat Meals and Food","Pitha or Paniyaram or Dumplings or Momo or Dim Sum or Gyoza","Meat",,"Lamb Gyoza",39,"no description",106,6,,,,,3.00,8.00,,,,,,,,,,,119.00,,,,,,,,,,,,,,,,,34
 2043,"Ready to Eat Meals and Food","Pitha or Paniyaram or Dumplings or Momo or Dim Sum or Gyoza","Meat",,"Pork Gyoza",37,"no description",79,7.4,0.50,,0.40,,3.50,3.80,1.3,,1.4,0.90,9.2,14.00,0.5,,,70.1,140.00,,,,,,,,,,,,,,,,,
 2044,"Ready to Eat Meals and Food","Pitha or Paniyaram or Dumplings or Momo or Dim Sum or Gyoza","Meat",,"Prasuma Spicy Chicken Momos",100,"no description",202,19.79,,,5.30,,8.87,9.70,,0.01,,4.26,21,,,,,,326.02,,,,,,,,,,,,,,,,,
 2045,"Ready to Eat Meals and Food","Pitha or Paniyaram or Dumplings or Momo or Dim Sum or Gyoza","Meat",,"Prawn Dim Sum",24,"no description",42,4,,,,,3.00,1.00,,,,,,,,,,,106.00,,,,,,,,,,,,,,,,,47
@@ -2245,7 +2233,6 @@
 2244,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Khakra",23,"no description",88,14,2.00,,,,3.00,3.00,,,,,,,,,,,194.00,,,,,,,,,,,,,,,,,70
 2245,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Khandvi",116,"no description",99,10,2.00,,3.00,,4.00,5.00,,,,,,,,,,,224.00,,,,,,,,,,,,,,,,,46
 2246,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Lilo Chevdo Chavanu",75,"no description",157,22,4.00,,4.00,,5.00,6.00,,,,,,,,,,,408.00,,,,,,,,,,,,,,,,,65
-2247,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Lilo Chevdo Chavanu",75,"no description",157,22,4.00,,4.00,,5.00,6.00,,,,,,,,,,,408.00,,,,,,,,,,,,,,,,,65
 2248,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Maggi Noodles",100,"no description",393,60.3,2.30,,2.30,,9.60,13.10,,0.13,,7.70,,,6.9,,,,939.30,,,,,,,,,,,,,,,,,
 2249,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Masala Khakra",26,"no description",72,12,2.00,,1.00,,3.00,2.00,,,,,,,,,,,189.00,,,,,,,,,,,,,,,,,55
 2250,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Mathri",24,"no description",87,6,,,1.00,,1.00,7.00,,,,,,,,,,,192.00,,,,,,,,,,,,,,,,,65
@@ -2272,7 +2259,6 @@
 2271,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Sweet Shakarpara",36,"no description",147,21,1.00,,4.00,,3.00,6.00,,,,,,,,,,,15.00,,,,,,,,,,,,,,,,,58
 2272,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Tao Kae Noi Crispy Seaweed Hot & Spicy Flavour",16,"no description",106,3.2,2.60,,,,2.60,9.20,,,,3.00,,,,,,,106.00,,,,,,,,,,,,,,,,,
 2273,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Tapioca Fries",116,"no description",169,26,1.00,,1.00,,1.00,7.00,,,,,,,,,,,399.00,,,,,,,,,,,,,,,,,57
-2274,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Tapioca Fries",116,"no description",160,26,1.00,,1.00,,1.00,7.00,,,,,,,,,,,399.00,,,,,,,,,,,,,,,,,57
 2275,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Taro Chips",32,"no description",159,22,2.00,,1.00,,1.00,8.00,,,,,,,,,,,109.00,,,,,,,,,,,,,,,,,59
 2276,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Tuver Lilva Kachori",55,"no description",129,19,2.00,,1.00,,4.00,4.00,,,,,,,,,,,148.00,,,,,,,,,,,,,,,,,55
 2277,"Ready to Eat Meals and Food","Savoury Snacks","Indian Snacks",,"Veggie Chips",32,"no description",165,19,3.00,,3.00,,1.00,10.00,,,,,,,,,,,79.00,,,,,,,,,,,,,,,,,45
@@ -2342,7 +2328,6 @@
 2341,"Ready to Eat Meals and Food","Soups","Meat Soups",,"Sweetcorn Crabmeat Soup",247,"no description",145,27,1.00,,7.00,,7.00,2.00,,,,,,,,,,,756.00,,,,,,,,,,,,,,,,,54
 2342,"Ready to Eat Meals and Food","Soups","Vegetarian Soups",,"Barley Lentil Soup",255,"no description",164,29,6.00,,3.00,,8.00,3.00,,,,,,,,,,,362.00,,,,,,,,,,,,,,,,,46
 2343,"Ready to Eat Meals and Food","Soups","Vegetarian Soups",,"Broccoli Corn Soup",266,"no description",154,18,3.00,,4.00,,4.00,9.00,,,,,,,,,,,273.00,,,,,,,,,,,,,,,,,54
-2344,"Ready to Eat Meals and Food","Soups","Vegetarian Soups",,"Cabbage Soup",490,"2 cups",170,14,5.10,,7.90,,3.40,12.00,8.8,,1.5,1.80,0.3,,,,,531.3,1384.00,,,,,,,,,,,,,,,,,
 2345,"Ready to Eat Meals and Food","Soups","Vegetarian Soups",,"Corn Chowder",254,"no description",221,23,4.00,,6.00,,4.00,14.00,,,,,,,,,,,182.00,,,,,,,,,,,,,,,,,54
 2346,"Ready to Eat Meals and Food","Soups","Vegetarian Soups",,"Cream of Broccoli Soup",222,"no description",143,11,2.00,,5.00,,4.00,10.00,,,,,,,,,,,470.00,,,,,,,,,,,,,,,,,32
 2347,"Ready to Eat Meals and Food","Soups","Vegetarian Soups",,"Cream of Spinach Soup",193,"no description",141,11,2.00,,6.00,,6.00,8.00,,,,,,,,,,,504.00,,,,,,,,,,,,,,,,,35
@@ -2457,7 +2442,6 @@
 2456,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Methi Baingan Masala",133,"no description",156,20,5.00,,6.00,,6.00,6.00,,,,,,,,,,,515.00,,,,,,,,,,,,,,,,,35
 2457,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Miso Grilled Aubergines",128,"no description",66,12,4.00,,8.00,,2.00,2.00,,,,,,,,,,,331.00,,,,,,,,,,,,,,,,,54
 2458,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Mixed Veg",140,"1 Cup",45,9.7,4.20,,3.70,,2.40,0.50,,,0.2,0.10,,46.00,0.7,,,295.1,43.00,,,,,,,,,,,,,,,,,
-2459,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Mixed Veg no corn or peas or pasta",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 2460,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Mixed Veg Poriyal",102,"no description",113,13,4.00,,1.00,,3.00,6.00,,,,,,,,,,,385.00,,,,,,,,,,,,,,,,,40
 2461,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Mixed Vegetables Sauteed",125,"no description",119,10,2.00,,2.00,,2.00,9.00,,,,,,,,,,,230.00,,,,,,,,,,,,,,,,,34
 2462,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Moloshyam",151,"no description",86,12,2.00,,,,4.00,3.00,,,,,,,,,,,416.00,,,,,,,,,,,,,,,,,33
@@ -2479,7 +2463,6 @@
 2478,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Potato Stew",158,"no description",170,11,2.00,,3.00,,2.00,15.00,,,,,,,,,,,288.00,,,,,,,,,,,,,,,,,65
 2479,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Pumpkin French Bean Subji",127,"no description",68,8,2.00,,3.00,,2.00,4.00,,,,,,,,,,,422.00,,,,,,,,,,,,,,,,,60
 2480,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Pumpkin Pulusu",148,"no description",125,16,2.00,,10.00,,1.00,7.00,,,,,,,,,,,259.00,,,,,,,,,,,,,,,,,55
-2481,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Puran Poli",101,"no description",392,53,5.00,,25.00,,6.00,19.00,,,,,,,,,,,67.00,,,,,,,,,,,,,,,,,0
 2482,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Ragda",168,"no description",139,22,9.00,,5.00,,6.00,3.00,,,,,,,,,,,324.00,,,,,,,,,,,,,,,,,35
 2483,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Rajasthani Kadhi",151,"no description",163,12,3.00,,5.00,,6.00,11.00,,,,,,,,,,,443.00,,,,,,,,,,,,,,,,,35
 2484,"Ready to Eat Meals and Food","Veggie Meals","Other Veggie Meals",,"Rajma Chawal",250,"1 Cup",235,43,6.50,,2.60,,9.50,3.40,1.8,,0.7,0.60,1.5,,,,,9.5,345.00,,,,,,,,,,,,,,,,,
@@ -3163,7 +3146,6 @@
 3162,"Restaurants","HPS","Lunch",,"HPS Onion Raita",173,"no description",118,7,3.00,,4.00,,8.00,7.00,,,,,,,,,,,192.00,,,,,,,,,,,,,,,,,40
 3163,"Restaurants","HPS","Lunch",,"HPS Paneer Butter Masala",175,"no description",166,10,1.00,,7.00,,10.00,10.00,,,,,,,,,,,293.00,,,,,,,,,,,,,,,,,32
 3164,"Restaurants","HPS","Lunch",,"HPS Papad",10,"no description",37,6,2.00,,,,3.00,,,,,,,,,,,,175.00,,,,,,,,,,,,,,,,,66
-3165,"Restaurants","HPS","Lunch",,"HPS Pickle",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3166,"Restaurants","HPS","Lunch",,"HPS Rasam",146,"no description",73,5,1.00,,1.00,,1.00,6.00,,,,,,,,,,,474.00,,,,,,,,,,,,,,,,,35
 3167,"Restaurants","HPS","Lunch",,"HPS Rice",158,"1 Cup",181.7,41.5,1.10,40.4,,,3.20,0.20,0.1,,,0.10,,9.50,0.7,19,36.3,55.3,1.60,0.8,0.1,11.9,4.7,,,,0.6,0.6,0.2,,,,,0.1,3.3,58
 3168,"Restaurants","HPS","Lunch",,"HPS Sambar",140,"no description",123,18,5.00,,,,6.00,3.00,,,,,,,,,,,262.00,,,,,,,,,,,,,,,,,33
@@ -3240,7 +3222,7 @@
 3239,"Recipes","Home Made","Broth",,"Slow Cooked Bone Broth",2628.87,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3240,"Recipes","Home Made","Pate",,"Chicken Liver Pate",837.4,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3241,"Recipes","Home Made","Spread",,"Butter Thyme",115.13,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3242,"Recipes","Home Made","Appetizer",,"Keto chicken liver pat  with thyme butter",952.53,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3242,"Recipes","Home Made","Appetizer",,"Keto chicken liver pate with thyme butter",952.53,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3243,"Recipes","Home Made","Spread",,"Instant Low Carb Raspberry Jam",126.08,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3244,"Recipes","Home Made","Snack",,"Cheesy Dough Bites",394,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3245,"Recipes","Home Made","Snack",,"Cheesy Dough Bites with Tzatziki",763.25,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3289,7 +3271,7 @@
 3288,"Recipes","Home Made","Snack",,"Churro Bites",926.3,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3289,"Recipes","Home Made","Meal",,"Keto Churro Bites",986.53,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3290,"Recipes","Home Made","Meal Part",,"Pimientos de Padron",251.58,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3291,"Recipes","Home Made","Meal Part",,"Garlic Mushrooms",324.2,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3291,"Recipes","Home Made","Meal Part",,"Garlic Mushrooms home made",324.2,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3292,"Recipes","Home Made","Meal Part",,"Garlic Shrimp",388.35,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3293,"Recipes","Home Made","Meal",,"Cheese Ham and Olives Platter",560,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3294,"Recipes","Home Made","Meal",,"Tapas Platter",1524.13,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3412,7 +3394,7 @@
 3411,"Recipes","Home Made","Soup",,"Laksa Noodle Soup",546,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3412,"Recipes","Home Made","Meal",,"Salmon Laksa",2595.46,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3413,"Recipes","Home Made","Meal",,"Open Omelet with Ham And Cheese",235.17,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3414,"Recipes","Home Made","Spread",,"Garlic Butter",20.24,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3414,"Recipes","Home Made","Spread",,"Garlic Butter home made",20.24,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3415,"Recipes","Home Made","Meal",,"Meat and Veggie Plate",921.05,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3416,"Recipes","Home Made","Meal",,"The Magnificent Mixed Grill",941.29,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3417,"Recipes","Home Made","Marinade",,"Chicken Souvlaki Marinade",71.85,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3422,7 +3404,7 @@
 3421,"Recipes","Home Made","Meal",,"Lettuce Cups with Deli Turkey, Tomatoes and Mayo",416.48,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3422,"Recipes","Home Made","Meal Part",,"Frozen Mixed Berries Compote",169.64,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3423,"Recipes","Home Made","Dessert",,"Yogurt Swirl with Instant Jam",519.64,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3424,"Recipes","Home Made","Sauce",,"Cheese Sauce",412.62,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3424,"Recipes","Home Made","Sauce",,"Cheese Sauce home made",412.62,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3425,"Recipes","Home Made","Meal Part",,"Lasagne Meat and Cabbage Mix",1571.38,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3426,"Recipes","Home Made","Meal",,"Keto Skillet Lasagna",1984,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3427,"Recipes","Home Made","Dressing",,"Caesar Salad Dressing",194.31,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3431,7 +3413,7 @@
 3430,"Recipes","Home Made","Meal Part",,"Burger Crust",455.09,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3431,"Recipes","Home Made","Meal Part",,"Burger Topping",284,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3432,"Recipes","Home Made","Dressing",,"Burger Dressing",183.13,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3433,"Recipes","Home Made","Meal",,"Burger Pizza",922.22,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3433,"Recipes","Home Made","Meal",,"Burger Pizza home made",922.22,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3434,"Recipes","Home Made","Meal Part",,"Cardamom Buns",614.3,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3435,"Recipes","Home Made","Meal Part",,"Almond Paste",166.78,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3436,"Recipes","Home Made","Dessert",,"Mini Keto Cream Buns (Swedish Semlor)",1027.41,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3441,7 +3423,7 @@
 3440,"Recipes","Home Made","Meal",,"Seared Tuna Steaks",422.87,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3441,"Recipes","Home Made","Meal",,"Baked Chicken Legs",578.54,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3442,"Recipes","Home Made","Meal",,"Smashed Beef Burger",453.57,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3443,"Recipes","Home Made","Meal Part",,"Green Bean Fries",200,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3443,"Recipes","Home Made","Meal Part",,"Green Bean Fries #2",200,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3444,"Recipes","Home Made","Meal Part",,"Perfectly Seared Steak",510.08,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3445,"Recipes","Home Made","Meal",,"Lemon Butter-Baked Salmon",483.93,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3446,"Recipes","Home Made","Meal",,"Juicy Lucy (Cheese Stuffed) Burger with Wax-Bean Fries",1014.7,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3533,7 +3515,7 @@
 3532,"Recipes","Home Made","Seasoning",,"Bagel Seasoning",94.6,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3533,"Recipes","Home Made","Meal",,"High Protein Breakfast Bowl with Eggs and Smoked Salmon",323,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3534,"Recipes","Home Made","Dessert",,"Protein Strawberry Vanilla Mug Cake",174.9,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3535,"Recipes","Home Made","Dessert",,"Sugar-Free Raspberry Chocolate Souffl",207.73,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3535,"Recipes","Home Made","Dessert",,"Sugar-Free Raspberry Chocolate Souffle",207.73,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3536,"Recipes","Home Made","Meal",,"High Protein Keto Breakfast Bowl",323.5,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3537,"Recipes","Home Made","Wrap",,"Thai Keto Tuna Salad Wrap",221.8,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3538,"Recipes","Home Made","Meal",,"Keto Rotisserie Chicken With Ranch Coleslaw",347.8,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3554,10 +3536,10 @@
 3553,"Recipes","Home Made","Meal",,"High Protein Ham and Cheddar Keto Dutch Baby",969.75,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3554,"Recipes","Home Made","Meal",,"Prosciutto-Wrapped Mozzarella Sticks with Tomato Basil Salad",221.06,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3555,"Recipes","Home Made","Meal",,"Egg-Free Low Carb Mexican Breakfast Scramble",1333.62,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3556,"Recipes","Home Made","Meal Part",,"Escalivada   Roasted Vegetables",772,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3556,"Recipes","Home Made","Meal Part",,"Escalivada - Roasted Vegetables",772,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3557,"Recipes","Home Made","Crust",,"Tuna Pizza Crust or Coca",405.18,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3558,"Recipes","Home Made","Meal",,"Mediterranean Protein Pizza Roasted Vegetables and Anchovies",1205.53,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3559,"Recipes","Home Made","Meal",,"Chorizo Crumb-Topped Cod With Padr n Peppers",767.9,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3559,"Recipes","Home Made","Meal",,"Chorizo Crumb-Topped Cod With Padron Peppers",767.9,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3560,"Recipes","Home Made","Meal",,"Keto Tomato Smash Burger",976.49,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3561,"Recipes","Home Made","Drink",,"High Protein Chocolate Raspberry Cheesecake Smoothie",636.84,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3562,"Recipes","Home Made","Drink",,"Luscious Lime High Protein Smoothie",568.83,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3592,7 +3574,7 @@
 3591,"Recipes","Home Made","Gravy",,"Onion Gravy",430.7,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3592,"Recipes","Home Made","Meal",,"Low Carb Salisbury Steak With Quick Mash",1618.16,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3593,"Recipes","Home Made","Sauce",,"Tzatziki with Lemon",341.24,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3594,"Recipes","Home Made","Salad",,"Greek Salad",537,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3594,"Recipes","Home Made","Salad",,"Greek Salad home made",537,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3595,"Recipes","Home Made","Meal Part",,"Meatballs",610.42,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3596,"Recipes","Home Made","Meal",,"Greek Low Carb Keftedes Bowls with Tzatziki",1488.66,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3597,"Recipes","Home Made","Meal Part",,"Sea Bass Butterflied",523,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3601,7 +3583,7 @@
 3600,"Recipes","Home Made","Filling",,"Cheese Pancake Filling",238.1,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3601,"Recipes","Home Made","Mix",,"Pancake Mix",196.34,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3602,"Recipes","Home Made","Meal",,"Low Carb Danish Skillet",489.44,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3603,"Recipes","Home Made","Meal",,"Saut ed Chicken Livers with Creamy Cauli Mash",1719.9,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3603,"Recipes","Home Made","Meal",,"Sauteed Chicken Livers with Creamy Cauli Mash",1719.9,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3604,"Recipes","Home Made","Crust",,"Cheesecake Crust",234.38,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3605,"Recipes","Home Made","Filling",,"Cheesecake Filling",1005.28,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3606,"Recipes","Home Made","Topping",,"Cheesecake Topping",452,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3658,7 +3640,7 @@
 3657,"Recipes","Home Made","Salad",,"Keto Wedge Salad",1142.29,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3658,"Recipes","Home Made","Meal",,"Mexican Shrimp Ceviche (Aguachile)",1297.69,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3659,"Recipes","Home Made","Sauce",,"Jalapeno Aioli",158.14,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3660,"Recipes","Home Made","Meal",,"Keto Chicken Burger with Jalape o Aioli",982.02,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3660,"Recipes","Home Made","Meal",,"Keto Chicken Burger with Jalapeno Aioli",982.02,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3661,"Recipes","Home Made","Meal",,"Loaded Cauliflower Mash",1176.25,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3662,"Recipes","Home Made","Meal Part",,"Seasoned Rib Eye Steak",932.25,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3663,"Recipes","Home Made","Meal",,"Ribeye Steak with Loaded Cauliflower Mash",2108.5,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3672,9 +3654,9 @@
 3671,"Recipes","Home Made","Marinade",,"Salmon Marinade",147,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3672,"Recipes","Home Made","Sauce",,"Lime and Ginger Mayo",278.28,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3673,"Recipes","Home Made","Meal",,"Keto Salmon Poke Bowl with Zoodles",1785.28,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3674,"Recipes","Home Made","Meal Part",,"Sponge Cake",397.4,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3674,"Recipes","Home Made","Meal Part",,"Sponge Cake home made",397.4,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3675,"Recipes","Home Made","Filling",,"Raspberry Cake Filling",256.15,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3676,"Recipes","Home Made","Coating",,"Chocolate Coating",384.15,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3676,"Recipes","Home Made","Coating",,"Chocolate Coating #2",384.15,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3677,"Recipes","Home Made","Dessert",,"Low Carb Christmas Yule Log",858.55,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3678,"Recipes","Home Made","Meal",,"Keto Sausage Rolls",1097.57,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3679,"Recipes","Home Made","Meal",,"Spinach Thoran Homemade",379.9,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3698,7 +3680,7 @@
 3697,"Recipes","Home Made","Meal",,"Keto Holiday Turkey Meatballs With Roasted Brussels Sprouts",1799.02,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3698,"Recipes","Home Made","Meal Part",,"Cranberry Pickled Red Onions",329.64,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3699,"Recipes","Home Made","Pate",,"Christmas Pate",1167.49,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3700,"Recipes","Home Made","Meal",,"Low Carb Christmas P t  With Cranberry Pickled Red Onions",1597.13,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3700,"Recipes","Home Made","Meal",,"Low Carb Christmas Pate With Cranberry Pickled Red Onions",1597.13,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3701,"Recipes","Home Made","Dessert",,"Cupcakes Homemade",998.92,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3702,"Recipes","Home Made","Meal Part",,"Orange Frosting",411,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3703,"Recipes","Home Made","Dessert",,"Keto Christmas Cupcakes With Orange Frosting",1409.92,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3717,11 +3699,11 @@
 3716,"Recipes","Home Made","Meal",,"Malabar Beef Biriyani",2535.86,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3717,"Recipes","Home Made","Meal Part",,"Chicken Pulao just the Chicken",499.02,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3718,"Recipes","Home Made","Meal Part",,"Chicken Pulao just the Pulao",2162.16,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3719,"Recipes","Home Made","Meal",,"Chicken Pulao",2661.18,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3719,"Recipes","Home Made","Meal",,"Chicken Pulao home made",2661.18,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3720,"Recipes","Home Made","Meal Part",,"Samosa Dough",304.29,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3721,"Recipes","Home Made","Meal Part",,"Samosa Veggie Filling",1932.37,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3722,"Recipes","Home Made","Meal",,"Indian Veggie Samosa",2236.66,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3723,"Recipes","Home Made","Meal",,"Butter Naan",533.99,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3723,"Recipes","Home Made","Meal",,"Butter Naan home made",533.99,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3724,"Recipes","Home Made","Meal",,"Indian Paneer Tikka",817.92,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3725,"Recipes","Home Made","Meal",,"Masoor Dal Tadka",1626.11,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3726,"Recipes","Home Made","Meal Part",,"Simple Home Raita",455,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -3751,7 +3733,7 @@
 3750,"Recipes","Home Made","Meal",,"Indian Chicken Curry",869.65,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3751,"Recipes","Home Made","Meal",,"Healthy Tandoori Fish",744.98,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3752,"Recipes","Home Made","Meal",,"Grilled Chicken Breast",564.67,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-3753,"Recipes","Home Made","Meal Part",,"Egg Curry",247.42,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3753,"Recipes","Home Made","Meal Part",,"Egg Curry home made",247.42,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3754,"Recipes","Home Made","Meal Part",,"Hariyali Masala",152,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3755,"Recipes","Home Made","Meal Part",,"Onion Masala",189,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3756,"Recipes","Home Made","Meal",,"Hariyali Egg Curry",565,"Bulk Food",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

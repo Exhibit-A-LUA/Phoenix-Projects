@@ -92,8 +92,8 @@ defmodule MySeeder do
   # * Products
   # Helper function to fetch ID by name
   defp get_id_by_name(module, name) do
-    IO.inspect(module, label: "Module passed to get_id_by_name")
-    IO.inspect(name, label: "Name passed to get_id_by_name")
+    # IO.inspect(module, label: "Module passed to get_id_by_name")
+    # IO.inspect(name, label: "Name passed to get_id_by_name")
 
     Repo.get_by(module, name: name)
     |> case do
@@ -101,7 +101,7 @@ defmodule MySeeder do
         raise "No record found for #{name} in #{module}"
 
       record ->
-        IO.inspect(record.id, label: "ID returned from #{module}")
+        # IO.inspect(record.id, label: "ID returned from #{module}")
         record.id
     end
   end
@@ -232,4 +232,4 @@ end
 # MySeeder.seed_product_main_types_data()
 # MySeeder.seed_product_sub_types_data()
 # MySeeder.seed_product_categories_data()
-MySeeder.seed_product_data()
+# MySeeder.seed_product_data()
