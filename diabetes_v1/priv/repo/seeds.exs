@@ -19,6 +19,8 @@ defmodule MySeeder do
   alias DiabetesV1.ProductCategories
   alias DiabetesV1.ProductCategories.ProductCategory
   alias DiabetesV1.Products
+  alias DiabetesV1.Products.Product
+  alias DiabetesV1.ProductAliases
 
   # ! This has been successfully run, uncomment to run again
   # * ProductMainTypes
@@ -227,9 +229,37 @@ defmodule MySeeder do
       end
     end)
   end
+
+  # ! This has been successfully run, uncomment to run again
+  # * ProductAliases
+  # # Seed product_aliases from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(ProductAlias)
+
+  def seed_product_aliases_data do
+    IO.puts("Seeding product aliases...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/product_aliases.csv"))
+    |> Enum.each(fn [
+                      id,
+                      product_name,
+                      alias
+                    ] ->
+      case ProductAliases.create_product_alias(%{
+             id: String.to_integer(id),
+             product_id: get_id_by_name(Product, product_name),
+             alias: String.trim(alias)
+           }) do
+        {:ok, _product_alias} -> IO.puts("Product Alias - #{alias} created.")
+        {:error, changeset} -> IO.inspect(changeset.errors)
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
 # MySeeder.seed_product_sub_types_data()
 # MySeeder.seed_product_categories_data()
 # MySeeder.seed_product_data()
+MySeeder.seed_product_aliases_data()
