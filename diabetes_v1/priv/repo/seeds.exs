@@ -21,9 +21,11 @@ defmodule MySeeder do
   alias DiabetesV1.Products
   alias DiabetesV1.Products.Product
   alias DiabetesV1.ProductAliases
+  alias DiabetesV1.Ingredients
 
-  # ! This has been successfully run, uncomment to run again
-  # * ProductMainTypes
+  import Ecto.Query
+
+  # ! ProductMainTypes
   # Seed product_main_types from a CSV file
 
   # ! To delete all data uncomment following line
@@ -45,8 +47,7 @@ defmodule MySeeder do
     end)
   end
 
-  # ! This has been successfully run, uncomment to run again
-  # * ProductSubTypes
+  # ! ProductSubTypes
   # # Seed product_sub_types from a CSV file
 
   # ! To delete all data uncomment following line
@@ -68,8 +69,7 @@ defmodule MySeeder do
     end)
   end
 
-  # ! This has been successfully run, uncomment to run again
-  # * ProductCategories
+  # ! ProductCategories
   # # Seed product_categories from a CSV file
 
   # ! To delete all data uncomment following line
@@ -94,17 +94,25 @@ defmodule MySeeder do
   # * Products
   # Helper function to fetch ID by name
   defp get_id_by_name(module, name) do
-    # IO.inspect(module, label: "Module passed to get_id_by_name")
-    # IO.inspect(name, label: "Name passed to get_id_by_name")
+    case Repo.get_by(module, name: name) do
+      %^module{id: id} ->
+        id
 
-    Repo.get_by(module, name: name)
-    |> case do
       nil ->
-        raise "No record found for #{name} in #{module}"
+        # Handle aliases only for the `Products` module
+        if module == DiabetesV1.Products.Product do
+          case Repo.get_by(DiabetesV1.ProductAliases.ProductAlias, alias: name) do
+            %DiabetesV1.ProductAliases.ProductAlias{product_id: product_id} ->
+              product_id
 
-      record ->
-        # IO.inspect(record.id, label: "ID returned from #{module}")
-        record.id
+            nil ->
+              IO.puts("Warning: Product or alias '#{name}' not found.")
+              nil
+          end
+        else
+          IO.puts("Warning: '#{name}' not found in #{inspect(module)}.")
+          nil
+        end
     end
   end
 
@@ -115,14 +123,12 @@ defmodule MySeeder do
 
   defp get_float(value) do
     # IO.inspect(value, label: "Value passed to get_float")
-
     value
     |> Float.parse()
     |> elem(0)
   end
 
-  # ! This has been successfully run, uncomment to run again
-  # * Products
+  # ! Products
   # # Seed products from a CSV file
 
   # ! To delete all data uncomment following line
@@ -230,12 +236,11 @@ defmodule MySeeder do
     end)
   end
 
-  # ! This has been successfully run, uncomment to run again
-  # * ProductAliases
+  # ! ProductAliases
   # # Seed product_aliases from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(ProductAlias)
+  # Repo.delete_all(DiabetesV1.ProductAliases.ProductAlias)
 
   def seed_product_aliases_data do
     IO.puts("Seeding product aliases...")
@@ -256,10 +261,103 @@ defmodule MySeeder do
       end
     end)
   end
+
+  # ! Ingredients
+  # # Seed ingredients from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(DiabetesV1.Ingredients.Ingredient)
+
+  def seed_ingredients_data do
+    IO.puts("Seeding ingredients...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/ingredients_test1.csv"))
+    |> Enum.each(
+      # in the csv, but ignoring recipe_num below
+      fn [
+           id,
+           _recipe_num,
+           product,
+           ingredient,
+           options,
+           grams,
+           included
+         ] ->
+        with {:ok, product_id} <- fetch_id_by_name(Product, product),
+             {:ok, ingredient_id} <- fetch_id_by_name(Product, ingredient),
+             {:ok, grams_float} <- get_float_tuple(grams) do
+          attrs = %{
+            id: String.to_integer(id),
+            product_id: product_id,
+            ingredient_id: ingredient_id,
+            options: String.trim(options) |> default_nil_if_empty(),
+            grams: grams_float,
+            included: included == "yes"
+          }
+
+          case Ingredients.create_ingredient(attrs) do
+            {:ok, _ingredient} ->
+              IO.puts("Ingredient Number - #{id} created.")
+
+            {:error, changeset} ->
+              IO.puts("Failed to create ingredient with ID #{id}.")
+              IO.inspect(changeset.errors)
+          end
+        else
+          :error ->
+            IO.puts("Invalid data for ingredient ID #{id}. Skipping...")
+
+          error ->
+            IO.inspect(error,
+              label: "Unexpected Error for ingredient ID #{id}"
+            )
+        end
+      end
+    )
+  end
+
+  defp get_float_tuple(num) do
+    {:ok, get_float(num)}
+  end
+
+  defp fetch_id_by_name(module, name) do
+    case get_id_by_name(module, name) do
+      nil -> {:error, "#{name} not found in #{module}"}
+      id -> {:ok, id}
+    end
+  end
+
+  defp default_nil_if_empty(""), do: nil
+  defp default_nil_if_empty(value), do: value
+
+  def calculate_product_nutritional_content do
+    # Batch update all recipes after seeding, limit to only products with ingredients
+    # Using batching and transactions
+
+    # wrap the updates in a transaction to ensure all updates succeed or none
+    Repo.transaction(fn ->
+      Repo.all(
+        from p in DiabetesV1.Products.Product,
+          # Include only products that have ingredients
+          join: i in DiabetesV1.Ingredients.Ingredient,
+          on: i.product_id == p.id,
+          # Avoid processing the same product multiple times
+          distinct: true,
+          select: p.id
+      )
+      |> Enum.chunk_every(100)
+      |> Enum.each(fn batch ->
+        Enum.each(batch, &Products.update_recipe_nutrition(&1))
+      end)
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
 # MySeeder.seed_product_sub_types_data()
 # MySeeder.seed_product_categories_data()
 # MySeeder.seed_product_data()
-MySeeder.seed_product_aliases_data()
+# MySeeder.seed_product_aliases_data()
+MySeeder.seed_ingredients_data()
+# run calculate_product_nutritional_content once seeding is successfully done
+# MySeeder.calculate_product_nutritional_content

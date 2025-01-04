@@ -47,6 +47,11 @@ defmodule DiabetesV1.Products.Product do
     belongs_to :main_type, DiabetesV1.ProductMainTypes.ProductMainType, foreign_key: :main_type_id
     belongs_to :sub_type, DiabetesV1.ProductSubTypes.ProductSubType, foreign_key: :sub_type_id
     belongs_to :category, DiabetesV1.ProductCategories.ProductCategory, foreign_key: :category_id
+    has_many :product_aliases, DiabetesV1.ProductAliases.ProductAlias
+    # A product that is a recipe has many ingredients
+    has_many :ingredients, DiabetesV1.Ingredients.Ingredient, foreign_key: :product_id
+    # A product that is an ingredient is used in many recipes
+    has_many :used_in_recipes, DiabetesV1.Ingredients.Ingredient, foreign_key: :ingredient_id
 
     timestamps(type: :utc_datetime)
   end

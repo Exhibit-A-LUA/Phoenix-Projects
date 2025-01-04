@@ -6,7 +6,6 @@ defmodule DiabetesV1.ProductAliases.ProductAlias do
     field :alias, :string
 
     belongs_to :product, DiabetesV1.Products.Product
-    has_many :product_aliases, DiabetesV1.ProductAliases.ProductAlias
 
     timestamps(type: :utc_datetime)
   end
