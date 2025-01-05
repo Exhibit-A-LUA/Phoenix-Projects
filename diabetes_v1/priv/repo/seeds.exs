@@ -535,7 +535,6 @@ end
 # MySeeder.seed_ingredients_data()
 # MySeeder.seed_test_data()
 # MySeeder.run_update_test()
-MySeeder.delete_test_data()
-
+# MySeeder.delete_test_data()
 # run calculate_product_nutritional_content once seeding is successfully done
-# MySeeder.calculate_product_nutritional_content
+DiabetesV1.Products.calculate_product_nutritional_content()

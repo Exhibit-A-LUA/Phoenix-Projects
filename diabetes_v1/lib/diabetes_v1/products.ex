@@ -298,4 +298,44 @@ defmodule DiabetesV1.Products do
       ]
     )
   end
+
+  def calculate_product_nutritional_content do
+    # Batch update all recipes after seeding, limit to only products with ingredients
+    # Using batching and transactions
+    IO.puts("Starting batch update for product nutritional content...")
+    # wrap the updates in a transaction to ensure all updates succeed or none
+    Repo.transaction(fn ->
+      Repo.all(
+        from p in DiabetesV1.Products.Product,
+          # Include only products that have ingredients
+          join: i in assoc(p, :ingredients),
+          # Avoid processing the same product multiple times
+          distinct: true,
+          select: p.id
+      )
+      |> Enum.chunk_every(100)
+      # Add an index for tracking batches
+      |> Enum.with_index(1)
+      |> Enum.each(fn {batch, index} ->
+        Enum.each(batch, fn id ->
+          case update_recipe_nutrition(id) do
+            :ok ->
+              # Log after each batch
+              IO.puts("#{index * 100} products processed")
+              :ok
+
+            {:error, reason} ->
+              Repo.rollback("Failed to update recipe nutrition for Product ID #{id}: #{reason}")
+
+            {1, nil} ->
+              IO.puts("#{index * 100} products processed")
+              IO.puts("Successfully updated (with {1, nil}) nutrition for product ID: #{id}")
+
+            other ->
+              IO.inspect(other, label: "Unexpected return value for product ID #{id}")
+          end
+        end)
+      end)
+    end)
+  end
 end
