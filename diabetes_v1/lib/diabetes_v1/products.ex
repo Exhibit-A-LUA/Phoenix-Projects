@@ -102,6 +102,13 @@ defmodule DiabetesV1.Products do
     Product.changeset(product, attrs)
   end
 
+  defp calc_sum(_name, sum, nil, _fraction), do: sum
+
+  defp calc_sum(_name, sum, new, fraction) do
+    # IO.puts("updating #{name},  #{sum} + #{new} * #{fraction}")
+    sum + new * fraction
+  end
+
   # calculate nutritional content for a product/recipe based on its ingredients.
   defp calculate_nutrition(recipe_id) do
     # Fetch all ingredients for the recipe
@@ -160,43 +167,86 @@ defmodule DiabetesV1.Products do
         multiplier = grams / ingredient.serving_g
 
         %{
-          calories_kcal: acc.calories_kcal + ingredient.calories_kcal * multiplier,
-          carbs_g: acc.carbs_g + ingredient.carbs_g * multiplier,
-          fibre_g: acc.fibre_g + ingredient.fibre_g * multiplier,
-          starch_g: acc.starch_g + ingredient.starch_g * multiplier,
-          sugars_g: acc.sugars_g + ingredient.sugars_g * multiplier,
-          sugar_alcohol_g: acc.sugar_alcohol_g + ingredient.sugar_alcohol_g * multiplier,
-          protein_g: acc.protein_g + ingredient.protein_g * multiplier,
-          fat_g: acc.fat_g + ingredient.fat_g * multiplier,
-          mono_g: acc.mono_g + ingredient.mono_g * multiplier,
-          trans_g: acc.trans_g + ingredient.trans_g * multiplier,
-          poly_g: acc.poly_g + ingredient.poly_g * multiplier,
-          sat_g: acc.sat_g + ingredient.sat_g * multiplier,
-          cholesterol_mg: acc.cholesterol_mg + ingredient.cholesterol_mg * multiplier,
-          calcium_mg: acc.calcium_mg + ingredient.calcium_mg * multiplier,
-          iron_mg: acc.iron_mg + ingredient.iron_mg * multiplier,
-          magnesium_mg: acc.magnesium_mg + ingredient.magnesium_mg * multiplier,
-          phosphorus_mg: acc.phosphorus_mg + ingredient.phosphorus_mg * multiplier,
-          potassium_mg: acc.potassium_mg + ingredient.potassium_mg * multiplier,
-          sodium_mg: acc.sodium_mg + ingredient.sodium_mg * multiplier,
-          zinc_mg: acc.zinc_mg + ingredient.zinc_mg * multiplier,
-          copper_mg: acc.copper_mg + ingredient.copper_mg * multiplier,
-          selenium_mcg: acc.selenium_mcg + ingredient.selenium_mcg * multiplier,
-          v_b9_folate_mcg: acc.v_b9_folate_mcg + ingredient.v_b9_folate_mcg * multiplier,
-          v_a_retinol_mcg: acc.v_a_retinol_mcg + ingredient.v_a_retinol_mcg * multiplier,
-          v_b1_thiamin_mg: acc.v_b1_thiamin_mg + ingredient.v_b1_thiamin_mg * multiplier,
-          v_b2_riboflavin_mg: acc.v_b2_riboflavin_mg + ingredient.v_b2_riboflavin_mg * multiplier,
-          v_b3_niacin_mg: acc.v_b3_niacin_mg + ingredient.v_b3_niacin_mg * multiplier,
-          v_b5_mg: acc.v_b5_mg + ingredient.v_b5_mg * multiplier,
-          v_b6_mg: acc.v_b6_mg + ingredient.v_b6_mg * multiplier,
-          v_b12_mg: acc.v_b12_mg + ingredient.v_b12_mg * multiplier,
+          calories_kcal:
+            calc_sum("calories_kcal", acc.calories_kcal, ingredient.calories_kcal, multiplier),
+          carbs_g: calc_sum("carbs_g", acc.carbs_g, ingredient.carbs_g, multiplier),
+          fibre_g: calc_sum("fibre_g", acc.fibre_g, ingredient.fibre_g, multiplier),
+          starch_g: calc_sum("starch_g", acc.starch_g, ingredient.starch_g, multiplier),
+          sugars_g: calc_sum("sugars_g", acc.sugars_g, ingredient.sugars_g, multiplier),
+          sugar_alcohol_g:
+            calc_sum(
+              "sugar_alcohol_g",
+              acc.sugar_alcohol_g,
+              ingredient.sugar_alcohol_g,
+              multiplier
+            ),
+          protein_g: calc_sum("protein_g", acc.protein_g, ingredient.protein_g, multiplier),
+          fat_g: calc_sum("fat_g", acc.fat_g, ingredient.fat_g, multiplier),
+          mono_g: calc_sum("mono_g", acc.mono_g, ingredient.mono_g, multiplier),
+          trans_g: calc_sum("trans_g", acc.trans_g, ingredient.trans_g, multiplier),
+          poly_g: calc_sum("poly_g", acc.poly_g, ingredient.poly_g, multiplier),
+          sat_g: calc_sum("sat_g", acc.sat_g, ingredient.sat_g, multiplier),
+          cholesterol_mg:
+            calc_sum("cholesterol_mg", acc.cholesterol_mg, ingredient.cholesterol_mg, multiplier),
+          calcium_mg: calc_sum("calcium_mg", acc.calcium_mg, ingredient.calcium_mg, multiplier),
+          iron_mg: calc_sum("iron_mg", acc.iron_mg, ingredient.iron_mg, multiplier),
+          magnesium_mg:
+            calc_sum("magnesium_mg", acc.magnesium_mg, ingredient.magnesium_mg, multiplier),
+          phosphorus_mg:
+            calc_sum("phosphorus_mg", acc.phosphorus_mg, ingredient.phosphorus_mg, multiplier),
+          potassium_mg:
+            calc_sum("potassium_mg", acc.potassium_mg, ingredient.potassium_mg, multiplier),
+          sodium_mg: calc_sum("sodium_mg", acc.sodium_mg, ingredient.sodium_mg, multiplier),
+          zinc_mg: calc_sum("zinc_mg", acc.zinc_mg, ingredient.zinc_mg, multiplier),
+          copper_mg: calc_sum("copper_mg", acc.copper_mg, ingredient.copper_mg, multiplier),
+          selenium_mcg:
+            calc_sum("selenium_mcg", acc.selenium_mcg, ingredient.selenium_mcg, multiplier),
+          v_b9_folate_mcg:
+            calc_sum(
+              "v_b9_folate_mcg",
+              acc.v_b9_folate_mcg,
+              ingredient.v_b9_folate_mcg,
+              multiplier
+            ),
+          v_a_retinol_mcg:
+            calc_sum(
+              "v_a_retinol_mcg",
+              acc.v_a_retinol_mcg,
+              ingredient.v_a_retinol_mcg,
+              multiplier
+            ),
+          v_b1_thiamin_mg:
+            calc_sum(
+              "v_b1_thiamin_mg",
+              acc.v_b1_thiamin_mg,
+              ingredient.v_b1_thiamin_mg,
+              multiplier
+            ),
+          v_b2_riboflavin_mg:
+            calc_sum(
+              "v_b2_riboflavin_mg",
+              acc.v_b2_riboflavin_mg,
+              ingredient.v_b2_riboflavin_mg,
+              multiplier
+            ),
+          v_b3_niacin_mg:
+            calc_sum("v_b3_niacin_mg", acc.v_b3_niacin_mg, ingredient.v_b3_niacin_mg, multiplier),
+          v_b5_mg: calc_sum("v_b5_mg", acc.v_b5_mg, ingredient.v_b5_mg, multiplier),
+          v_b6_mg: calc_sum("v_b6_mg", acc.v_b6_mg, ingredient.v_b6_mg, multiplier),
+          v_b12_mg: calc_sum("v_b12_mg", acc.v_b12_mg, ingredient.v_b12_mg, multiplier),
           v_c_ascorbic_acid_mg:
-            acc.v_c_ascorbic_acid_mg + ingredient.v_c_ascorbic_acid_mg * multiplier,
-          v_d_mcg: acc.v_d_mcg + ingredient.v_d_mcg * multiplier,
-          v_k_mcg: acc.v_k_mcg + ingredient.v_k_mcg * multiplier,
-          v_e_mg: acc.v_e_mg + ingredient.v_e_mg * multiplier,
-          choline_mg: acc.choline_mg + ingredient.choline_mg * multiplier,
-          glycemix_index: acc.glycemix_index + ingredient.glycemix_index * multiplier
+            calc_sum(
+              "v_c_ascorbic_acid_mg",
+              acc.v_c_ascorbic_acid_mg,
+              ingredient.v_c_ascorbic_acid_mg,
+              multiplier
+            ),
+          v_d_mcg: calc_sum("v_d_mcg", acc.v_d_mcg, ingredient.v_d_mcg, multiplier),
+          v_k_mcg: calc_sum("v_k_mcg", acc.v_k_mcg, ingredient.v_k_mcg, multiplier),
+          v_e_mg: calc_sum("v_e_mg", acc.v_e_mg, ingredient.v_e_mg, multiplier),
+          choline_mg: calc_sum("choline_mg", acc.choline_mg, ingredient.choline_mg, multiplier),
+          glycemix_index:
+            calc_sum("glycemix_index", acc.glycemix_index, ingredient.glycemix_index, multiplier)
         }
       end
     )

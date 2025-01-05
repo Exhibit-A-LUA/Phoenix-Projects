@@ -117,9 +117,7 @@ defmodule MySeeder do
   end
 
   # Helper function to ensure floats are done correctly
-  defp get_float(value) when value == "" do
-    0.0
-  end
+  defp get_float(""), do: 0.0
 
   defp get_float(value) do
     # IO.inspect(value, label: "Value passed to get_float")
@@ -351,6 +349,182 @@ defmodule MySeeder do
       end)
     end)
   end
+
+  def seed_test_data do
+    # Insert or ensure the existence of specific products
+    IO.puts("Creating Product - Test Product A")
+
+    {:ok, _} =
+      Products.create_product(%{
+        name: "Test Product A",
+        serving_g: 100,
+        calories_kcal: 200,
+        main_type_id: 1,
+        sub_type_id: 1,
+        category_id: 1
+      })
+
+    IO.puts("Creating Product - Test Product B")
+
+    {:ok, _} =
+      Products.create_product(%{
+        name: "Test Product B",
+        serving_g: 50,
+        calories_kcal: 100,
+        main_type_id: 1,
+        sub_type_id: 1,
+        category_id: 1
+      })
+
+    IO.puts("Creating Product - Test Product C")
+
+    {:ok, _} =
+      Products.create_product(%{
+        name: "Test Product C",
+        serving_g: 80,
+        calories_kcal: 150,
+        main_type_id: 1,
+        sub_type_id: 1,
+        category_id: 1
+      })
+
+    IO.puts("Creating Product - Test Product D")
+
+    {:ok, _} =
+      Products.create_product(%{
+        name: "Test Product D",
+        serving_g: 60,
+        calories_kcal: 50,
+        main_type_id: 1,
+        sub_type_id: 1,
+        category_id: 1
+      })
+
+    # Insert product aliases
+    IO.puts("Creating Alias - Alias A for Test Product A")
+
+    {:ok, _} =
+      ProductAliases.create_product_alias(%{
+        product_id: get_id_by_name(Products.Product, "Test Product A"),
+        alias: "Alias A"
+      })
+
+    # Insert ingredients
+    IO.puts("Adding Ingredient Test Product A for product Test Product B")
+
+    {:ok, _} =
+      Ingredients.create_ingredient(%{
+        product_id: get_id_by_name(Products.Product, "Test Product B"),
+        ingredient_id: get_id_by_name(Products.Product, "Test Product A"),
+        included: true,
+        grams: 20
+      })
+
+    IO.puts("Adding Ingredient Test Product D for product Test Product B")
+
+    {:ok, _} =
+      Ingredients.create_ingredient(%{
+        product_id: get_id_by_name(Products.Product, "Test Product B"),
+        ingredient_id: get_id_by_name(Products.Product, "Test Product D"),
+        included: true,
+        grams: 10
+      })
+
+    IO.puts("Adding Ingredient Alias A for product Test Product C")
+
+    {:ok, _} =
+      Ingredients.create_ingredient(%{
+        product_id: get_id_by_name(Products.Product, "Test Product C"),
+        ingredient_id: get_id_by_name(Products.Product, "Alias A"),
+        included: true,
+        grams: 40
+      })
+
+    IO.puts("Adding Ingredient Test Product D for product Test Product C")
+
+    {:ok, _} =
+      Ingredients.create_ingredient(%{
+        product_id: get_id_by_name(Products.Product, "Test Product C"),
+        ingredient_id: get_id_by_name(Products.Product, "Test Product D"),
+        included: true,
+        grams: 20
+      })
+  end
+
+  def run_update_test do
+    # This runs update_recipe_nutrition for Test Product B which uses Test Product A as an ingredient
+    # and Test Product C which uses an Alias for Test Product A as an ingredient.
+
+    # It will print out the details of the three test products after updating their nutritional values
+
+    # Then it will delete the test products, aliases and ingredients
+
+    # Fetch IDs for the recipes
+    recipe_ids = [
+      get_id_by_name(DiabetesV1.Products.Product, "Test Product B"),
+      get_id_by_name(DiabetesV1.Products.Product, "Test Product C")
+    ]
+
+    # Debug: Check if recipe_ids is correctly populated
+    # IO.inspect(recipe_ids, label: "Recipe IDs")
+
+    # Update each recipe's nutrition
+    Enum.each(recipe_ids, fn id ->
+      IO.inspect(id, label: "Updating recipe nutrition for ID")
+      Products.update_recipe_nutrition(id)
+    end)
+
+    # Debug: Ensure recipe_ids is a list of integers before query
+    # IO.inspect(Enum.all?(recipe_ids, &is_integer/1), label: "Are all recipe_ids integers?")
+
+    # Query updated product details
+    updated_products =
+      Repo.all(
+        from(
+          p in DiabetesV1.Products.Product,
+          # Interpolate recipe_ids into the query
+          where: p.id in ^recipe_ids,
+          select: %{name: p.name, calories_kcal: p.calories_kcal}
+        )
+      )
+
+    # Debug: Inspect the results
+    IO.inspect(updated_products, label: "Updated Products")
+
+    # ! Expected Output
+
+    # [
+    #   %{name: "Test Product B", calories: 73.33},
+    #   %{name: "Test Product C", calories: 236.67}
+    # ]
+  end
+
+  def delete_test_data do
+    # Fetch IDs for the recipes
+    recipe_ids = [
+      get_id_by_name(DiabetesV1.Products.Product, "Test Product B"),
+      get_id_by_name(DiabetesV1.Products.Product, "Test Product C")
+    ]
+
+    IO.puts("Deleting Products")
+
+    Repo.delete_all(
+      from p in DiabetesV1.Products.Product,
+        where: p.name in ["Test Product A", "Test Product B", "Test Product C", "Test Product D"]
+    )
+
+    IO.puts("Deleting Product Aliases")
+
+    Repo.delete_all(
+      from a in DiabetesV1.ProductAliases.ProductAlias, where: a.alias in ["Alias A"]
+    )
+
+    IO.puts("Deleting Ingredients")
+
+    Repo.delete_all(
+      from i in DiabetesV1.Ingredients.Ingredient, where: i.product_id in ^recipe_ids
+    )
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -358,6 +532,10 @@ end
 # MySeeder.seed_product_categories_data()
 # MySeeder.seed_product_data()
 # MySeeder.seed_product_aliases_data()
-MySeeder.seed_ingredients_data()
+# MySeeder.seed_ingredients_data()
+# MySeeder.seed_test_data()
+# MySeeder.run_update_test()
+MySeeder.delete_test_data()
+
 # run calculate_product_nutritional_content once seeding is successfully done
 # MySeeder.calculate_product_nutritional_content
