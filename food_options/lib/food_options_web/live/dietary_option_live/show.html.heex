@@ -1,0 +1,25 @@
+<.header>
+  Dietary option {@dietary_option.id}
+  <:subtitle>This is a dietary_option record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/dietary_options/#{@dietary_option}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit dietary_option</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+</.list>
+
+<.back navigate={~p"/dietary_options"}>Back to dietary_options</.back>
+
+<.modal :if={@live_action == :edit} id="dietary_option-modal" show on_cancel={JS.patch(~p"/dietary_options/#{@dietary_option}")}>
+  <.live_component
+    module={FoodOptionsWeb.DietaryOptionLive.FormComponent}
+    id={@dietary_option.id}
+    title={@page_title}
+    action={@live_action}
+    dietary_option={@dietary_option}
+    patch={~p"/dietary_options/#{@dietary_option}"}
+  />
+</.modal>

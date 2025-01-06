@@ -1,0 +1,24 @@
+<h1>Dietary Options Converter</h1>
+
+<h2>Select Dietary Options</h2>
+<form phx-submit="convert_options">
+  <%= for option <- @options do %>
+    <label>
+      <input type="checkbox" name={"options[#{option}]"} checked={option in @selected_options} />
+      {option}
+    </label>
+    <br />
+  <% end %>
+  <button type="submit">Convert to Integer</button>
+</form>
+
+<h2>Enter Integer</h2>
+<form phx-submit="convert_bitstring">
+  <label>Bitstring Integer:</label>
+  <input type="number" name="bitstring" value={@bitstring} />
+  <button type="submit">Convert to Options</button>
+</form>
+
+<h3>Results</h3>
+<p>Selected Options: {Enum.join(@selected_options, ", ")}</p>
+<p>Bitstring Integer: {@bitstring}</p>
