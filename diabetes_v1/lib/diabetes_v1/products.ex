@@ -102,6 +102,7 @@ defmodule DiabetesV1.Products do
     Product.changeset(product, attrs)
   end
 
+  # Helper function for calculate_nutrition
   defp calc_sum(_name, sum, nil, _fraction), do: sum
 
   defp calc_sum(_name, sum, new, fraction) do

@@ -50,9 +50,10 @@ defmodule DiabetesV1.Ingredients do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_ingredient(attrs \\ %{}) do
+  def create_ingredient(product, attrs \\ %{}) do
     result =
-      %Ingredient{}
+      product
+      |> Ecto.build_assoc(:ingredients)
       |> Ingredient.changeset(attrs)
       |> Repo.insert()
 

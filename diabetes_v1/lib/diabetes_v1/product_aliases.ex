@@ -49,18 +49,19 @@ defmodule DiabetesV1.ProductAliases do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_product_alias(attrs \\ %{}) do
-    %ProductAlias{}
-    |> ProductAlias.changeset(attrs)
-    |> Repo.insert()
-  end
 
-  # def create_product_alias(product, attrs \\ %{}) do
-  #   product
-  #   |> Ecto.build_assoc(:product_aliases)
+  # def create_product_alias(attrs \\ %{}) do
+  #   %ProductAlias{}
   #   |> ProductAlias.changeset(attrs)
   #   |> Repo.insert()
   # end
+
+  def create_product_alias(product, attrs \\ %{}) do
+    product
+    |> Ecto.build_assoc(:product_aliases)
+    |> ProductAlias.changeset(attrs)
+    |> Repo.insert()
+  end
 
   @doc """
   Updates a product_alias.

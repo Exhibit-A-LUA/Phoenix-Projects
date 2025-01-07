@@ -6,6 +6,7 @@ defmodule DiabetesV1.Ingredients.Ingredient do
     field :options, :string
     field :grams, :float
     field :included, :boolean, default: false
+    field :weight_description, :string
 
     # The product that is a recipe
     belongs_to :product, DiabetesV1.Products.Product, foreign_key: :product_id
@@ -18,7 +19,7 @@ defmodule DiabetesV1.Ingredients.Ingredient do
   @doc false
   def changeset(ingredient, attrs) do
     ingredient
-    |> cast(attrs, [:product_id, :ingredient_id, :options, :grams, :included])
+    |> cast(attrs, [:product_id, :ingredient_id, :options, :grams, :included, :weight_description])
     |> validate_required([:product_id, :ingredient_id, :grams, :included])
   end
 end

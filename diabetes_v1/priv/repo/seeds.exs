@@ -269,7 +269,7 @@ defmodule MySeeder do
   def seed_ingredients_data do
     IO.puts("Seeding ingredients...")
 
-    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/ingredients_test1.csv"))
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/ingredients.csv"))
     |> Enum.each(
       # in the csv, but ignoring recipe_num below
       fn [
@@ -328,27 +328,27 @@ defmodule MySeeder do
   defp default_nil_if_empty(""), do: nil
   defp default_nil_if_empty(value), do: value
 
-  def calculate_product_nutritional_content do
-    # Batch update all recipes after seeding, limit to only products with ingredients
-    # Using batching and transactions
+  # def calculate_product_nutritional_content do
+  #   # Batch update all recipes after seeding, limit to only products with ingredients
+  #   # Using batching and transactions
 
-    # wrap the updates in a transaction to ensure all updates succeed or none
-    Repo.transaction(fn ->
-      Repo.all(
-        from p in DiabetesV1.Products.Product,
-          # Include only products that have ingredients
-          join: i in DiabetesV1.Ingredients.Ingredient,
-          on: i.product_id == p.id,
-          # Avoid processing the same product multiple times
-          distinct: true,
-          select: p.id
-      )
-      |> Enum.chunk_every(100)
-      |> Enum.each(fn batch ->
-        Enum.each(batch, &Products.update_recipe_nutrition(&1))
-      end)
-    end)
-  end
+  #   # wrap the updates in a transaction to ensure all updates succeed or none
+  #   Repo.transaction(fn ->
+  #     Repo.all(
+  #       from p in DiabetesV1.Products.Product,
+  #         # Include only products that have ingredients
+  #         join: i in DiabetesV1.Ingredients.Ingredient,
+  #         on: i.product_id == p.id,
+  #         # Avoid processing the same product multiple times
+  #         distinct: true,
+  #         select: p.id
+  #     )
+  #     |> Enum.chunk_every(100)
+  #     |> Enum.each(fn batch ->
+  #       Enum.each(batch, &Products.update_recipe_nutrition(&1))
+  #     end)
+  #   end)
+  # end
 
   def seed_test_data do
     # Insert or ensure the existence of specific products
@@ -525,6 +525,53 @@ defmodule MySeeder do
       from i in DiabetesV1.Ingredients.Ingredient, where: i.product_id in ^recipe_ids
     )
   end
+
+  def seed_weight_descriptions_for_ingredients_data do
+    IO.puts("Adding Weight Descriptions to ingredients...")
+
+    NimbleCSV.RFC4180.parse_stream(
+      File.stream!("priv/repo/ingredients_with_weight_description.csv")
+    )
+    |> Enum.each(
+      # in the csv, but ignoring recipe_num below
+      fn [
+           id,
+           _recipe_num,
+           _product,
+           _ingredient,
+           _options,
+           _grams,
+           _included,
+           weight_description
+         ] ->
+        # Find the ingredient by ID
+        case DiabetesV1.Repo.get(
+               DiabetesV1.Ingredients.Ingredient,
+               String.to_integer(id)
+             ) do
+          nil ->
+            IO.puts("Ingredient ID #{id} not found. Skipping.")
+
+          ingredient ->
+            # Update the weight_description field
+            ingredient
+            |> Ecto.Changeset.change(weight_description: weight_description)
+            |> DiabetesV1.Repo.update()
+            |> case do
+              {:ok, _updated_ingredient} ->
+                IO.puts(
+                  "Updated Ingredient ID #{id} with weight description: #{weight_description}"
+                )
+
+              {:error, changeset} ->
+                IO.inspect(changeset.errors,
+                  label: "Failed to update Ingredient ID #{id}"
+                )
+            end
+        end
+      end
+    )
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -537,4 +584,5 @@ end
 # MySeeder.run_update_test()
 # MySeeder.delete_test_data()
 # run calculate_product_nutritional_content once seeding is successfully done
-DiabetesV1.Products.calculate_product_nutritional_content()
+# DiabetesV1.Products.calculate_product_nutritional_content()
+MySeeder.seed_weight_descriptions_for_ingredients_data()
