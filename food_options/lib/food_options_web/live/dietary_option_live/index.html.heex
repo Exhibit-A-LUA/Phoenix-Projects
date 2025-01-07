@@ -2,12 +2,26 @@
 
 <h2>Select Dietary Options</h2>
 <form phx-submit="convert_options">
-  <%= for option <- @options do %>
-    <label>
+  <div>
+    <%= for option <- @options do %>
+      <%!-- <label>
       <input type="checkbox" name={"options[#{option}]"} checked={option in @selected_options} />
       {option}
     </label>
-    <br />
+    <br /> --%>
+      <span
+        phx-click="toggle_option"
+        phx-value-option={option}
+        class={"option #{if option in @selected_options, do: "selected", else: ""}"}
+        style="cursor: pointer; margin-right: 10px;"
+      >
+        {option}
+      </span>
+    <% end %>
+  </div>
+  <!-- Hidden inputs to include selected options in the form submission -->
+  <%= for option <- @selected_options do %>
+    <input type="hidden" name="options[]" value={option} />
   <% end %>
   <button type="submit">Convert to Integer</button>
 </form>
@@ -22,3 +36,24 @@
 <h3>Results</h3>
 <p>Selected Options: {Enum.join(@selected_options, ", ")}</p>
 <p>Bitstring Integer: {@bitstring}</p>
+
+<style>
+  .option {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+    display: inline-block;
+  }
+
+  .option.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+
+  .option:hover {
+    background-color: #e0e0e0;
+  }
+</style>
