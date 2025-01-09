@@ -30,6 +30,7 @@ defmodule MySeeder do
   alias DiabetesV1.DoseFactorChanges
   alias DiabetesV1.InsulinPurchases
   alias DiabetesV1.SensorChanges
+  alias DiabetesV1.Days
 
   import Ecto.Query
 
@@ -37,7 +38,7 @@ defmodule MySeeder do
   # Seed product_main_types from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(ProductMainType)
+  # Repo.delete_all(ProductMainTypes.ProductMainType)
 
   def seed_product_main_types_data do
     IO.puts("Seeding product_main_types...")
@@ -59,7 +60,7 @@ defmodule MySeeder do
   # # Seed product_sub_types from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(ProductSubType)
+  # Repo.delete_all(ProductSubTypes.ProductSubType)
 
   def seed_product_sub_types_data do
     IO.puts("Seeding product_sub_types...")
@@ -81,7 +82,7 @@ defmodule MySeeder do
   # # Seed product_categories from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(ProductCategory)
+  # Repo.delete_all(ProductCategories.ProductCategory)
 
   def seed_product_categories_data do
     IO.puts("Seeding product_categories...")
@@ -138,7 +139,7 @@ defmodule MySeeder do
   # # Seed products from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(Product)
+  # Repo.delete_all(Products.Product)
 
   def seed_product_data do
     IO.puts("Seeding products...")
@@ -585,7 +586,7 @@ defmodule MySeeder do
   # # Seed constants from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(Constant)
+  # Repo.delete_all(Constants.Constant)
 
   def seed_constants_data do
     IO.puts("Seeding constants...")
@@ -609,7 +610,7 @@ defmodule MySeeder do
   # # Seed exercises from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(Exercise)
+  # Repo.delete_all(Exercises.Exercise)
 
   def seed_exercises_data do
     IO.puts("Seeding exercises...")
@@ -650,7 +651,7 @@ defmodule MySeeder do
   # # Seed period_dates from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(PeriodDate)
+  # Repo.delete_all(PeriodDates.PeriodDate)
 
   def seed_period_dates_data do
     IO.puts("Seeding period dates...")
@@ -672,7 +673,7 @@ defmodule MySeeder do
   # # Seed body_weights from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(BodyWeight)
+  # Repo.delete_all(BodyWeights.BodyWeight)
 
   def seed_body_weights_data do
     IO.puts("Seeding body weights...")
@@ -695,7 +696,7 @@ defmodule MySeeder do
   # # Seed basal_changes from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(BasalChange)
+  # Repo.delete_all(BasalChanges.BasalChange)
 
   def seed_basal_changes_data do
     IO.puts("Seeding basal changes...")
@@ -719,7 +720,7 @@ defmodule MySeeder do
   # # Seed dose_factor_changes from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(DoseFactorChange)
+  # Repo.delete_all(DoseFactorChanges.DoseFactorChange)
 
   def seed_dose_factor_changes_data do
     IO.puts("Seeding dose factor changes...")
@@ -750,7 +751,7 @@ defmodule MySeeder do
   # # Seed insulin_purchases from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(InsulinPurchase)
+  # Repo.delete_all(InsulinPurchases.InsulinPurchase)
 
   def seed_insulin_purchases_data do
     IO.puts("Seeding insulin purchases...")
@@ -786,7 +787,7 @@ defmodule MySeeder do
   # # Seed sensor_changes from a CSV file
 
   # ! To delete all data uncomment following line
-  # Repo.delete_all(SensorChange)
+  # Repo.delete_all(SensorChanges.SensorChange)
 
   def seed_sensor_changes_data do
     IO.puts("Seeding sensor_changes...")
@@ -801,6 +802,69 @@ defmodule MySeeder do
              comments: String.trim(comments)
            }) do
         {:ok, _sensor_change} -> IO.puts("Sensor Change #{num_days} created.")
+        {:error, changeset} -> IO.inspect(changeset.errors)
+      end
+    end)
+  end
+
+  # helper function to deal with time fields and nil time fields
+  defp parse_time(time_string, default \\ nil)
+  defp parse_time(nil, default), do: default
+  defp parse_time("", default), do: default
+
+  defp parse_time(time_string, _default) do
+    [time_part, am_pm] = String.split(time_string, " ")
+    [hour, minute] = String.split(time_part, ":") |> Enum.map(&String.to_integer/1)
+
+    hour =
+      cond do
+        am_pm == "PM" and hour < 12 -> hour + 12
+        am_pm == "AM" and hour == 12 -> 0
+        true -> hour
+      end
+
+    {:ok, time} = Time.new(hour, minute, 0)
+    time
+  end
+
+  # ! Days
+  # # Seed days from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(Days.Day)
+
+  def seed_days_data do
+    IO.puts("Seeding days...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/days.csv"))
+    |> Enum.each(fn [
+                      id,
+                      user_id,
+                      _user_day_num,
+                      day_date,
+                      basal,
+                      icr_fixed,
+                      isf_fixed,
+                      fiasp_left,
+                      tresiba_left,
+                      sensor_day,
+                      _body_weight,
+                      _period_day,
+                      notes
+                    ] ->
+      case Days.create_day(%{
+             id: String.to_integer(id),
+             user_id: String.to_integer(user_id),
+             day_date: parse_date(String.trim(day_date)),
+             basal: parse_integer(basal),
+             icr_fixed: get_float(icr_fixed),
+             isf_fixed: get_float(isf_fixed),
+             fiasp_left: parse_integer(fiasp_left),
+             tresiba_left: parse_integer(tresiba_left),
+             sensor_day: String.to_integer(sensor_day),
+             notes: String.trim(notes)
+           }) do
+        {:ok, _day} -> IO.puts("Day #{id} created.")
         {:error, changeset} -> IO.inspect(changeset.errors)
       end
     end)
@@ -826,4 +890,5 @@ end
 # MySeeder.seed_basal_changes_data()
 # MySeeder.seed_dose_factor_changes_data()
 # MySeeder.seed_insulin_purchases_data()
-MySeeder.seed_sensor_changes_data()
+# MySeeder.seed_sensor_changes_data()
+MySeeder.seed_days_data()

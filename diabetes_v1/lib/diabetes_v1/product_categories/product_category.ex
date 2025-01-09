@@ -6,6 +6,8 @@ defmodule DiabetesV1.ProductCategories.ProductCategory do
     field :name, :string
     field :description, :string
 
+    has_many :products, DiabetesV1.Products.Product, foreign_key: :category_id
+
     timestamps(type: :utc_datetime)
   end
 
