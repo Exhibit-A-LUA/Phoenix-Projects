@@ -1,0 +1,26 @@
+"id","type","Intensity","met","description"
+1,"Walking (2.7 km/h)","low",2.3,"Level ground, strolling, very slow"
+2,"Light Exercise General","low",2.5,"General light exercise"
+3,"Yoga (Hatha)","low",2.5,"Gentle stretching and poses."
+4,"8-Ball","low",2.5,
+5,"Walking (3-4 km/h)","low",2.9,"Leisurely pace, flat terrain."
+6,"Bowling","moderate",3,
+7,"Brisk Walking (5-6 km/h)","moderate",4,"Slightly elevated heart rate, flat terrain."
+8,"Trampolining","moderate",4,
+9,"Table Tennis","moderate",4,
+10,"Moderate Exercise General","moderate",4.5,"General moderate exercise"
+11,"Swimming (Light)","moderate",4.5,"Casual laps, focus on technique."
+12,"Dancing","moderate",5,
+13,"Badminton","moderate",5,
+14,"Tennis (doubles)","moderate",5,
+15,"Cycling (16-19 km/h)","moderate",6,"On flat terrain, not racing."
+16,"Rock Climbing","moderate",6,
+17,"Cycling (20-25 km/h)","vigorous",7,"On flat terrain or mild hills."
+18,"Mixed Martial Arts","vigorous",7,
+19,"Vigorous Exercise General","vigorous",8,"General vigorous exercise"
+20,"Jogging (8-10 km/h)","vigorous",8,"Steady pace, noticeable increase in breathing."
+21,"Aerobics (Step)","vigorous",8,"High-energy choreographed movements."
+22,"Sports (Soccer, Basketball)","vigorous",8,"High-intensity game play."
+23,"HIIT (High-Intensity Interval Training)","vigorous",8,"Short bursts of high effort alternated with rest."
+24,"Running (10+ km/h)","vigorous",10,"Fast pace, significant effort."
+25,"Swimming (Freestyle, Fast)","vigorous",10,"Continuous laps, high intensity."

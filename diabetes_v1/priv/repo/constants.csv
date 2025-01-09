@@ -1,0 +1,49 @@
+"id","key","value","description","notes"
+1,"bg_resting_lower",80,"Lower end of safe resting blood sugar range",
+2,"bg_resting_upper",130,"Upper end of safe resting blood sugar range",
+3,"bg_resting_max",150,"Just above upper end of safe resting blood sugar range",
+4,"bg_after_meal_lower",70,"Lower end of safe post meal blood sugar range",
+5,"bg_after_meal_upper",180,"Upper end of safe post meal blood sugar range",
+6,"bg_extreme_high",250,"Try to stay below this blood sugar reading at all times",
+7,"bg_extreme_low",54,"Try to stay above this blood sugar reading at all times",
+8,"bg_target",120,"Ideal Blood Sugar reading",
+9,"conversion_factor",10,"Used in calculating FPU (Fat Protein Unit)","FPU = (((meal protein grams * 4) + (meal fat grams * 9)) / 100); FPU Carb Equiv = FPU  * conversion_factor. Split doses = FPU Carb Equiv/ICR"
+10,"carb_gram_absorption_per_minute",0.5,"Amount of carb grams absorbed by the body per minute","ideally meal would be split into its fast medium ans slow absorbtion components, and consider amount of fat and protein"
+11,"insulin_percent_used_per_hour",0.3,"The percentage of the dose given that is used every hour",
+12,"split_dose_meal_carbs_limit",60,"Always do a split dose if total meal carbs is more than this many grams","Case 1: If meal carbs are at least split_dose_meal_carbs_limit MUST do a split dose -OR-"
+13,"split_dose_meal_protein_limit",30,"Always do a split dose if total protein is more than this many grams","Case 2: If meal protein grams are at least split_dose_meal_protein_limit MUST do a split dose -OR-"
+14,"split_dose_fat_to_meal_limit",0.33,"Always do a split dose if total fat grams is more than this fraction of the total meal weight","Case 3: if meal fat grams are at least this fraction of the total meal weight MUST do a split dose -OR-"
+15,"split_dose_min_protein_limit",15,"Always do a split dose if meal protein grams is greater than this AND","(Case 4A: if meal protein grams is more than split_dose_min_protein_limit AND"
+16,"split_dose_min_fpu_to_carbs_ratio",0.3,"if the FPU carbs are more than this percentage of the total carbs"," Case 4B: if the FPU carbs at least this fraction of the meal carbs)"
+17,"calories_lower_daily_bound",1000,"Lower calorie requirement for 17yo female",
+18,"calories_upper_daily_bound",1750,"Upper calorie requirement for 17yo female",
+19,"calorie_percent_from_carbs_lower",0.45,"The percentage of calory intake due to carbs, lower end of range",
+20,"calorie_percent_from_carbs_upper",0.65,"The percentage of calory intake due to carbs, upper end of range",
+21,"calorie_percent_from_protein_lower",0.1,"The percentage of calory intake due to protein, lower end of range",
+22,"calorie_percent_from_protein_upper",0.3,"The percentage of calory intake due to protein, upper end of range",
+23,"calorie_percent_from_fat_lower",0.2,"The percentage of calory intake due to fat, lower end of range",
+24,"calorie_percent_from_fat_upper",0.35,"The percentage of calory intake due to fat, upper end of range",
+25,"protein_grams_per_kilo",0.8,"The ideal amount of protein per kilo of body weight",
+26,"sodium_grams_per_day_lower",1500,"The ideal sodium intake per day, lower end of range",
+27,"sodium_grams_per_day_upper",2300,"The ideal sodium intake per day, upper end of range",
+28,"calcium_grams_per_day_lower",1000,"The ideal calcium intake per day, lower end of range",
+29,"calcium_grams_per_day_upper",2000,"The ideal calcium intake per day, upper end of range",
+30,"max_sugars",32,"The ideal maximum amount of sugar intake per day",
+31,"max_saturated_fat",14,"The ideal maximum amount of saturated fat intake per day",
+32,"fibre_grams_per_day_lower",25,"The ideal fibre intake per day, lower end of range",
+33,"fibre_grams_per_day_upper",35,"The ideal fibre intake per day, upper end of range",
+34,"max_glycemic_load",100,"The ideal maximum glycemic load per day","Glycemic load = Glycemic Index * net carbs / 100; If fibre >= carbs, net carbs = 0 else net carbs = carbs - fibre - sugar alcahol"
+35,"max_cholesterol",200,"The ideal maximum cholesterol intake per day",
+36,"max_a1c",7,"The ideal safe maximum A1C reading","A1C = Average Blood Glucose / 18.015"
+37,"standard_deviation_max_percent",0.33,"The ideal maximum Standard Deviation","individual_reading_calc = (Blood Sugar reading - Average Daily Blood Sugar) squared; Standard Deviation = square root of (the sum of reading_calcs / (num reading - 1))"
+38,"cv_glucose_variablilty_max_percent",0.36,"The ideal maximum Glucose Variablilty","Glucose Variablilty = Standard Deviation / Average Daily Blood Glucose"
+39,"blood_sugar_in_range_min_percent",0.7,"Blood sugar readings should be in range at least this percent",
+40,"fiasp_is_low",50,"Warning level when fiasp doses are below this number",
+41,"tresiba_is_low",30,"Warning level when tresiba doses are below this number",
+42,"sensor_near_end",10,"Warning level when the sensor is close to the end of its life",
+43,"isf_constant",1700,"Used in calculating ISF (Insulin Sensitivity Factor)","ISF (Insulin Sensitivity Factor) = ISF Constant / Total Daily Doses; -or- 277700 / (BG * TDD)"
+44,"FPU_1_to_2_delay",2,"Number of hours after the meal for the split dose when FPU is between 1 and 2",
+45,"FPU_2_to_3_delay",4,"Number of hours after the meal for the split dose when FPU is between 2 and 3",
+46,"FPU_3_to_4_delay",5,"Number of hours after the meal for the split dose when FPU is between 3 and 4",
+47,"FPU_over_4_delay",6,"Number of hours after the meal for the split dose when FPU is over 4 (6 to 8)",
+48,"isc_info",0,"ICR (insulin to carb ratio) = (total daily carbs * 1.5) / total bolus doses","ICR (insulin to carb ratio) = (total daily carbs * 1.5) / total bolus doses"

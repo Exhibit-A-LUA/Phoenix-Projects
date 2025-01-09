@@ -22,6 +22,7 @@ defmodule MySeeder do
   alias DiabetesV1.Products.Product
   alias DiabetesV1.ProductAliases
   alias DiabetesV1.Ingredients
+  alias DiabetesV1.Constants
 
   import Ecto.Query
 
@@ -572,6 +573,30 @@ defmodule MySeeder do
       end
     )
   end
+
+  # ! Constants
+  # # Seed constants from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(Constant)
+
+  def seed_constants_data do
+    IO.puts("Seeding constants...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/constants.csv"))
+    |> Enum.each(fn [id, key, value, description, notes] ->
+      case Constants.create_constant(%{
+             id: String.to_integer(id),
+             key: String.trim(key),
+             value: get_float(value),
+             description: String.trim(description),
+             notes: String.trim(notes)
+           }) do
+        {:ok, _constant} -> IO.puts("Constant #{key} created.")
+        {:error, changeset} -> IO.inspect(changeset.errors)
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -585,4 +610,5 @@ end
 # MySeeder.delete_test_data()
 # run calculate_product_nutritional_content once seeding is successfully done
 # DiabetesV1.Products.calculate_product_nutritional_content()
-MySeeder.seed_weight_descriptions_for_ingredients_data()
+# MySeeder.seed_weight_descriptions_for_ingredients_data()
+MySeeder.seed_constants_data()
