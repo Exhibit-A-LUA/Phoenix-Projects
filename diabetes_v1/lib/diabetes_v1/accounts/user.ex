@@ -10,6 +10,7 @@ defmodule DiabetesV1.Accounts.User do
     field :confirmed_at, :utc_datetime
 
     many_to_many :addresses, DiabetesV1.Addresses.Address, join_through: "user_addresses"
+    has_many :period_dates, DiabetesV1.PeriodDates.PeriodDate
     timestamps(type: :utc_datetime)
   end
 

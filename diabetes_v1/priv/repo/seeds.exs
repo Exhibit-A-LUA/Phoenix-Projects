@@ -24,6 +24,7 @@ defmodule MySeeder do
   alias DiabetesV1.Ingredients
   alias DiabetesV1.Constants
   alias DiabetesV1.Exercises
+  alias DiabetesV1.PeriodDates
 
   import Ecto.Query
 
@@ -622,6 +623,45 @@ defmodule MySeeder do
       end
     end)
   end
+
+  defp parse_date(date_string) do
+    [day, month, year] = String.split(date_string, "/")
+
+    # Add "20" to the year if it's only 2 digits
+    year =
+      if String.length(year) == 2 do
+        "20" <> year
+      else
+        year
+      end
+
+    case Date.new(String.to_integer(year), String.to_integer(month), String.to_integer(day)) do
+      {:ok, date} -> date
+      {:error, _reason} -> raise "Invalid date: #{date_string}"
+    end
+  end
+
+  # ! PeriodDates
+  # # Seed period_dates from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(PeriodDate)
+
+  def seed_period_dates_data do
+    IO.puts("Seeding period dates...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/period_dates.csv"))
+    |> Enum.each(fn [id, user_id, start_date] ->
+      case PeriodDates.create_period_date(%{
+             id: String.to_integer(id),
+             user_id: String.to_integer(user_id),
+             start_date: parse_date(String.trim(start_date))
+           }) do
+        {:ok, _period_date} -> IO.puts("Period Date #{start_date} created.")
+        {:error, changeset} -> IO.inspect(changeset.errors)
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -637,4 +677,5 @@ end
 # DiabetesV1.Products.calculate_product_nutritional_content()
 # MySeeder.seed_weight_descriptions_for_ingredients_data()
 # MySeeder.seed_constants_data()
-MySeeder.seed_exercises_data()
+# MySeeder.seed_exercises_data()
+MySeeder.seed_period_dates_data()
