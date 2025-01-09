@@ -13,6 +13,7 @@ defmodule DiabetesV1.Accounts.User do
     has_many :period_dates, DiabetesV1.PeriodDates.PeriodDate
     has_many :body_weights, DiabetesV1.BodyWeights.BodyWeight
     has_many :basal_changes, DiabetesV1.BasalChanges.BasalChange
+    has_many :dose_factor_changes, DiabetesV1.DoseFactorChanges.DoseFactorChange
     timestamps(type: :utc_datetime)
   end
 
