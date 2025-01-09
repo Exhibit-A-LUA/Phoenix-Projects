@@ -28,6 +28,7 @@ defmodule MySeeder do
   alias DiabetesV1.BodyWeights
   alias DiabetesV1.BasalChanges
   alias DiabetesV1.DoseFactorChanges
+  alias DiabetesV1.InsulinPurchases
 
   import Ecto.Query
 
@@ -737,6 +738,48 @@ defmodule MySeeder do
       end
     end)
   end
+
+  # helper function to deal with nil integer fields
+  defp parse_integer(str, default \\ 0)
+  defp parse_integer(nil, default), do: default
+  defp parse_integer("", default), do: default
+  defp parse_integer(str, _default), do: String.to_integer(str)
+
+  # ! InsulinPurchases
+  # # Seed insulin_purchases from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(InsulinPurchase)
+
+  def seed_insulin_purchases_data do
+    IO.puts("Seeding insulin purchases...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/insulin_purchases.csv"))
+    |> Enum.each(fn [
+                      id,
+                      user_id,
+                      change_date,
+                      fiasp_total_doses,
+                      fiasp_initial_doses_used,
+                      tresiba_total_doses,
+                      tresiba_initial_doses_used,
+                      comments
+                    ] ->
+      case InsulinPurchases.create_insulin_purchase(%{
+             id: String.to_integer(id),
+             user_id: String.to_integer(user_id),
+             change_date: parse_date(String.trim(change_date)),
+             fiasp_total_doses: parse_integer(fiasp_total_doses),
+             fiasp_initial_doses_used: parse_integer(fiasp_initial_doses_used),
+             tresiba_total_doses: parse_integer(tresiba_total_doses),
+             tresiba_initial_doses_used: parse_integer(tresiba_initial_doses_used),
+             comments: String.trim(comments)
+           }) do
+        {:ok, _insulin_purchase} -> IO.puts("Insulin_Purchase #{fiasp_total_doses} created.")
+        {:error, changeset} -> IO.inspect(changeset.errors)
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -756,4 +799,5 @@ end
 # MySeeder.seed_period_dates_data()
 # MySeeder.seed_body_weights_data()
 # MySeeder.seed_basal_changes_data()
-MySeeder.seed_dose_factor_changes_data()
+# MySeeder.seed_dose_factor_changes_data()
+MySeeder.seed_insulin_purchases_data()
