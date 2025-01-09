@@ -25,6 +25,7 @@ defmodule MySeeder do
   alias DiabetesV1.Constants
   alias DiabetesV1.Exercises
   alias DiabetesV1.PeriodDates
+  alias DiabetesV1.BodyWeights
 
   import Ecto.Query
 
@@ -662,6 +663,29 @@ defmodule MySeeder do
       end
     end)
   end
+
+  # ! BodyWeights
+  # # Seed body_weights from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(BodyWeight)
+
+  def seed_body_weights_data do
+    IO.puts("Seeding body weights...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/body_weights.csv"))
+    |> Enum.each(fn [id, user_id, reading_date, weight_kg] ->
+      case BodyWeights.create_body_weight(%{
+             id: String.to_integer(id),
+             user_id: String.to_integer(user_id),
+             reading_date: parse_date(String.trim(reading_date)),
+             weight_kg: get_float(String.trim(weight_kg))
+           }) do
+        {:ok, _body_weight} -> IO.puts("Body Weight #{weight_kg} created.")
+        {:error, changeset} -> IO.inspect(changeset.errors)
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -678,4 +702,5 @@ end
 # MySeeder.seed_weight_descriptions_for_ingredients_data()
 # MySeeder.seed_constants_data()
 # MySeeder.seed_exercises_data()
-MySeeder.seed_period_dates_data()
+# MySeeder.seed_period_dates_data()
+MySeeder.seed_body_weights_data()

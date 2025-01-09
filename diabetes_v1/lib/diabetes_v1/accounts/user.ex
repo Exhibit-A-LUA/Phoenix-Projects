@@ -11,6 +11,7 @@ defmodule DiabetesV1.Accounts.User do
 
     many_to_many :addresses, DiabetesV1.Addresses.Address, join_through: "user_addresses"
     has_many :period_dates, DiabetesV1.PeriodDates.PeriodDate
+    has_many :body_weights, DiabetesV1.BodyWeights.BodyWeight
     timestamps(type: :utc_datetime)
   end
 

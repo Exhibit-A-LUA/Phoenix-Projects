@@ -49,8 +49,10 @@ defmodule DiabetesV1.PeriodDates do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_period_date(attrs \\ %{}) do
-    %PeriodDate{}
+
+  def create_period_date(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:period_dates)
     |> PeriodDate.changeset(attrs)
     |> Repo.insert()
   end
