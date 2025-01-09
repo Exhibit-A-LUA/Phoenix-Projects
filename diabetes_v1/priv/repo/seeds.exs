@@ -23,6 +23,7 @@ defmodule MySeeder do
   alias DiabetesV1.ProductAliases
   alias DiabetesV1.Ingredients
   alias DiabetesV1.Constants
+  alias DiabetesV1.Exercises
 
   import Ecto.Query
 
@@ -597,6 +598,30 @@ defmodule MySeeder do
       end
     end)
   end
+
+  # ! Exercises
+  # # Seed exercises from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(Exercise)
+
+  def seed_exercises_data do
+    IO.puts("Seeding exercises...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/exercises.csv"))
+    |> Enum.each(fn [id, type, intensity, met, description] ->
+      case Exercises.create_exercise(%{
+             id: String.to_integer(id),
+             type: String.trim(type),
+             intensity: String.trim(intensity),
+             met: get_float(met),
+             description: String.trim(description)
+           }) do
+        {:ok, _exercise} -> IO.puts("Exercise #{type} created.")
+        {:error, changeset} -> IO.inspect(changeset.errors)
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -611,4 +636,5 @@ end
 # run calculate_product_nutritional_content once seeding is successfully done
 # DiabetesV1.Products.calculate_product_nutritional_content()
 # MySeeder.seed_weight_descriptions_for_ingredients_data()
-MySeeder.seed_constants_data()
+# MySeeder.seed_constants_data()
+MySeeder.seed_exercises_data()
