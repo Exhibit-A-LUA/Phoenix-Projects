@@ -29,6 +29,7 @@ defmodule MySeeder do
   alias DiabetesV1.BasalChanges
   alias DiabetesV1.DoseFactorChanges
   alias DiabetesV1.InsulinPurchases
+  alias DiabetesV1.SensorChanges
 
   import Ecto.Query
 
@@ -780,6 +781,30 @@ defmodule MySeeder do
       end
     end)
   end
+
+  # ! SensorChanges
+  # # Seed sensor_changes from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(SensorChange)
+
+  def seed_sensor_changes_data do
+    IO.puts("Seeding sensor_changes...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/sensor_changes.csv"))
+    |> Enum.each(fn [id, user_id, start_date, num_days, comments] ->
+      case SensorChanges.create_sensor_change(%{
+             id: String.to_integer(id),
+             user_id: String.to_integer(user_id),
+             start_date: parse_date(String.trim(start_date)),
+             num_days: String.to_integer(num_days),
+             comments: String.trim(comments)
+           }) do
+        {:ok, _sensor_change} -> IO.puts("Sensor Change #{num_days} created.")
+        {:error, changeset} -> IO.inspect(changeset.errors)
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -800,4 +825,5 @@ end
 # MySeeder.seed_body_weights_data()
 # MySeeder.seed_basal_changes_data()
 # MySeeder.seed_dose_factor_changes_data()
-MySeeder.seed_insulin_purchases_data()
+# MySeeder.seed_insulin_purchases_data()
+MySeeder.seed_sensor_changes_data()

@@ -15,6 +15,7 @@ defmodule DiabetesV1.Accounts.User do
     has_many :basal_changes, DiabetesV1.BasalChanges.BasalChange
     has_many :dose_factor_changes, DiabetesV1.DoseFactorChanges.DoseFactorChange
     has_many :insulin_purchases, DiabetesV1.InsulinPurchases.InsulinPurchase
+    has_many :sensor_changes, DiabetesV1.SensorChanges.SensorChange
     timestamps(type: :utc_datetime)
   end
 
