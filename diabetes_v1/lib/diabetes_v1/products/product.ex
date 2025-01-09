@@ -52,6 +52,7 @@ defmodule DiabetesV1.Products.Product do
     has_many :ingredients, DiabetesV1.Ingredients.Ingredient, foreign_key: :product_id
     # A product that is an ingredient is used in many recipes
     has_many :used_in_recipes, DiabetesV1.Ingredients.Ingredient, foreign_key: :ingredient_id
+    has_many :meals, DiabetesV1.Meals.Meal, foreign_key: :product_id
 
     timestamps(type: :utc_datetime)
   end

@@ -12,6 +12,7 @@ defmodule DiabetesV1.Times.Time do
     field :exercise_start, :time
     field :exercise_end, :time
 
+    has_many :meals, DiabetesV1.Meals.Meal
     belongs_to :day, DiabetesV1.Days.Day
     belongs_to :exercise, DiabetesV1.Exercises.Exercise, foreign_key: :exercise_id
 

@@ -32,6 +32,7 @@ defmodule MySeeder do
   alias DiabetesV1.SensorChanges
   alias DiabetesV1.Days
   alias DiabetesV1.Times
+  alias DiabetesV1.Meals
 
   import Ecto.Query
 
@@ -916,6 +917,38 @@ defmodule MySeeder do
       end
     end)
   end
+
+  # ! Meals
+  # # Seed meals from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(Meals.Meal)
+
+  def seed_meals_data do
+    IO.puts("Seeding meals...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/meals.csv"))
+    |> Enum.each(fn [id, time_id, _day_num, _date, meal_num, food, qty, weight] ->
+      with {:ok, product_id} <- fetch_id_by_name(Product, food) do
+        attrs = %{
+          id: String.to_integer(id),
+          time_id: String.to_integer(time_id),
+          meal_num: String.to_integer(meal_num),
+          product_id: product_id,
+          qty: get_float(qty),
+          weight: get_float(weight)
+        }
+
+        case Meals.create_meal(attrs) do
+          {:ok, _meal} -> IO.puts("Meal #{food} created.")
+          {:error, changeset} -> IO.inspect(changeset.errors)
+        end
+      else
+        :error -> IO.puts("Invalid data for meal ID #{id}. Skipping...")
+        error -> IO.inspect(error, label: "Unexpected Error for meal ID #{id}")
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -939,4 +972,5 @@ end
 # MySeeder.seed_insulin_purchases_data()
 # MySeeder.seed_sensor_changes_data()
 # MySeeder.seed_days_data()
-MySeeder.seed_times_data()
+# MySeeder.seed_times_data()
+MySeeder.seed_meals_data()
