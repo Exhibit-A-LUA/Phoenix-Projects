@@ -31,6 +31,7 @@ defmodule MySeeder do
   alias DiabetesV1.InsulinPurchases
   alias DiabetesV1.SensorChanges
   alias DiabetesV1.Days
+  alias DiabetesV1.Times
 
   import Ecto.Query
 
@@ -869,6 +870,52 @@ defmodule MySeeder do
       end
     end)
   end
+
+  # ! Times
+  # # Seed times from a CSV file
+
+  # ! To delete all data uncomment following line
+  # Repo.delete_all(Times.Time)
+
+  def seed_times_data do
+    IO.puts("Seeding times...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times.csv"))
+    |> Enum.each(fn [
+                      id,
+                      day_id,
+                      _date,
+                      reading_time,
+                      blood_sugar,
+                      meal_num,
+                      dose_time,
+                      doses,
+                      _split_dose_time,
+                      _split_doses,
+                      meal_time,
+                      _two_hrs_bs,
+                      exercise_id,
+                      exercise_start,
+                      exercise_end
+                    ] ->
+      case Times.create_time(%{
+             id: String.to_integer(id),
+             day_id: String.to_integer(day_id),
+             reading_time: parse_time(reading_time),
+             blood_sugar: String.to_integer(blood_sugar),
+             meal_num: parse_integer(meal_num),
+             dose_time: parse_time(dose_time),
+             doses: parse_integer(doses),
+             meal_time: parse_time(meal_time),
+             exercise_id: parse_integer(exercise_id),
+             exercise_start: parse_time(exercise_start),
+             exercise_end: parse_time(exercise_end)
+           }) do
+        {:ok, _time} -> IO.puts("Time #{reading_time} created.")
+        {:error, changeset} -> IO.inspect(changeset.errors)
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -891,4 +938,5 @@ end
 # MySeeder.seed_dose_factor_changes_data()
 # MySeeder.seed_insulin_purchases_data()
 # MySeeder.seed_sensor_changes_data()
-MySeeder.seed_days_data()
+# MySeeder.seed_days_data()
+MySeeder.seed_times_data()

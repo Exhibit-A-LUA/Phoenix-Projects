@@ -8,6 +8,8 @@ defmodule DiabetesV1.Exercises.Exercise do
     field :intensity, Ecto.Enum, values: [:low, :moderate, :vigorous]
     field :met, :float
 
+    has_many :times, DiabetesV1.Times.Time
+
     timestamps(type: :utc_datetime)
   end
 

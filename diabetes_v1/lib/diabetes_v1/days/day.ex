@@ -12,6 +12,7 @@ defmodule DiabetesV1.Days.Day do
     field :sensor_day, :integer
     field :notes, :string
     belongs_to :user, DiabetesV1.Accounts.User
+    has_many :times, DiabetesV1.Times.Time
 
     timestamps(type: :utc_datetime)
   end
