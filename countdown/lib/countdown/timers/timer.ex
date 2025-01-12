@@ -23,8 +23,9 @@ defmodule Countdown.Timers.Timer do
       "00:00:00"
     else
       hours = div(duration, 3600)
-      minutes = div(rem(duration, 3600), 60)
-      seconds = rem(duration, 60)
+      remaining = rem(duration, 3600)
+      minutes = div(remaining, 60)
+      seconds = rem(remaining, 60)
 
       [hours, minutes, seconds]
       |> Enum.map(&String.pad_leading(Integer.to_string(&1), 2, "0"))

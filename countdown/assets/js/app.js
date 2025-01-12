@@ -26,7 +26,7 @@ let Hooks = {}
 
 function formatDuration(seconds) {
   let hours = Math.floor(seconds / 3600)
-  let minutes = Math.floor((seconds / 3600) / 60)
+  let minutes = Math.floor((seconds % 3600) / 60)
   let secs = seconds % 60
 
   hours = hours.toString().padStart(2, '0')
