@@ -3,7 +3,8 @@ defmodule DiabetesV1.Times.Time do
   import Ecto.Changeset
 
   schema "times" do
-    field :reading_time, :time
+    field :event_time, :time
+    field :event_type, :string, default: "multiple"
     field :blood_sugar, :integer
     field :meal_num, :integer
     field :dose_time, :time
@@ -24,7 +25,8 @@ defmodule DiabetesV1.Times.Time do
     time
     |> cast(attrs, [
       :day_id,
-      :reading_time,
+      :event_time,
+      :event_type,
       :blood_sugar,
       :meal_num,
       :dose_time,

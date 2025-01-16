@@ -949,6 +949,57 @@ defmodule MySeeder do
       end
     end)
   end
+
+  def add_event_type_for_times_data do
+    IO.puts("Adding Event Types to times...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times-with-event-type.csv"))
+    |> Enum.each(
+      # in the csv, but ignoring all fields except id and event_type below
+      fn [
+           id,
+           _day_id,
+           _date,
+           _reading_time,
+           _blood_sugar,
+           _meal_num,
+           _dose_time,
+           _doses,
+           _split_dose_time,
+           _split_doses,
+           _meal_time,
+           _two_hrs_bs,
+           _exercise_id,
+           _exercise_start,
+           _exercise_end,
+           event_type
+         ] ->
+        # Find the ingredient by ID
+        case DiabetesV1.Repo.get(
+               DiabetesV1.Times.Time,
+               String.to_integer(id)
+             ) do
+          nil ->
+            IO.puts("Time ID #{id} not found. Skipping.")
+
+          time ->
+            # Update the event_type field
+            time
+            |> Ecto.Changeset.change(event_type: event_type)
+            |> DiabetesV1.Repo.update()
+            |> case do
+              {:ok, _updated_time} ->
+                IO.puts("Updated Time ID #{id} with event type: #{event_type}")
+
+              {:error, changeset} ->
+                IO.inspect(changeset.errors,
+                  label: "Failed to update Time ID #{id}"
+                )
+            end
+        end
+      end
+    )
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -974,3 +1025,4 @@ end
 # MySeeder.seed_days_data()
 # MySeeder.seed_times_data()
 # MySeeder.seed_meals_data()
+MySeeder.add_event_type_for_times_data()
