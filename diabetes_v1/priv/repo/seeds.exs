@@ -1025,4 +1025,4 @@ end
 # MySeeder.seed_days_data()
 # MySeeder.seed_times_data()
 # MySeeder.seed_meals_data()
-MySeeder.add_event_type_for_times_data()
+# MySeeder.add_event_type_for_times_data()
