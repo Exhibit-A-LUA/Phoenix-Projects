@@ -881,12 +881,12 @@ defmodule MySeeder do
   def seed_times_data do
     IO.puts("Seeding times...")
 
-    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times.csv"))
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times-with-dose-type.csv"))
     |> Enum.each(fn [
                       id,
                       day_id,
                       _date,
-                      reading_time,
+                      event_time,
                       blood_sugar,
                       meal_num,
                       dose_time,
@@ -904,7 +904,7 @@ defmodule MySeeder do
       case Times.create_time(%{
              id: String.to_integer(id),
              day_id: String.to_integer(day_id),
-             reading_time: parse_time(reading_time),
+             event_time: parse_time(event_time),
              blood_sugar: String.to_integer(blood_sugar),
              meal_num: parse_integer(meal_num),
              dose_time: parse_time(dose_time),
@@ -913,10 +913,10 @@ defmodule MySeeder do
              exercise_id: parse_integer(exercise_id),
              exercise_start: parse_time(exercise_start),
              exercise_end: parse_time(exercise_end),
-             event_type: String.trim(event_type)
-             #  dose_type:String.trim(dose_type)
+             event_type: String.trim(event_type),
+             dose_type: String.trim(dose_type)
            }) do
-        {:ok, _time} -> IO.puts("Time #{reading_time} created.")
+        {:ok, _time} -> IO.puts("Time #{event_time} created.")
         {:error, changeset} -> IO.inspect(changeset.errors)
       end
     end)
@@ -964,7 +964,7 @@ defmodule MySeeder do
            id,
            _day_id,
            _date,
-           _reading_time,
+           _event_time,
            _blood_sugar,
            _meal_num,
            _dose_time,
@@ -1028,5 +1028,5 @@ end
 # MySeeder.seed_sensor_changes_data()
 # MySeeder.seed_days_data()
 # MySeeder.seed_times_data()
-# MySeeder.seed_meals_data()
+MySeeder.seed_meals_data()
 # MySeeder.add_event_type_for_times_data()

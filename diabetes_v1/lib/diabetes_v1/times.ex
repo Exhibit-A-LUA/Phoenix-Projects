@@ -49,6 +49,13 @@ defmodule DiabetesV1.Times do
       {:error, %Ecto.Changeset{}}
 
   """
+
+  # def create_time(attrs \\ %{}) do
+  #   %Time{}
+  #   |> Time.changeset(attrs)
+  #   |> Repo.insert()
+  # end
+
   def create_time(day, attrs \\ %{}) do
     day
     |> Ecto.build_assoc(:times)

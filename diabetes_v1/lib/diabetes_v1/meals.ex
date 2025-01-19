@@ -49,6 +49,13 @@ defmodule DiabetesV1.Meals do
       {:error, %Ecto.Changeset{}}
 
   """
+
+  # def create_meal(attrs \\ %{}) do
+  #   %Meal{}
+  #   |> Meal.changeset(attrs)
+  #   |> Repo.insert()
+  # end
+
   def create_meal(time, attrs \\ %{}) do
     time
     |> Ecto.build_assoc(:meals)

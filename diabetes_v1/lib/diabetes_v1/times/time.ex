@@ -5,6 +5,7 @@ defmodule DiabetesV1.Times.Time do
   schema "times" do
     field :event_time, :time
     field :event_type, :string, default: "multiple"
+    field :dose_type, :string
     field :blood_sugar, :integer
     field :meal_num, :integer
     field :dose_time, :time
@@ -27,6 +28,7 @@ defmodule DiabetesV1.Times.Time do
       :day_id,
       :event_time,
       :event_type,
+      :dose_type,
       :blood_sugar,
       :meal_num,
       :dose_time,
@@ -37,7 +39,7 @@ defmodule DiabetesV1.Times.Time do
     ])
     # Ensures exercise_id is valid if provided
     |> assoc_constraint(:exercise)
-    |> validate_required([:day_id, :reading_time, :blood_sugar])
-    |> unique_constraint([:day_id, :reading_time], name: :times_day_id_reading_time_index)
+    |> validate_required([:day_id, :event_time, :blood_sugar])
+    |> unique_constraint([:day_id, :event_time], name: :times_day_id_reading_time_index)
   end
 end
