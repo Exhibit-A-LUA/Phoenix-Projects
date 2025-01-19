@@ -39,7 +39,7 @@ defmodule DiabetesV1.Times.Time do
     ])
     # Ensures exercise_id is valid if provided
     |> assoc_constraint(:exercise)
-    |> validate_required([:day_id, :event_time, :blood_sugar])
+    |> validate_required([:day_id, :event_time])
     |> unique_constraint([:day_id, :event_time], name: :times_day_id_reading_time_index)
   end
 end

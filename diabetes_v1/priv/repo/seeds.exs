@@ -881,7 +881,7 @@ defmodule MySeeder do
   def seed_times_data do
     IO.puts("Seeding times...")
 
-    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times-with-dose-type.csv"))
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times.csv"))
     |> Enum.each(fn [
                       id,
                       day_id,
@@ -1004,6 +1004,107 @@ defmodule MySeeder do
       end
     )
   end
+
+  defp get_next_id() do
+    case Repo.one(from t in DiabetesV1.Times.Time, select: max(t.id)) do
+      # Start with 1 if the table is empty
+      nil -> 1
+      max_id -> max_id + 1
+    end
+  end
+
+  defp get_day_id(day_id, event_time, split_dose_time) do
+    if event_time > split_dose_time do
+      day_id + 1
+    else
+      day_id
+    end
+  end
+
+  def seed_times_data_adding_split_doses do
+    IO.puts("Seeding times adding split doses...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times.csv"))
+    |> Enum.each(fn [
+                      _id,
+                      day_id,
+                      _date,
+                      event_time,
+                      _blood_sugar,
+                      _meal_num,
+                      _dose_time,
+                      _doses,
+                      split_dose_time,
+                      split_doses,
+                      _meal_time,
+                      _two_hrs_bs,
+                      _exercise_id,
+                      _exercise_start,
+                      _exercise_end,
+                      _event_type,
+                      _dose_type
+                    ] ->
+      if split_dose_time != "" and split_doses != "" do
+        # Parse values
+        day_id = String.to_integer(day_id)
+        event_time = parse_time(event_time)
+        split_dose_time = parse_time(split_dose_time)
+        split_doses = String.to_integer(split_doses)
+
+        # Get correct day_id for split_dose_time
+        day_id = get_day_id(day_id, event_time, split_dose_time)
+
+        # Check if a record with the same day_id + event_time exists
+        existing_record =
+          DiabetesV1.Times.Time
+          |> where([t], t.day_id == ^day_id and t.event_time == ^split_dose_time)
+          |> Repo.one()
+
+        if existing_record do
+          # Update the existing record
+          changeset =
+            existing_record
+            |> Ecto.Changeset.cast(
+              %{
+                dose_time: split_dose_time,
+                doses: split_doses,
+                event_type: "split dose",
+                dose_type: "split"
+              },
+              [:dose_time, :doses, :event_type, :dose_type]
+            )
+
+          case Repo.update(changeset) do
+            {:ok, _updated_record} ->
+              IO.puts("Updated existing split dose for #{split_dose_time}.")
+
+            {:error, changeset} ->
+              IO.inspect(changeset.errors)
+          end
+        else
+          # Insert a new record
+          case DiabetesV1.Times.create_time(%{
+                 id: get_next_id(),
+                 day_id: day_id,
+                 event_time: split_dose_time,
+                 blood_sugar: nil,
+                 meal_num: nil,
+                 dose_time: split_dose_time,
+                 doses: split_doses,
+                 meal_time: nil,
+                 exercise_id: nil,
+                 exercise_start: nil,
+                 exercise_end: nil,
+                 event_type: "split dose",
+                 dose_type: "split"
+               }) do
+            {:ok, _time} -> IO.puts("Created new split dose for #{split_dose_time}.")
+            {:error, changeset} -> IO.inspect(changeset.errors)
+          end
+        end
+      end
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -1028,5 +1129,6 @@ end
 # MySeeder.seed_sensor_changes_data()
 # MySeeder.seed_days_data()
 # MySeeder.seed_times_data()
-MySeeder.seed_meals_data()
+# MySeeder.seed_meals_data()
 # MySeeder.add_event_type_for_times_data()
+# MySeeder.seed_times_data_adding_split_doses()
