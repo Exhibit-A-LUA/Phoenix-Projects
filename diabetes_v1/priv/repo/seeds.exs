@@ -897,7 +897,9 @@ defmodule MySeeder do
                       _two_hrs_bs,
                       exercise_id,
                       exercise_start,
-                      exercise_end
+                      exercise_end,
+                      event_type,
+                      dose_type
                     ] ->
       case Times.create_time(%{
              id: String.to_integer(id),
@@ -910,7 +912,9 @@ defmodule MySeeder do
              meal_time: parse_time(meal_time),
              exercise_id: parse_integer(exercise_id),
              exercise_start: parse_time(exercise_start),
-             exercise_end: parse_time(exercise_end)
+             exercise_end: parse_time(exercise_end),
+             event_type: String.trim(event_type)
+             #  dose_type:String.trim(dose_type)
            }) do
         {:ok, _time} -> IO.puts("Time #{reading_time} created.")
         {:error, changeset} -> IO.inspect(changeset.errors)
