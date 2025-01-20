@@ -46,3 +46,19 @@
   background-image: linear-gradient(to bottom, #631A61, #551653, #340E33, #010101);
   height: 225px;
 }
+
+.markdown-content {
+  color: white;
+}
+
+.markdown-content h1 {
+  color: white;
+  margin-top: 20px;  /* Adjust the space above the header */
+  margin-bottom: 20px;  /* Adjust the space below the header */
+  font-size: 2rem;
+}
+
+.markdown-content p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}

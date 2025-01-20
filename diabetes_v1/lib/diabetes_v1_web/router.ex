@@ -20,6 +20,7 @@ defmodule DiabetesV1Web.Router do
   scope "/", DiabetesV1Web do
     pipe_through :browser
 
+    live "/technical", MarkdownLive
     get "/", PageController, :home
   end
 
