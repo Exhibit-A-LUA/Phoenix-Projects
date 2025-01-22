@@ -1105,6 +1105,496 @@ defmodule MySeeder do
       end
     end)
   end
+
+  # def seed_times_data_separting_exercises do
+  #   IO.puts("Seeding times separating exercises...")
+
+  #   NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times.csv"))
+  #   |> Enum.each(fn [
+  #                     id,
+  #                     day_id,
+  #                     _date,
+  #                     event_time,
+  #                     _blood_sugar,
+  #                     meal_num,
+  #                     _dose_time,
+  #                     doses,
+  #                     _split_dose_time,
+  #                     _split_doses,
+  #                     meal_time,
+  #                     _two_hrs_bs,
+  #                     exercise_id,
+  #                     exercise_start,
+  #                     exercise_end,
+  #                     event_type,
+  #                     dose_type
+  #                   ] ->
+  #     if exercise_id != "" do
+  #       # Parse values
+  #       day_id = String.to_integer(day_id || "0")
+  #       event_time = parse_time(event_time || "00:00:00")
+  #       meal_num = String.to_integer(meal_num || "0")
+  #       doses = String.to_integer(doses || "0")
+  #       saved_exercise_id = String.to_integer(exercise_id || "0")
+  #       exercise_start = parse_time(exercise_start || "00:00:00")
+  #       exercise_end = parse_time(exercise_end || "00:00:00")
+  #       exercise_mins = Time.diff(exercise_end, exercise_start, :minute)
+
+  #       if meal_num == 0 and doses == 0 and event_time == exercise_start do
+  #         # update current record changeset
+  #         # set exercise_mins = exercise_mins
+  #         # set event_type = 'exercise'
+  #         # Construct the changeset directly for the current record
+  #         changeset =
+  #           %DiabetesV1.Times.Time{
+  #             id: id,
+  #             day_id: day_id,
+  #             event_time: event_time
+  #           }
+  #           |> Ecto.Changeset.cast(
+  #             %{
+  #               exercise_mins: exercise_mins,
+  #               event_type: "exercise"
+  #             },
+  #             [:exercise_mins, :event_type]
+  #           )
+
+  #         # Update the record
+  #         case Repo.update(changeset) do
+  #           {:ok, _updated_record} ->
+  #             IO.puts("Updated current exercise record to start at #{exercise_start}.")
+
+  #           {:error, changeset} ->
+  #             IO.inspect(changeset.errors)
+  #         end
+  #       else
+  #         # update current record changeset
+  #         # set exercise_mins = exercise_mins
+  #         # set event_type = 'meal' if meal_num > 0
+  #         # set event_type = 'dose' if doses > 0
+  #         # set event_type = 'reading' if meal_num = 0 and doses = 0
+  #         if meal_num > 0 do
+  #           event_type = "meal"
+  #         else
+  #           if doses > 0 do
+  #             event_type = "dose"
+  #           else
+  #             event_type = "reading"
+  #           end
+  #         end
+
+  #         changeset =
+  #           %DiabetesV1.Times.Time{
+  #             id: id,
+  #             day_id: day_id,
+  #             event_time: event_time
+  #           }
+  #           |> Ecto.Changeset.cast(
+  #             %{
+  #               event_type: event_type
+  #             },
+  #             [:event_type]
+  #           )
+
+  #         # Update the record
+  #         case Repo.update(changeset) do
+  #           {:ok, _updated_record} ->
+  #             IO.puts("Updated current exercise record to start at #{exercise_start}.")
+
+  #           {:error, changeset} ->
+  #             IO.inspect(changeset.errors)
+  #         end
+
+  #         # Create or update record with exercise details
+  #         # Check if a record with the same day_id + exercise_start exists
+  #         existing_record =
+  #           DiabetesV1.Times.Time
+  #           |> where([t], t.day_id == ^day_id and t.event_time == ^exercise_start)
+  #           |> Repo.one()
+
+  #         if existing_record do
+  #           # Update the existing record
+  #           changeset =
+  #             existing_record
+  #             |> Ecto.Changeset.cast(
+  #               %{
+  #                 exercise_id: exercise_id,
+  #                 exercise_mins: exercise_mins,
+  #                 event_type: "exercise"
+  #               },
+  #               [:exercise_id, :exercise_mins, :event_type]
+  #             )
+
+  #           case Repo.update(changeset) do
+  #             {:ok, _updated_record} ->
+  #               IO.puts("Updated existing record for #{exercise_start}.")
+
+  #             {:error, changeset} ->
+  #               IO.inspect(changeset.errors)
+  #           end
+  #         else
+  #           # Insert a new record
+  #           case DiabetesV1.Times.create_time(%{
+  #                  id: get_next_id(),
+  #                  day_id: day_id,
+  #                  event_time: exercise_start,
+  #                  blood_sugar: nil,
+  #                  meal_num: nil,
+  #                  dose_time: nil,
+  #                  doses: nil,
+  #                  meal_time: nil,
+  #                  exercise_id: saved_exercise_id,
+  #                  exercise_mins: exercise_mins,
+  #                  exercise_start: nil,
+  #                  exercise_end: nil,
+  #                  event_type: "exercise",
+  #                  dose_type: nil
+  #                }) do
+  #             {:ok, _time} -> IO.puts("Created new record for #{exercise_start}.")
+  #             {:error, changeset} -> IO.inspect(changeset.errors)
+  #           end
+  #         end
+  #       end
+  #     end
+  #   end)
+  # end
+
+  def insert_time_test_data do
+    # Test records
+    records = [
+      %Time{
+        id: 14808,
+        day_id: 1,
+        date: ~D[2025-01-01],
+        event_time: ~T[08:00:00],
+        blood_sugar: 150,
+        meal_num: nil,
+        dose_time: nil,
+        doses: nil,
+        split_dose_time: nil,
+        split_doses: nil,
+        meal_time: nil,
+        two_hrs_bs: nil,
+        exercise_id: 1,
+        exercise_start: ~T[08:00:00],
+        exercise_end: ~T[08:30:00],
+        event_type: "exercise",
+        dose_type: nil
+      },
+      %Time{
+        id: 14809,
+        day_id: 1,
+        date: ~D[2025-01-01],
+        event_time: ~T[09:00:00],
+        blood_sugar: 120,
+        meal_num: nil,
+        dose_time: nil,
+        doses: nil,
+        split_dose_time: nil,
+        split_doses: nil,
+        meal_time: nil,
+        two_hrs_bs: nil,
+        exercise_id: 2,
+        exercise_start: ~T[09:30:00],
+        exercise_end: ~T[10:00:00],
+        event_type: "exercise",
+        dose_type: nil
+      },
+      %Time{
+        id: 14810,
+        day_id: 1,
+        date: ~D[2025-01-01],
+        event_time: ~T[09:30:00],
+        blood_sugar: 110,
+        meal_num: nil,
+        dose_time: nil,
+        doses: nil,
+        split_dose_time: nil,
+        split_doses: nil,
+        meal_time: nil,
+        two_hrs_bs: nil,
+        exercise_id: nil,
+        exercise_start: nil,
+        exercise_end: nil,
+        event_type: "reading",
+        dose_type: nil
+      },
+      %Time{
+        id: 14811,
+        day_id: 1,
+        date: ~D[2025-01-01],
+        event_time: ~T[10:00:00],
+        blood_sugar: 120,
+        meal_num: nil,
+        dose_time: nil,
+        doses: nil,
+        split_dose_time: nil,
+        split_doses: nil,
+        meal_time: nil,
+        two_hrs_bs: nil,
+        exercise_id: 3,
+        exercise_start: ~T[10:30:00],
+        exercise_end: ~T[11:00:00],
+        event_type: "exercise",
+        dose_type: nil
+      },
+      %Time{
+        id: 14812,
+        day_id: 1,
+        date: ~D[2025-01-01],
+        event_time: ~T[11:00:00],
+        blood_sugar: 130,
+        meal_num: 1,
+        dose_time: nil,
+        doses: nil,
+        split_dose_time: nil,
+        split_doses: nil,
+        meal_time: nil,
+        two_hrs_bs: nil,
+        exercise_id: 4,
+        exercise_start: ~T[11:00:00],
+        exercise_end: ~T[11:30:00],
+        event_type: "meal",
+        dose_type: "meal"
+      },
+      %Time{
+        id: 14813,
+        day_id: 1,
+        date: ~D[2025-01-01],
+        event_time: ~T[11:00:00],
+        blood_sugar: 110,
+        meal_num: nil,
+        dose_time: nil,
+        doses: nil,
+        split_dose_time: nil,
+        split_doses: nil,
+        meal_time: nil,
+        two_hrs_bs: nil,
+        exercise_id: nil,
+        exercise_start: nil,
+        exercise_end: nil,
+        event_type: "reading",
+        dose_type: nil
+      },
+      %Time{
+        id: 14814,
+        day_id: 1,
+        date: ~D[2025-01-01],
+        event_time: ~T[12:00:00],
+        blood_sugar: 140,
+        meal_num: 1,
+        dose_time: nil,
+        doses: nil,
+        split_dose_time: nil,
+        split_doses: nil,
+        meal_time: nil,
+        two_hrs_bs: nil,
+        exercise_id: 5,
+        exercise_start: ~T[12:30:00],
+        exercise_end: ~T[01:00:00],
+        event_type: "meal",
+        dose_type: "meal"
+      }
+    ]
+
+    # Insert the records
+    Enum.each(records, fn record ->
+      Repo.insert!(record)
+    end)
+  end
+
+  def delete_times_test_data do
+    # Delete records with id >= 14808
+    from(t in Time, where: t.id >= 14808)
+    |> Repo.delete_all()
+  end
+
+  def seed_times_data_separating_exercises(csv_file) do
+    IO.puts("Seeding times separating exercises...")
+
+    # Parse CSV and iterate through each row
+    NimbleCSV.RFC4180.parse_stream(File.stream!(csv_file))
+    |> Enum.each(fn [
+                      id,
+                      day_id,
+                      _date,
+                      event_time,
+                      _blood_sugar,
+                      meal_num,
+                      _dose_time,
+                      doses,
+                      _split_dose_time,
+                      _split_doses,
+                      meal_time,
+                      _two_hrs_bs,
+                      exercise_id,
+                      exercise_start,
+                      exercise_end,
+                      event_type,
+                      dose_type
+                    ] ->
+      # Parse `id` and check against `starting_id` if provided
+
+      if exercise_id != "" do
+        IO.puts("Processing record id. #{id}")
+        # Parse values
+        id = String.to_integer(id || "0")
+        day_id = String.to_integer(day_id || "0")
+        event_time = parse_time(event_time || "00:00:00")
+        meal_num = String.to_integer(meal_num || "0")
+        doses = String.to_integer(doses || "0")
+        saved_exercise_id = String.to_integer(exercise_id || "0")
+        exercise_start = parse_time(exercise_start || "00:00:00")
+        exercise_end = parse_time(exercise_end || "00:00:00")
+        exercise_mins = Time.diff(exercise_end, exercise_start, :minute)
+
+        # Helper: Update a record
+        update_record = fn record, changes ->
+          record
+          |> Ecto.Changeset.cast(changes, Map.keys(changes))
+          |> Repo.update()
+        end
+
+        # Helper: Create a new record
+        create_new_record = fn ->
+          DiabetesV1.Times.create_time(%{
+            id: get_next_id(),
+            day_id: day_id,
+            event_time: exercise_start,
+            event_type: "exercise",
+            dose_type: nil,
+            blood_sugar: nil,
+            meal_num: nil,
+            dose_time: nil,
+            doses: nil,
+            meal_time: nil,
+            exercise_id: saved_exercise_id,
+            exercise_mins: exercise_mins
+          })
+        end
+
+        cond do
+          # Case 1: Use same record
+          meal_num == 0 and doses == 0 and event_time == exercise_start ->
+            IO.puts("Case 1: Updating original record id #{id} for exercise mins.")
+
+            update_record.(
+              %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+              %{
+                exercise_mins: exercise_mins,
+                event_type: "exercise"
+              }
+            )
+
+          # Case 2: Use existing record
+          meal_num == 0 and doses == 0 and event_time != exercise_start ->
+            IO.puts("Case 2: Existing record found for exercise start: id #{id}.")
+
+            existing_record =
+              DiabetesV1.Times.Time
+              |> where([t], t.day_id == ^day_id and t.event_time == ^exercise_start)
+              |> Repo.one()
+
+            if existing_record do
+              IO.puts("Case 2, Updating original record id #{id} ...")
+              # Update original record
+              update_record.(
+                %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+                %{
+                  event_type: "reading",
+                  exercise_id: nil
+                }
+              )
+
+              # Update existing record
+              IO.puts(
+                "Case 2, Updating existing record with exercise info for record id #{id} ..."
+              )
+
+              update_record.(existing_record, %{
+                event_type: "exercise",
+                exercise_id: saved_exercise_id,
+                exercise_mins: exercise_mins
+              })
+            else
+              IO.puts("Case 3, Updating original record id #{id} ...")
+
+              # Update original record
+              update_record.(
+                %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+                %{
+                  event_type: "reading",
+                  exercise_id: nil
+                }
+              )
+
+              IO.puts("Case 3, No existing record found; creating a new one for id #{id} ...")
+              # Create new record
+              create_new_record.()
+            end
+
+          # Case 4 & 5: Record includes an exercise and a meal_num or doses
+          meal_num > 0 or doses > 0 ->
+            IO.puts("Case 4 or 5: Record includes meal_num or doses.  id #{id} ")
+
+            existing_record =
+              DiabetesV1.Times.Time
+              |> where([t], t.day_id == ^day_id and t.event_time == ^exercise_start)
+              |> Repo.one()
+
+            event_type =
+              cond do
+                meal_num > 0 -> "meal"
+                doses > 0 -> "dose"
+                true -> "reading"
+              end
+
+            if existing_record do
+              IO.puts("Case 4, Updating original record  id #{id} ...")
+              # Update original record
+              update_record.(
+                %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+                %{
+                  event_type: event_type,
+                  exercise_id: nil
+                }
+              )
+
+              IO.puts(
+                "Case 4, Updating existing record with exercise info for record id #{id} ..."
+              )
+
+              # Update existing record
+              update_record.(existing_record, %{
+                event_type: "exercise",
+                exercise_id: saved_exercise_id,
+                exercise_mins: exercise_mins
+              })
+            else
+              IO.puts("Case 5, No existing record found; creating a new one for id #{id} ...")
+              # Update original record
+              update_record.(
+                %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+                %{
+                  event_type: event_type,
+                  exercise_id: nil
+                }
+              )
+
+              IO.puts("Case 5, No existing record found; creating a new one for id #{id} ...")
+              # Create new record
+              create_new_record.()
+            end
+        end
+      end
+    end)
+  end
+
+  def seed_times_data_separating_exercises_in_transaction(csv_file) do
+    Repo.transaction(fn ->
+      seed_times_data_separating_exercises(csv_file)
+    end)
+  end
 end
 
 # MySeeder.seed_product_main_types_data()
@@ -1132,3 +1622,7 @@ end
 # MySeeder.seed_meals_data()
 # MySeeder.add_event_type_for_times_data()
 # MySeeder.seed_times_data_adding_split_doses()
+mySeeder.insert_time_test_data()
+# MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times-test.csv")
+# mySeeder.delete_times_test_data()
+# MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times.csv")
