@@ -1259,153 +1259,225 @@ defmodule MySeeder do
   #   end)
   # end
 
-  def insert_time_test_data do
-    # Test records
-    records = [
-      %Time{
-        id: 14808,
-        day_id: 1,
-        date: ~D[2025-01-01],
-        event_time: ~T[08:00:00],
-        blood_sugar: 150,
-        meal_num: nil,
-        dose_time: nil,
-        doses: nil,
-        split_dose_time: nil,
-        split_doses: nil,
-        meal_time: nil,
-        two_hrs_bs: nil,
-        exercise_id: 1,
-        exercise_start: ~T[08:00:00],
-        exercise_end: ~T[08:30:00],
-        event_type: "exercise",
-        dose_type: nil
-      },
-      %Time{
-        id: 14809,
-        day_id: 1,
-        date: ~D[2025-01-01],
-        event_time: ~T[09:00:00],
-        blood_sugar: 120,
-        meal_num: nil,
-        dose_time: nil,
-        doses: nil,
-        split_dose_time: nil,
-        split_doses: nil,
-        meal_time: nil,
-        two_hrs_bs: nil,
-        exercise_id: 2,
-        exercise_start: ~T[09:30:00],
-        exercise_end: ~T[10:00:00],
-        event_type: "exercise",
-        dose_type: nil
-      },
-      %Time{
-        id: 14810,
-        day_id: 1,
-        date: ~D[2025-01-01],
-        event_time: ~T[09:30:00],
-        blood_sugar: 110,
-        meal_num: nil,
-        dose_time: nil,
-        doses: nil,
-        split_dose_time: nil,
-        split_doses: nil,
-        meal_time: nil,
-        two_hrs_bs: nil,
-        exercise_id: nil,
-        exercise_start: nil,
-        exercise_end: nil,
-        event_type: "reading",
-        dose_type: nil
-      },
-      %Time{
-        id: 14811,
-        day_id: 1,
-        date: ~D[2025-01-01],
-        event_time: ~T[10:00:00],
-        blood_sugar: 120,
-        meal_num: nil,
-        dose_time: nil,
-        doses: nil,
-        split_dose_time: nil,
-        split_doses: nil,
-        meal_time: nil,
-        two_hrs_bs: nil,
-        exercise_id: 3,
-        exercise_start: ~T[10:30:00],
-        exercise_end: ~T[11:00:00],
-        event_type: "exercise",
-        dose_type: nil
-      },
-      %Time{
-        id: 14812,
-        day_id: 1,
-        date: ~D[2025-01-01],
-        event_time: ~T[11:00:00],
-        blood_sugar: 130,
-        meal_num: 1,
-        dose_time: nil,
-        doses: nil,
-        split_dose_time: nil,
-        split_doses: nil,
-        meal_time: nil,
-        two_hrs_bs: nil,
-        exercise_id: 4,
-        exercise_start: ~T[11:00:00],
-        exercise_end: ~T[11:30:00],
-        event_type: "meal",
-        dose_type: "meal"
-      },
-      %Time{
-        id: 14813,
-        day_id: 1,
-        date: ~D[2025-01-01],
-        event_time: ~T[11:00:00],
-        blood_sugar: 110,
-        meal_num: nil,
-        dose_time: nil,
-        doses: nil,
-        split_dose_time: nil,
-        split_doses: nil,
-        meal_time: nil,
-        two_hrs_bs: nil,
-        exercise_id: nil,
-        exercise_start: nil,
-        exercise_end: nil,
-        event_type: "reading",
-        dose_type: nil
-      },
-      %Time{
-        id: 14814,
-        day_id: 1,
-        date: ~D[2025-01-01],
-        event_time: ~T[12:00:00],
-        blood_sugar: 140,
-        meal_num: 1,
-        dose_time: nil,
-        doses: nil,
-        split_dose_time: nil,
-        split_doses: nil,
-        meal_time: nil,
-        two_hrs_bs: nil,
-        exercise_id: 5,
-        exercise_start: ~T[12:30:00],
-        exercise_end: ~T[01:00:00],
-        event_type: "meal",
-        dose_type: "meal"
-      }
-    ]
+  # def insert_time_test_data_exercises do
+  #   # Test records
+  #   records = [
+  #     %Time{
+  #       id: 15112,
+  #       day_id: 1,
+  #       date: ~D[2025-01-01],
+  #       event_time: ~T[08:00:00],
+  #       blood_sugar: 150,
+  #       meal_num: nil,
+  #       dose_time: nil,
+  #       doses: nil,
+  #       split_dose_time: nil,
+  #       split_doses: nil,
+  #       meal_time: nil,
+  #       two_hrs_bs: nil,
+  #       exercise_id: 1,
+  #       exercise_start: ~T[08:00:00],
+  #       exercise_end: ~T[08:30:00],
+  #       event_type: "exercise",
+  #       dose_type: nil
+  #     },
+  #     %Time{
+  #       id: 15113,
+  #       day_id: 1,
+  #       date: ~D[2025-01-01],
+  #       event_time: ~T[09:00:00],
+  #       blood_sugar: 120,
+  #       meal_num: nil,
+  #       dose_time: nil,
+  #       doses: nil,
+  #       split_dose_time: nil,
+  #       split_doses: nil,
+  #       meal_time: nil,
+  #       two_hrs_bs: nil,
+  #       exercise_id: 2,
+  #       exercise_start: ~T[09:30:00],
+  #       exercise_end: ~T[10:00:00],
+  #       event_type: "exercise",
+  #       dose_type: nil
+  #     },
+  #     %Time{
+  #       id: 15114,
+  #       day_id: 1,
+  #       date: ~D[2025-01-01],
+  #       event_time: ~T[09:30:00],
+  #       blood_sugar: 110,
+  #       meal_num: nil,
+  #       dose_time: nil,
+  #       doses: nil,
+  #       split_dose_time: nil,
+  #       split_doses: nil,
+  #       meal_time: nil,
+  #       two_hrs_bs: nil,
+  #       exercise_id: nil,
+  #       exercise_start: nil,
+  #       exercise_end: nil,
+  #       event_type: "reading",
+  #       dose_type: nil
+  #     },
+  #     %Time{
+  #       id: 15115,
+  #       day_id: 1,
+  #       date: ~D[2025-01-01],
+  #       event_time: ~T[10:00:00],
+  #       blood_sugar: 120,
+  #       meal_num: nil,
+  #       dose_time: nil,
+  #       doses: nil,
+  #       split_dose_time: nil,
+  #       split_doses: nil,
+  #       meal_time: nil,
+  #       two_hrs_bs: nil,
+  #       exercise_id: 3,
+  #       exercise_start: ~T[10:30:00],
+  #       exercise_end: ~T[11:00:00],
+  #       event_type: "exercise",
+  #       dose_type: nil
+  #     },
+  #     %Time{
+  #       id: 15116,
+  #       day_id: 1,
+  #       date: ~D[2025-01-01],
+  #       event_time: ~T[11:00:00],
+  #       blood_sugar: 130,
+  #       meal_num: 1,
+  #       dose_time: nil,
+  #       doses: nil,
+  #       split_dose_time: nil,
+  #       split_doses: nil,
+  #       meal_time: nil,
+  #       two_hrs_bs: nil,
+  #       exercise_id: 4,
+  #       exercise_start: ~T[11:00:00],
+  #       exercise_end: ~T[11:30:00],
+  #       event_type: "meal",
+  #       dose_type: "meal"
+  #     },
+  #     %Time{
+  #       id: 15117,
+  #       day_id: 1,
+  #       date: ~D[2025-01-01],
+  #       event_time: ~T[11:00:00],
+  #       blood_sugar: 110,
+  #       meal_num: nil,
+  #       dose_time: nil,
+  #       doses: nil,
+  #       split_dose_time: nil,
+  #       split_doses: nil,
+  #       meal_time: nil,
+  #       two_hrs_bs: nil,
+  #       exercise_id: nil,
+  #       exercise_start: nil,
+  #       exercise_end: nil,
+  #       event_type: "reading",
+  #       dose_type: nil
+  #     },
+  #     %Time{
+  #       id: 15118,
+  #       day_id: 1,
+  #       date: ~D[2025-01-01],
+  #       event_time: ~T[12:00:00],
+  #       blood_sugar: 140,
+  #       meal_num: 1,
+  #       dose_time: nil,
+  #       doses: nil,
+  #       split_dose_time: nil,
+  #       split_doses: nil,
+  #       meal_time: nil,
+  #       two_hrs_bs: nil,
+  #       exercise_id: 5,
+  #       exercise_start: ~T[12:30:00],
+  #       exercise_end: ~T[01:00:00],
+  #       event_type: "meal",
+  #       dose_type: "meal"
+  #     }
+  #   ]
 
-    # Insert the records
-    Enum.each(records, fn record ->
-      Repo.insert!(record)
-    end)
+  #   # Insert the records
+  #   Enum.each(records, fn record ->
+  #     Repo.insert!(record)
+  #   end)
+  # end
+
+  def insert_time_test_data(file_path) do
+    file_path
+    |> File.stream!()
+    # Skip header row
+    |> Stream.drop(1)
+    |> Stream.map(&parse_csv_row/1)
+    |> Enum.each(&Repo.insert!/1)
+  end
+
+  defp parse_csv_row(row) do
+    [
+      id,
+      day_id,
+      date,
+      event_time,
+      blood_sugar,
+      meal_num,
+      dose_time,
+      doses,
+      split_dose_time,
+      split_doses,
+      meal_time,
+      two_hrs_bs,
+      exercise_id,
+      exercise_start,
+      exercise_end,
+      event_type,
+      dose_type
+    ] =
+      row |> String.trim() |> String.split(",")
+
+    %Time{
+      id: String.to_integer(id),
+      day_id: String.to_integer(day_id),
+      date: new_parse_date(date),
+      event_time: new_parse_time(event_time),
+      blood_sugar: new_parse_integer(blood_sugar),
+      meal_num: new_parse_integer(meal_num),
+      dose_time: new_parse_time(dose_time),
+      doses: new_parse_integer(doses),
+      split_dose_time: new_parse_time(split_dose_time),
+      split_doses: new_parse_integer(split_doses),
+      meal_time: new_parse_time(meal_time),
+      two_hrs_bs: new_parse_integer(two_hrs_bs),
+      exercise_id: new_parse_integer(exercise_id),
+      exercise_start: new_parse_time(exercise_start),
+      exercise_end: new_parse_time(exercise_end),
+      event_type: new_parse_string(event_type),
+      dose_type: new_parse_string(dose_type)
+    }
+  end
+
+  defp new_parse_date(date) when date in ["", nil], do: nil
+  defp new_parse_date(date), do: Date.from_iso8601!("20" <> String.replace(date, "/", "-"))
+
+  defp new_parse_time(time) when time in ["", nil], do: nil
+  defp new_parse_time(time), do: Time.from_iso8601!(convert_to_24hr(time))
+
+  defp new_parse_integer(value) when value in ["", nil], do: nil
+  defp new_parse_integer(value), do: String.to_integer(value)
+
+  defp new_parse_string(value) when value in ["", nil], do: nil
+  defp new_parse_string(value), do: String.trim(value)
+
+  defp convert_to_24hr(time) do
+    case Timex.parse(time, "%I:%M %p", :strftime) do
+      {:ok, datetime} -> Timex.format!(datetime, "%H:%M:%S", :strftime)
+      # Fallback to default if parsing fails
+      {:error, _} -> "00:00:00"
+    end
   end
 
   def delete_times_test_data do
-    # Delete records with id >= 14808
-    from(t in Time, where: t.id >= 14808)
+    # Delete records with id >= 15112
+    from(t in Time, where: t.id >= 15112)
     |> Repo.delete_all()
   end
 
@@ -1655,7 +1727,7 @@ defmodule MySeeder do
                       day_id,
                       _date,
                       event_time,
-                      _blood_sugar,
+                      blood_sugar,
                       meal_num,
                       dose_time,
                       doses,
@@ -2075,56 +2147,58 @@ defmodule MySeeder do
 
             # Create the reading record (add the blood_sugar)
             create_new_reading_record.(event_time, blood_sugar)
+        end
+      else
+        # Case 8: Update to dose
+        if(event_time == dose_time and meal_time == nil) do
+          my_puts_meal("Case 8 id = #{id} update to dose")
 
-          # Case 8: Update to dose
-          event_time == dose_time and meal_time == nil ->
-            my_puts_meal("Case 8 id = #{id} update to dose")
+          # Update original record to remove dose_time (event_time IS dose_time)
+          update_record.(
+            %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+            %{
+              dose_time: nil,
+              dose_type: "boost"
+            }
+          )
+        end
 
-            # Update original record to remove dose_time (event_time IS dose_time)
-            update_record.(
-              %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-              %{
-                dose_time: nil,
-                dose_type: "boost"
-              }
-            )
+        # Case 9: Update to reading, add dose
+        if event_time != dose_time and meal_time == nil do
+          my_puts_meal("Case 9 id = #{id} update to reading, add dose")
 
-          # Case 9: Update to reading, add dose
-          event_time != dose_time and meal_time == nil ->
-            my_puts_meal("Case 9 id = #{id} update to reading, add dose")
+          # Update original record to be a reading and remove dose info
+          update_record.(
+            %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+            %{
+              doses: nil,
+              dose_time: nil,
+              event_type: "reading"
+            }
+          )
 
-            # Update original record to be a reading and remove dose info
-            update_record.(
-              %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-              %{
-                doses: nil,
-                dose_time: nil,
-                event_type: "reading"
-              }
-            )
+          # Check and update/create the dose record
+          # Is there already a record at dose time?
+          new_dose_id =
+            case Repo.one(
+                   from t in DiabetesV1.Times.Time,
+                     where: t.day_id == ^day_id and t.event_time == ^dose_time
+                 ) do
+              nil ->
+                my_puts_meal(
+                  "No existing record found; creating a new dose record for id #{id} ..."
+                )
 
-            # Check and update/create the dose record
-            # Is there already a record at dose time?
-            new_dose_id =
-              case Repo.one(
-                     from t in DiabetesV1.Times.Time,
-                       where: t.day_id == ^day_id and t.event_time == ^dose_time
-                   ) do
-                nil ->
-                  my_puts_meal(
-                    "No existing record found; creating a new dose record for id #{id} ..."
-                  )
+                {:ok, dose_record} = create_new_dose_record.(dose_time, "boost")
+                dose_record.id
 
-                  {:ok, dose_record} = create_new_dose_record.(dose_time, "boost")
-                  dose_record.id
+              existing ->
+                my_puts_meal("Updating existing record to make it a dose for id #{id} ...")
 
-                existing ->
-                  my_puts_meal("Updating existing record to make it a dose for id #{id} ...")
+                update_record.(existing, %{event_type: "dose", doses: doses, dose_type: "boost"})
 
-                  update_record.(existing, %{event_type: "dose", doses: doses, dose_type: "boost"})
-
-                  existing.id
-              end
+                existing.id
+            end
         end
       end
     end)
@@ -2162,7 +2236,19 @@ end
 # MySeeder.seed_meals_data()
 # MySeeder.add_event_type_for_times_data()
 # MySeeder.seed_times_data_adding_split_doses()
-mySeeder.insert_time_test_data()
+#      insert test cases for exercises
+mySeeder.insert_time_test_data("priv/repo/times-test.csv")
+#      run the function on test exercise data
 # MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times-test.csv")
+#      remove test cases
 # mySeeder.delete_times_test_data()
+#      update full table for exercises BACKUP FIRST
+# MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times.csv")
+#      insert test cases for meals
+# mySeeder.insert_time_test_data("times-test-cases.csv")
+#      run the function on test exercise data
+# MySeeder.seed_times_data_separating_meals_in_transaction("priv/repo/times-test-cases.csv")
+#      remove test cases
+# mySeeder.delete_times_test_data()
+#      update full table for meals BACKUP FIRST
 # MySeeder.seed_times_data_separating_meals_in_transaction("priv/repo/times.csv")
