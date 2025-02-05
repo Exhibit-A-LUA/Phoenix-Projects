@@ -614,10 +614,10 @@ defmodule MySeeder do
   # ! To delete all data uncomment following line
   # Repo.delete_all(Exercises.Exercise)
 
-  def seed_exercises_data do
+  def seed_exercises_data(file_path) do
     IO.puts("Seeding exercises...")
 
-    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/exercises.csv"))
+    NimbleCSV.RFC4180.parse_stream(File.stream!(file_path))
     |> Enum.each(fn [id, type, intensity, met, description] ->
       case Exercises.create_exercise(%{
              id: String.to_integer(id),
@@ -2224,7 +2224,7 @@ end
 # DiabetesV1.Products.calculate_product_nutritional_content()
 # MySeeder.seed_weight_descriptions_for_ingredients_data()
 # MySeeder.seed_constants_data()
-# MySeeder.seed_exercises_data()
+# MySeeder.seed_exercises_data("priv/repo/exercises.csv")
 # MySeeder.seed_period_dates_data()
 # MySeeder.seed_body_weights_data()
 # MySeeder.seed_basal_changes_data()
@@ -2236,18 +2236,20 @@ end
 # MySeeder.seed_meals_data()
 # MySeeder.add_event_type_for_times_data()
 # MySeeder.seed_times_data_adding_split_doses()
+
+# NEXT!!!!!
 #      insert test cases for exercises
-mySeeder.insert_time_test_data("priv/repo/times-test.csv")
+# mySeeder.insert_time_test_data("priv/repo/times-test-exercise-cases.csv")
 #      run the function on test exercise data
-# MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times-test.csv")
+# MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times-test-exercise-cases.csv")
 #      remove test cases
 # mySeeder.delete_times_test_data()
 #      update full table for exercises BACKUP FIRST
 # MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times.csv")
 #      insert test cases for meals
-# mySeeder.insert_time_test_data("times-test-cases.csv")
+# mySeeder.insert_time_test_data("times-test-meals-cases.csv")
 #      run the function on test exercise data
-# MySeeder.seed_times_data_separating_meals_in_transaction("priv/repo/times-test-cases.csv")
+# MySeeder.seed_times_data_separating_meals_in_transaction("priv/repo/times-test-meal-cases.csv")
 #      remove test cases
 # mySeeder.delete_times_test_data()
 #      update full table for meals BACKUP FIRST
