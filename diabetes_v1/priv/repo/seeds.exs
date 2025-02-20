@@ -2220,7 +2220,7 @@ end
 # MySeeder.seed_test_data()
 # MySeeder.run_update_test()
 # MySeeder.delete_test_data()
-# run calculate_product_nutritional_content once seeding is successfully done
+# ! run calculate_product_nutritional_content once seeding is successfully done
 # DiabetesV1.Products.calculate_product_nutritional_content()
 # MySeeder.seed_weight_descriptions_for_ingredients_data()
 # MySeeder.seed_constants_data()
@@ -2237,20 +2237,20 @@ end
 # MySeeder.add_event_type_for_times_data()
 # MySeeder.seed_times_data_adding_split_doses()
 
-# NEXT!!!!!
-#      insert test cases for exercises
-# mySeeder.insert_time_test_data("priv/repo/times-test-exercise-cases.csv")
-#      run the function on test exercise data
+# todo NEXT!!!!!
+#      *insert test cases for exercises
+mySeeder.insert_time_test_data("priv/repo/times-test-exercise-cases.csv")
+#      *run the function on test exercise data
 # MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times-test-exercise-cases.csv")
-#      remove test cases
+#      *remove test cases and new records added due to test cases
 # mySeeder.delete_times_test_data()
-#      update full table for exercises BACKUP FIRST
+#      !update full table for exercises BACKUP FIRST
 # MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times.csv")
-#      insert test cases for meals
+#      *insert test cases for meals
 # mySeeder.insert_time_test_data("times-test-meals-cases.csv")
-#      run the function on test exercise data
+#      *run the function on test exercise data
 # MySeeder.seed_times_data_separating_meals_in_transaction("priv/repo/times-test-meal-cases.csv")
-#      remove test cases
+#      *remove test cases and new records added due to test cases
 # mySeeder.delete_times_test_data()
-#      update full table for meals BACKUP FIRST
+#      !update full table for meals BACKUP FIRST
 # MySeeder.seed_times_data_separating_meals_in_transaction("priv/repo/times.csv")
