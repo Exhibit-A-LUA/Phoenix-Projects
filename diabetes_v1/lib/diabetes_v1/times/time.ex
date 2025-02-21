@@ -35,7 +35,8 @@ defmodule DiabetesV1.Times.Time do
       :doses,
       :meal_time,
       :exercise_start,
-      :exercise_end
+      :exercise_end,
+      :exercise_id
     ])
     # Ensures exercise_id is valid if provided
     |> assoc_constraint(:exercise)

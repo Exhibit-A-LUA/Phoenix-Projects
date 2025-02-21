@@ -910,7 +910,7 @@ defmodule MySeeder do
              dose_time: parse_time(dose_time),
              doses: parse_integer(doses),
              meal_time: parse_time(meal_time),
-             exercise_id: parse_integer(exercise_id),
+             exercise_id: parse_integer(String.trim(exercise_id)),
              exercise_start: parse_time(exercise_start),
              exercise_end: parse_time(exercise_end),
              event_type: String.trim(event_type),
@@ -1106,354 +1106,57 @@ defmodule MySeeder do
     end)
   end
 
-  # def seed_times_data_separting_exercises do
-  #   IO.puts("Seeding times separating exercises...")
-
-  #   NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times.csv"))
-  #   |> Enum.each(fn [
-  #                     id,
-  #                     day_id,
-  #                     _date,
-  #                     event_time,
-  #                     _blood_sugar,
-  #                     meal_num,
-  #                     _dose_time,
-  #                     doses,
-  #                     _split_dose_time,
-  #                     _split_doses,
-  #                     meal_time,
-  #                     _two_hrs_bs,
-  #                     exercise_id,
-  #                     exercise_start,
-  #                     exercise_end,
-  #                     event_type,
-  #                     dose_type
-  #                   ] ->
-  #     if exercise_id != "" do
-  #       # Parse values
-  #       day_id = String.to_integer(day_id || "0")
-  #       event_time = parse_time(event_time || "00:00:00")
-  #       meal_num = String.to_integer(meal_num || "0")
-  #       doses = String.to_integer(doses || "0")
-  #       saved_exercise_id = String.to_integer(exercise_id || "0")
-  #       exercise_start = parse_time(exercise_start || "00:00:00")
-  #       exercise_end = parse_time(exercise_end || "00:00:00")
-  #       exercise_mins = Time.diff(exercise_end, exercise_start, :minute)
-
-  #       if meal_num == 0 and doses == 0 and event_time == exercise_start do
-  #         # update current record changeset
-  #         # set exercise_mins = exercise_mins
-  #         # set event_type = 'exercise'
-  #         # Construct the changeset directly for the current record
-  #         changeset =
-  #           %DiabetesV1.Times.Time{
-  #             id: id,
-  #             day_id: day_id,
-  #             event_time: event_time
-  #           }
-  #           |> Ecto.Changeset.cast(
-  #             %{
-  #               exercise_mins: exercise_mins,
-  #               event_type: "exercise"
-  #             },
-  #             [:exercise_mins, :event_type]
-  #           )
-
-  #         # Update the record
-  #         case Repo.update(changeset) do
-  #           {:ok, _updated_record} ->
-  #             IO.puts("Updated current exercise record to start at #{exercise_start}.")
-
-  #           {:error, changeset} ->
-  #             IO.inspect(changeset.errors)
-  #         end
-  #       else
-  #         # update current record changeset
-  #         # set exercise_mins = exercise_mins
-  #         # set event_type = 'meal' if meal_num > 0
-  #         # set event_type = 'dose' if doses > 0
-  #         # set event_type = 'reading' if meal_num = 0 and doses = 0
-  #         if meal_num > 0 do
-  #           event_type = "meal"
-  #         else
-  #           if doses > 0 do
-  #             event_type = "dose"
-  #           else
-  #             event_type = "reading"
-  #           end
-  #         end
-
-  #         changeset =
-  #           %DiabetesV1.Times.Time{
-  #             id: id,
-  #             day_id: day_id,
-  #             event_time: event_time
-  #           }
-  #           |> Ecto.Changeset.cast(
-  #             %{
-  #               event_type: event_type
-  #             },
-  #             [:event_type]
-  #           )
-
-  #         # Update the record
-  #         case Repo.update(changeset) do
-  #           {:ok, _updated_record} ->
-  #             IO.puts("Updated current exercise record to start at #{exercise_start}.")
-
-  #           {:error, changeset} ->
-  #             IO.inspect(changeset.errors)
-  #         end
-
-  #         # Create or update record with exercise details
-  #         # Check if a record with the same day_id + exercise_start exists
-  #         existing_record =
-  #           DiabetesV1.Times.Time
-  #           |> where([t], t.day_id == ^day_id and t.event_time == ^exercise_start)
-  #           |> Repo.one()
-
-  #         if existing_record do
-  #           # Update the existing record
-  #           changeset =
-  #             existing_record
-  #             |> Ecto.Changeset.cast(
-  #               %{
-  #                 exercise_id: exercise_id,
-  #                 exercise_mins: exercise_mins,
-  #                 event_type: "exercise"
-  #               },
-  #               [:exercise_id, :exercise_mins, :event_type]
-  #             )
-
-  #           case Repo.update(changeset) do
-  #             {:ok, _updated_record} ->
-  #               IO.puts("Updated existing record for #{exercise_start}.")
-
-  #             {:error, changeset} ->
-  #               IO.inspect(changeset.errors)
-  #           end
-  #         else
-  #           # Insert a new record
-  #           case DiabetesV1.Times.create_time(%{
-  #                  id: get_next_id(),
-  #                  day_id: day_id,
-  #                  event_time: exercise_start,
-  #                  blood_sugar: nil,
-  #                  meal_num: nil,
-  #                  dose_time: nil,
-  #                  doses: nil,
-  #                  meal_time: nil,
-  #                  exercise_id: saved_exercise_id,
-  #                  exercise_mins: exercise_mins,
-  #                  exercise_start: nil,
-  #                  exercise_end: nil,
-  #                  event_type: "exercise",
-  #                  dose_type: nil
-  #                }) do
-  #             {:ok, _time} -> IO.puts("Created new record for #{exercise_start}.")
-  #             {:error, changeset} -> IO.inspect(changeset.errors)
-  #           end
-  #         end
-  #       end
-  #     end
-  #   end)
+  # def insert_time_test_data(file_path) do
+  #   file_path
+  #   |> File.stream!()
+  #   # Skip header row
+  #   |> Stream.drop(1)
+  #   |> Stream.map(&parse_csv_row/1)
+  #   |> Enum.each(&Repo.insert!/1)
   # end
 
-  # def insert_time_test_data_exercises do
-  #   # Test records
-  #   records = [
-  #     %Time{
-  #       id: 15112,
-  #       day_id: 1,
-  #       date: ~D[2025-01-01],
-  #       event_time: ~T[08:00:00],
-  #       blood_sugar: 150,
-  #       meal_num: nil,
-  #       dose_time: nil,
-  #       doses: nil,
-  #       split_dose_time: nil,
-  #       split_doses: nil,
-  #       meal_time: nil,
-  #       two_hrs_bs: nil,
-  #       exercise_id: 1,
-  #       exercise_start: ~T[08:00:00],
-  #       exercise_end: ~T[08:30:00],
-  #       event_type: "exercise",
-  #       dose_type: nil
-  #     },
-  #     %Time{
-  #       id: 15113,
-  #       day_id: 1,
-  #       date: ~D[2025-01-01],
-  #       event_time: ~T[09:00:00],
-  #       blood_sugar: 120,
-  #       meal_num: nil,
-  #       dose_time: nil,
-  #       doses: nil,
-  #       split_dose_time: nil,
-  #       split_doses: nil,
-  #       meal_time: nil,
-  #       two_hrs_bs: nil,
-  #       exercise_id: 2,
-  #       exercise_start: ~T[09:30:00],
-  #       exercise_end: ~T[10:00:00],
-  #       event_type: "exercise",
-  #       dose_type: nil
-  #     },
-  #     %Time{
-  #       id: 15114,
-  #       day_id: 1,
-  #       date: ~D[2025-01-01],
-  #       event_time: ~T[09:30:00],
-  #       blood_sugar: 110,
-  #       meal_num: nil,
-  #       dose_time: nil,
-  #       doses: nil,
-  #       split_dose_time: nil,
-  #       split_doses: nil,
-  #       meal_time: nil,
-  #       two_hrs_bs: nil,
-  #       exercise_id: nil,
-  #       exercise_start: nil,
-  #       exercise_end: nil,
-  #       event_type: "reading",
-  #       dose_type: nil
-  #     },
-  #     %Time{
-  #       id: 15115,
-  #       day_id: 1,
-  #       date: ~D[2025-01-01],
-  #       event_time: ~T[10:00:00],
-  #       blood_sugar: 120,
-  #       meal_num: nil,
-  #       dose_time: nil,
-  #       doses: nil,
-  #       split_dose_time: nil,
-  #       split_doses: nil,
-  #       meal_time: nil,
-  #       two_hrs_bs: nil,
-  #       exercise_id: 3,
-  #       exercise_start: ~T[10:30:00],
-  #       exercise_end: ~T[11:00:00],
-  #       event_type: "exercise",
-  #       dose_type: nil
-  #     },
-  #     %Time{
-  #       id: 15116,
-  #       day_id: 1,
-  #       date: ~D[2025-01-01],
-  #       event_time: ~T[11:00:00],
-  #       blood_sugar: 130,
-  #       meal_num: 1,
-  #       dose_time: nil,
-  #       doses: nil,
-  #       split_dose_time: nil,
-  #       split_doses: nil,
-  #       meal_time: nil,
-  #       two_hrs_bs: nil,
-  #       exercise_id: 4,
-  #       exercise_start: ~T[11:00:00],
-  #       exercise_end: ~T[11:30:00],
-  #       event_type: "meal",
-  #       dose_type: "meal"
-  #     },
-  #     %Time{
-  #       id: 15117,
-  #       day_id: 1,
-  #       date: ~D[2025-01-01],
-  #       event_time: ~T[11:00:00],
-  #       blood_sugar: 110,
-  #       meal_num: nil,
-  #       dose_time: nil,
-  #       doses: nil,
-  #       split_dose_time: nil,
-  #       split_doses: nil,
-  #       meal_time: nil,
-  #       two_hrs_bs: nil,
-  #       exercise_id: nil,
-  #       exercise_start: nil,
-  #       exercise_end: nil,
-  #       event_type: "reading",
-  #       dose_type: nil
-  #     },
-  #     %Time{
-  #       id: 15118,
-  #       day_id: 1,
-  #       date: ~D[2025-01-01],
-  #       event_time: ~T[12:00:00],
-  #       blood_sugar: 140,
-  #       meal_num: 1,
-  #       dose_time: nil,
-  #       doses: nil,
-  #       split_dose_time: nil,
-  #       split_doses: nil,
-  #       meal_time: nil,
-  #       two_hrs_bs: nil,
-  #       exercise_id: 5,
-  #       exercise_start: ~T[12:30:00],
-  #       exercise_end: ~T[01:00:00],
-  #       event_type: "meal",
-  #       dose_type: "meal"
-  #     }
-  #   ]
+  # defp parse_csv_row(row) do
+  #   [
+  #     id,
+  #     day_id,
+  #     date,
+  #     event_time,
+  #     blood_sugar,
+  #     meal_num,
+  #     dose_time,
+  #     doses,
+  #     split_dose_time,
+  #     split_doses,
+  #     meal_time,
+  #     two_hrs_bs,
+  #     exercise_id,
+  #     exercise_start,
+  #     exercise_end,
+  #     event_type,
+  #     dose_type
+  #   ] =
+  #     row |> String.trim() |> String.split(",")
 
-  #   # Insert the records
-  #   Enum.each(records, fn record ->
-  #     Repo.insert!(record)
-  #   end)
+  #   %DiabetesV1.Times.Time{
+  #     id: String.to_integer(id),
+  #     day_id: String.to_integer(day_id),
+  #     date: new_parse_date(date),
+  #     event_time: new_parse_time(event_time),
+  #     blood_sugar: new_parse_integer(blood_sugar),
+  #     meal_num: new_parse_integer(meal_num),
+  #     dose_time: new_parse_time(dose_time),
+  #     doses: new_parse_integer(doses),
+  #     split_dose_time: new_parse_time(split_dose_time),
+  #     split_doses: new_parse_integer(split_doses),
+  #     meal_time: new_parse_time(meal_time),
+  #     two_hrs_bs: new_parse_integer(two_hrs_bs),
+  #     exercise_id: new_parse_integer(exercise_id),
+  #     exercise_start: new_parse_time(exercise_start),
+  #     exercise_end: new_parse_time(exercise_end),
+  #     event_type: new_parse_string(event_type),
+  #     dose_type: new_parse_string(dose_type)
+  #   }
   # end
-
-  def insert_time_test_data(file_path) do
-    file_path
-    |> File.stream!()
-    # Skip header row
-    |> Stream.drop(1)
-    |> Stream.map(&parse_csv_row/1)
-    |> Enum.each(&Repo.insert!/1)
-  end
-
-  defp parse_csv_row(row) do
-    [
-      id,
-      day_id,
-      date,
-      event_time,
-      blood_sugar,
-      meal_num,
-      dose_time,
-      doses,
-      split_dose_time,
-      split_doses,
-      meal_time,
-      two_hrs_bs,
-      exercise_id,
-      exercise_start,
-      exercise_end,
-      event_type,
-      dose_type
-    ] =
-      row |> String.trim() |> String.split(",")
-
-    %Time{
-      id: String.to_integer(id),
-      day_id: String.to_integer(day_id),
-      date: new_parse_date(date),
-      event_time: new_parse_time(event_time),
-      blood_sugar: new_parse_integer(blood_sugar),
-      meal_num: new_parse_integer(meal_num),
-      dose_time: new_parse_time(dose_time),
-      doses: new_parse_integer(doses),
-      split_dose_time: new_parse_time(split_dose_time),
-      split_doses: new_parse_integer(split_doses),
-      meal_time: new_parse_time(meal_time),
-      two_hrs_bs: new_parse_integer(two_hrs_bs),
-      exercise_id: new_parse_integer(exercise_id),
-      exercise_start: new_parse_time(exercise_start),
-      exercise_end: new_parse_time(exercise_end),
-      event_type: new_parse_string(event_type),
-      dose_type: new_parse_string(dose_type)
-    }
-  end
 
   defp new_parse_date(date) when date in ["", nil], do: nil
   defp new_parse_date(date), do: Date.from_iso8601!("20" <> String.replace(date, "/", "-"))
@@ -1717,496 +1420,550 @@ defmodule MySeeder do
     log_message_to_file("priv/repo/meal_log.txt", message)
   end
 
-  def seed_times_data_separating_meals(csv_file) do
-    my_puts_meal("Seeding times separating meals...")
+  # def seed_times_data_separating_meals(csv_file) do
+  #   my_puts_meal("Seeding times separating meals...")
 
-    # Parse CSV and iterate through each row
-    NimbleCSV.RFC4180.parse_stream(File.stream!(csv_file))
+  #   # Parse CSV and iterate through each row
+  #   NimbleCSV.RFC4180.parse_stream(File.stream!(csv_file))
+  #   |> Enum.each(fn [
+  #                     id,
+  #                     day_id,
+  #                     _date,
+  #                     event_time,
+  #                     blood_sugar,
+  #                     meal_num,
+  #                     dose_time,
+  #                     doses,
+  #                     _split_dose_time,
+  #                     _split_doses,
+  #                     meal_time,
+  #                     _two_hrs_bs,
+  #                     _exercise_id,
+  #                     _exercise_start,
+  #                     _exercise_end,
+  #                     event_type,
+  #                     dose_type
+  #                   ] ->
+  #     if meal_num != "" do
+  #       my_puts_meal("Processing record id. #{id}")
+  #       # Parse values
+  #       id = String.to_integer(id || "0")
+  #       day_id = String.to_integer(day_id || "0")
+  #       event_time = parse_time(event_time || "00:00:00")
+  #       meal_num = String.to_integer(meal_num || "0")
+  #       dose_time = parse_time(dose_time || "00:00:00")
+  #       doses = String.to_integer(doses || "0")
+  #       meal_time = parse_time(meal_time || "00:00:00")
+  #       event_type = String.trim(event_type)
+  #       dose_type = String.trim(dose_type)
+  #       new_meal_id = nil
+  #       saved_event_time = event_time
+
+  #       # Helper: Update a record
+  #       update_record = fn record, changes ->
+  #         record
+  #         |> Ecto.Changeset.cast(changes, Map.keys(changes))
+  #         |> Repo.update()
+  #       end
+
+  #       # Helper: Create a new dose record, pass event_time in as new_dose_time
+  #       # pass dose_type in as new_dose_type, and pass blood_sugar in as reading
+  #       create_new_dose_record = fn new_dose_time, new_dose_type.reading ->
+  #         DiabetesV1.Times.create_time(%{
+  #           id: get_next_id(),
+  #           day_id: day_id,
+  #           event_time: new_dose_time,
+  #           event_type: "dose",
+  #           dose_type: new_dose_type,
+  #           blood_sugar: reading,
+  #           meal_num: nil,
+  #           from_meal: id,
+  #           dose_time: nil,
+  #           doses: doses,
+  #           meal_time: nil,
+  #           exercise_id: nil,
+  #           exercise_mins: nil
+  #         })
+  #       end
+
+  #       # Helper: Create a new reading record, pass event_time in as new_reading_time
+  #       # pass blood_sugar in as reading
+  #       create_new_reading_record = fn new_reading_time, reading ->
+  #         DiabetesV1.Times.create_time(%{
+  #           id: get_next_id(),
+  #           day_id: day_id,
+  #           event_time: new_reading_time,
+  #           event_type: "reading",
+  #           dose_type: nil,
+  #           blood_sugar: reading,
+  #           meal_num: nil,
+  #           from_meal: nil,
+  #           dose_time: nil,
+  #           doses: doses,
+  #           meal_time: nil,
+  #           exercise_id: nil,
+  #           exercise_mins: nil
+  #         })
+  #       end
+
+  #       cond do
+  #         # Case 1: Update to meal, add dose
+  #         event_time == dose_time and dose_time == meal_time ->
+  #           my_puts_meal("Case 1: id = #{id} update to meal, add dose")
+
+  #           # Update original record to be a meal and remove dose info and meal_time
+  #           update_record.(
+  #             %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #             %{
+  #               dose_time: nil,
+  #               doses: nil,
+  #               meal_time: nil,
+  #               event_type: "meal"
+  #             }
+  #           )
+
+  #           # Check and update/create the dose record
+  #           # Is there already a record at event time - 1?
+  #           case Repo.one(
+  #                  from t in DiabetesV1.Times.Time,
+  #                    where: t.day_id == ^day_id and t.event_time == ^adjust_time(event_time, 1)
+  #                ) do
+  #             nil ->
+  #               my_puts_meal(
+  #                 "No existing record at event_time + 1; creating a new dose record for id #{id} ..."
+  #               )
+
+  #               create_new_dose_record.(adjust_time(event_time, 1), "meal", nil)
+
+  #             existing ->
+  #               my_puts_meal("Updating existing record to make it a dose for id #{id} ...")
+
+  #               update_record.(existing, %{
+  #                 event_type: "dose",
+  #                 dose_type: "meal",
+  #                 doses: doses,
+  #                 from_meal: id
+  #               })
+  #           end
+
+  #         # Case 2: Update original record as meal, add dose record
+  #         event_time == dose_time and dose_time != meal_time ->
+  #           my_puts_meal("Case 2: id = #{id} update original record to meal, add dose")
+
+  #           # Update original record to meal at meal_time and remove dose info and meal_time and BS
+  #           # Is there already a record at meal time?
+  #           case Repo.one(
+  #                  from t in DiabetesV1.Times.Time,
+  #                    where: t.day_id == ^day_id and t.event_time == ^meal_time
+  #                ) do
+  #             nil ->
+  #               # No records at meal_time so change original record event_time to meal_time
+  #               my_puts_meal(
+  #                 "Update original record to make it a meal for id #{id} at meal_time ..."
+  #               )
+
+  #               update_record.(
+  #                 %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: nil,
+  #                   meal_time: nil,
+  #                   event_type: "meal",
+  #                   event_time: meal_time,
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+
+  #             existing ->
+  #               # A record exists at meal_time so change original record event_time to meal_time + 1
+  #               my_puts_meal(
+  #                 "Update original record to make it a meal for id #{id} at meal_time + 1 min ..."
+  #               )
+
+  #               update_record.(
+  #                 %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: nil,
+  #                   meal_time: nil,
+  #                   event_type: "meal",
+  #                   event_time: adjust_time(meal_time, 1),
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+  #           end
+
+  #           # Add the dose record (add the blood_sugar)
+  #           create_new_dose_record.(dose_time, "meal", blood_sugar)
+
+  #         # Case 3: Update original to meal, add/update dose, add reading
+  #         event_time != dose_time and dose_time == meal_time ->
+  #           my_puts_meal(
+  #             "Case 3 id = #{id} update original record to meal, add dose, add reading"
+  #           )
+
+  #           # Update original record for meal at meal_time or meal_time + 1
+  #           # and remove dose info and meal_time and BS
+  #           # Is there already a record at meal time?
+  #           case Repo.one(
+  #                  from t in DiabetesV1.Times.Time,
+  #                    where: t.day_id == ^day_id and t.event_time == ^meal_time
+  #                ) do
+  #             nil ->
+  #               my_puts_meal(
+  #                 "Update original record to make it a meal for id #{id} at meal_time ..."
+  #               )
+
+  #               update_record.(
+  #                 %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: nil,
+  #                   meal_time: nil,
+  #                   event_type: "meal",
+  #                   event_time: meal_time,
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+
+  #             existing ->
+  #               my_puts_meal(
+  #                 "Update original record at meal_time to make it a meal for id #{id} at meal_time + 1 min ..."
+  #               )
+
+  #               update_record.(
+  #                 %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: nil,
+  #                   meal_time: nil,
+  #                   event_type: "meal",
+  #                   event_time: adjust_time(meal_time, 1),
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+  #           end
+
+  #           # Update existing record/add new record for dose at meal_time - 1
+  #           # Is there already a record at meal time - 1?
+  #           case Repo.one(
+  #                  from t in DiabetesV1.Times.Time,
+  #                    where: t.day_id == ^day_id and t.event_time == ^adjust_time(meal_time, -1)
+  #                ) do
+  #             nil ->
+  #               my_puts_meal("Add new record for the dose for id #{id} at meal_time - 1 ...")
+  #               create_new_dose_record.(adjust_time(meal_time, -1), "meal", nil)
+
+  #             existing ->
+  #               my_puts_meal(
+  #                 "Update existing record at meal_time - 1 min to make it a dose for id #{id}  ..."
+  #               )
+
+  #               update_record.(
+  #                 existing,
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: doses,
+  #                   meal_time: nil,
+  #                   event_type: "dose",
+  #                   dose_type: "meal",
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+  #           end
+
+  #           # Create the reading record (add the blood_sugar)
+  #           create_new_reading_record.(event_time, blood_sugar)
+
+  #         # Case 4: Update to meal, add dose
+  #         event_time == meal_time and event_time != dose_time ->
+  #           my_puts_meal("Case 4 id = #{id} update to meal, add dose")
+
+  #           new_meal_id = id
+
+  #           # Update original record to be a meal and remove dose info
+  #           update_record.(
+  #             %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #             %{
+  #               dose_time: nil,
+  #               doses: nil,
+  #               event_type: "meal"
+  #             }
+  #           )
+
+  #           # Check and update/create the dose record
+  #           # Is there already a record at dose time?
+  #           case Repo.one(
+  #                  from t in DiabetesV1.Times.Time,
+  #                    where: t.day_id == ^day_id and t.event_time == ^dose_time
+  #                ) do
+  #             nil ->
+  #               my_puts_meal(
+  #                 "No existing record found; creating a new dose record for id #{id} ..."
+  #               )
+
+  #               create_new_dose_record.(dose_time, "meal")
+
+  #             existing ->
+  #               my_puts_meal("Updating existing record to make it a dose for id #{id} ...")
+
+  #               update_record.(existing, %{
+  #                 event_type: "dose",
+  #                 dose_type: "meal",
+  #                 doses: doses,
+  #                 from_meal: new_meal_id
+  #               })
+  #           end
+
+  #         # Case 5: Update to meal, add dose, add reading
+  #         event_time != dose_time and event_time != meal_time and dose_time != meal_time ->
+  #           my_puts_meal("Case 5 id = #{id} update to meal, add dose, add reading")
+
+  #           # Update original record for meal at meal_time
+  #           # and remove dose info and meal_time and BS
+  #           # Is there already a record at meal time?
+  #           case Repo.one(
+  #                  from t in DiabetesV1.Times.Time,
+  #                    where: t.day_id == ^day_id and t.event_time == ^meal_time
+  #                ) do
+  #             nil ->
+  #               my_puts_meal(
+  #                 "Update original record to make it a meal for id #{id} at meal_time ..."
+  #               )
+
+  #               update_record.(
+  #                 %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: nil,
+  #                   meal_time: nil,
+  #                   event_type: "meal",
+  #                   event_time: meal_time,
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+
+  #             existing ->
+  #               my_puts_meal(
+  #                 "Update original record to make it a meal for id #{id} at meal_time + 1 min ..."
+  #               )
+
+  #               update_record.(
+  #                 %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: nil,
+  #                   meal_time: nil,
+  #                   event_type: "meal",
+  #                   event_time: adjust_time(meal_time, 1),
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+  #           end
+
+  #           # Update existing record/add new record for dose at dose
+  #           # Is there already a record at dose time?
+  #           case Repo.one(
+  #                  from t in DiabetesV1.Times.Time,
+  #                    where: t.day_id == ^day_id and t.event_time == dose_time
+  #                ) do
+  #             nil ->
+  #               my_puts_meal("Add new record for the dose for id #{id} at dose_time ...")
+  #               create_new_dose_record.(dose_time, "meal", nil)
+
+  #             existing ->
+  #               my_puts_meal("Update existing record to make it a dose for id #{id} at dose ...")
+
+  #               update_record.(
+  #                 existing,
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: doses,
+  #                   meal_time: nil,
+  #                   event_type: "dose",
+  #                   dose_type: "meal",
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+  #           end
+
+  #           # Create the reading record (add the blood_sugar)
+  #           create_new_reading_record.(event_time, blood_sugar)
+
+  #         # Case 6: Update to meal
+  #         event_time == meal_time and doses == nil ->
+  #           my_puts_meal("Case 6 id = #{id} update to meal")
+
+  #           # Update original record to remove meal_time (event_time IS meal_time)
+  #           update_record.(
+  #             %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #             %{
+  #               meal_time: nil
+  #             }
+  #           )
+
+  #         # Case 7: Update to reading, add meal
+  #         event_time != meal_time and doses == nil ->
+  #           my_puts_meal("Case 7 id = #{id} update to reading, add meal")
+
+  #           # Update original record for meal at meal_time or meal_time + 1
+  #           # and remove dose info and meal_time and BS
+  #           # Is there already a record at meal time?
+  #           case Repo.one(
+  #                  from t in DiabetesV1.Times.Time,
+  #                    where: t.day_id == ^day_id and t.event_time == ^meal_time
+  #                ) do
+  #             nil ->
+  #               my_puts_meal(
+  #                 "Update original record to make it a meal for id #{id} at meal_time ..."
+  #               )
+
+  #               update_record.(
+  #                 %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: nil,
+  #                   meal_time: nil,
+  #                   event_type: "meal",
+  #                   event_time: meal_time,
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+
+  #             existing ->
+  #               my_puts_meal(
+  #                 "Update original record at meal_time to make it a meal for id #{id} at meal_time + 1 min ..."
+  #               )
+
+  #               update_record.(
+  #                 %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #                 %{
+  #                   dose_time: nil,
+  #                   doses: nil,
+  #                   meal_time: nil,
+  #                   event_type: "meal",
+  #                   event_time: adjust_time(meal_time, 1),
+  #                   blood_sugar: nil
+  #                 }
+  #               )
+  #           end
+
+  #           # Create the reading record (add the blood_sugar)
+  #           create_new_reading_record.(event_time, blood_sugar)
+  #       end
+  #     else
+  #       # Case 8: Update to dose
+  #       if(event_time == dose_time and meal_time == nil) do
+  #         my_puts_meal("Case 8 id = #{id} update to dose")
+
+  #         # Update original record to remove dose_time (event_time IS dose_time)
+  #         update_record.(
+  #           %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #           %{
+  #             dose_time: nil,
+  #             dose_type: "boost"
+  #           }
+  #         )
+  #       end
+
+  #       # Case 9: Update to reading, add dose
+  #       if event_time != dose_time and meal_time == nil do
+  #         my_puts_meal("Case 9 id = #{id} update to reading, add dose")
+
+  #         # Update original record to be a reading and remove dose info
+  #         update_record.(
+  #           %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
+  #           %{
+  #             doses: nil,
+  #             dose_time: nil,
+  #             event_type: "reading"
+  #           }
+  #         )
+
+  #         # Check and update/create the dose record
+  #         # Is there already a record at dose time?
+  #         new_dose_id =
+  #           case Repo.one(
+  #                  from t in DiabetesV1.Times.Time,
+  #                    where: t.day_id == ^day_id and t.event_time == ^dose_time
+  #                ) do
+  #             nil ->
+  #               my_puts_meal(
+  #                 "No existing record found; creating a new dose record for id #{id} ..."
+  #               )
+
+  #               {:ok, dose_record} = create_new_dose_record.(dose_time, "boost")
+  #               dose_record.id
+
+  #             existing ->
+  #               my_puts_meal("Updating existing record to make it a dose for id #{id} ...")
+
+  #               update_record.(existing, %{event_type: "dose", doses: doses, dose_type: "boost"})
+
+  #               existing.id
+  #           end
+  #       end
+  #     end
+  #   end)
+  # end
+
+  # def seed_times_data_separating_meals_in_transaction(csv_file) do
+  #   Repo.transaction(fn ->
+  #     seed_times_data_separating_meals(csv_file)
+  #   end)
+  # end
+
+  def seed_times_exercise_id do
+    IO.puts("Updating times with exercise_id...")
+
+    NimbleCSV.RFC4180.parse_stream(File.stream!("priv/repo/times.csv"))
     |> Enum.each(fn [
                       id,
-                      day_id,
+                      _day_id,
                       _date,
-                      event_time,
-                      blood_sugar,
-                      meal_num,
-                      dose_time,
-                      doses,
+                      _event_time,
+                      _blood_sugar,
+                      _meal_num,
+                      _dose_time,
+                      _doses,
                       _split_dose_time,
                       _split_doses,
-                      meal_time,
+                      _meal_time,
                       _two_hrs_bs,
-                      _exercise_id,
-                      _exercise_start,
+                      exercise_id,
+                      exercise_start,
                       _exercise_end,
-                      event_type,
-                      dose_type
+                      _event_type,
+                      _dose_type
                     ] ->
-      if meal_num != "" do
-        my_puts_meal("Processing record id. #{id}")
-        # Parse values
-        id = String.to_integer(id || "0")
-        day_id = String.to_integer(day_id || "0")
-        event_time = parse_time(event_time || "00:00:00")
-        meal_num = String.to_integer(meal_num || "0")
-        dose_time = parse_time(dose_time || "00:00:00")
-        doses = String.to_integer(doses || "0")
-        meal_time = parse_time(meal_time || "00:00:00")
-        event_type = String.trim(event_type)
-        dose_type = String.trim(dose_type)
-        new_meal_id = nil
-        saved_event_time = event_time
+      # Only update records where exercise_start is present
+      if not is_nil(exercise_start) and exercise_start != "" do
+        parsed_exercise_id = parse_integer(String.trim(exercise_id))
 
-        # Helper: Update a record
-        update_record = fn record, changes ->
-          record
-          |> Ecto.Changeset.cast(changes, Map.keys(changes))
-          |> Repo.update()
-        end
+        # Debug: Check if exercise_id is parsed correctly
+        IO.inspect(exercise_id, label: "Raw Exercise ID from CSV")
+        IO.inspect(parsed_exercise_id, label: "Parsed Exercise ID")
 
-        # Helper: Create a new dose record, pass event_time in as new_dose_time
-        # pass dose_type in as new_dose_type, and pass blood_sugar in as reading
-        create_new_dose_record = fn new_dose_time, new_dose_type.reading ->
-          DiabetesV1.Times.create_time(%{
-            id: get_next_id(),
-            day_id: day_id,
-            event_time: new_dose_time,
-            event_type: "dose",
-            dose_type: new_dose_type,
-            blood_sugar: reading,
-            meal_num: nil,
-            from_meal: id,
-            dose_time: nil,
-            doses: doses,
-            meal_time: nil,
-            exercise_id: nil,
-            exercise_mins: nil
-          })
-        end
+        case Times.get_time!(String.to_integer(id)) do
+          %Times.Time{} = time ->
+            # Debugging step
+            IO.inspect(time, label: "Fetched time")
 
-        # Helper: Create a new reading record, pass event_time in as new_reading_time
-        # pass blood_sugar in as reading
-        create_new_reading_record = fn new_reading_time, reading ->
-          DiabetesV1.Times.create_time(%{
-            id: get_next_id(),
-            day_id: day_id,
-            event_time: new_reading_time,
-            event_type: "reading",
-            dose_type: nil,
-            blood_sugar: reading,
-            meal_num: nil,
-            from_meal: nil,
-            dose_time: nil,
-            doses: doses,
-            meal_time: nil,
-            exercise_id: nil,
-            exercise_mins: nil
-          })
-        end
+            case Times.update_time(time, %{exercise_id: parsed_exercise_id}) do
+              {:ok, updated_time} ->
+                # Debug: Verify the updated record
+                IO.inspect(updated_time, label: "Updated Time Record")
+                IO.puts("Updated time #{id} with exercise_id #{parsed_exercise_id}.")
 
-        cond do
-          # Case 1: Update to meal, add dose
-          event_time == dose_time and dose_time == meal_time ->
-            my_puts_meal("Case 1: id = #{id} update to meal, add dose")
-
-            # Update original record to be a meal and remove dose info and meal_time
-            update_record.(
-              %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-              %{
-                dose_time: nil,
-                doses: nil,
-                meal_time: nil,
-                event_type: "meal"
-              }
-            )
-
-            # Check and update/create the dose record
-            # Is there already a record at event time - 1?
-            case Repo.one(
-                   from t in DiabetesV1.Times.Time,
-                     where: t.day_id == ^day_id and t.event_time == ^adjust_time(event_time, 1)
-                 ) do
-              nil ->
-                my_puts_meal(
-                  "No existing record at event_time + 1; creating a new dose record for id #{id} ..."
-                )
-
-                create_new_dose_record.(adjust_time(event_time, 1), "meal", nil)
-
-              existing ->
-                my_puts_meal("Updating existing record to make it a dose for id #{id} ...")
-
-                update_record.(existing, %{
-                  event_type: "dose",
-                  dose_type: "meal",
-                  doses: doses,
-                  from_meal: id
-                })
+              {:error, changeset} ->
+                IO.puts("Failed to update time ID #{id}")
+                IO.inspect(changeset.errors, label: "Update Error")
             end
 
-          # Case 2: Update original record as meal, add dose record
-          event_time == dose_time and dose_time != meal_time ->
-            my_puts_meal("Case 2: id = #{id} update original record to meal, add dose")
-
-            # Update original record to meal at meal_time and remove dose info and meal_time and BS
-            # Is there already a record at meal time?
-            case Repo.one(
-                   from t in DiabetesV1.Times.Time,
-                     where: t.day_id == ^day_id and t.event_time == ^meal_time
-                 ) do
-              nil ->
-                # No records at meal_time so change original record event_time to meal_time
-                my_puts_meal(
-                  "Update original record to make it a meal for id #{id} at meal_time ..."
-                )
-
-                update_record.(
-                  %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-                  %{
-                    dose_time: nil,
-                    doses: nil,
-                    meal_time: nil,
-                    event_type: "meal",
-                    event_time: meal_time,
-                    blood_sugar: nil
-                  }
-                )
-
-              existing ->
-                # A record exists at meal_time so change original record event_time to meal_time + 1
-                my_puts_meal(
-                  "Update original record to make it a meal for id #{id} at meal_time + 1 min ..."
-                )
-
-                update_record.(
-                  %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-                  %{
-                    dose_time: nil,
-                    doses: nil,
-                    meal_time: nil,
-                    event_type: "meal",
-                    event_time: adjust_time(meal_time, 1),
-                    blood_sugar: nil
-                  }
-                )
-            end
-
-            # Add the dose record (add the blood_sugar)
-            create_new_dose_record.(dose_time, "meal", blood_sugar)
-
-          # Case 3: Update original to meal, add/update dose, add reading
-          event_time != dose_time and dose_time == meal_time ->
-            my_puts_meal(
-              "Case 3 id = #{id} update original record to meal, add dose, add reading"
-            )
-
-            # Update original record for meal at meal_time or meal_time + 1
-            # and remove dose info and meal_time and BS
-            # Is there already a record at meal time?
-            case Repo.one(
-                   from t in DiabetesV1.Times.Time,
-                     where: t.day_id == ^day_id and t.event_time == ^meal_time
-                 ) do
-              nil ->
-                my_puts_meal(
-                  "Update original record to make it a meal for id #{id} at meal_time ..."
-                )
-
-                update_record.(
-                  %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-                  %{
-                    dose_time: nil,
-                    doses: nil,
-                    meal_time: nil,
-                    event_type: "meal",
-                    event_time: meal_time,
-                    blood_sugar: nil
-                  }
-                )
-
-              existing ->
-                my_puts_meal(
-                  "Update original record at meal_time to make it a meal for id #{id} at meal_time + 1 min ..."
-                )
-
-                update_record.(
-                  %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-                  %{
-                    dose_time: nil,
-                    doses: nil,
-                    meal_time: nil,
-                    event_type: "meal",
-                    event_time: adjust_time(meal_time, 1),
-                    blood_sugar: nil
-                  }
-                )
-            end
-
-            # Update existing record/add new record for dose at meal_time - 1
-            # Is there already a record at meal time - 1?
-            case Repo.one(
-                   from t in DiabetesV1.Times.Time,
-                     where: t.day_id == ^day_id and t.event_time == ^adjust_time(meal_time, -1)
-                 ) do
-              nil ->
-                my_puts_meal("Add new record for the dose for id #{id} at meal_time - 1 ...")
-                create_new_dose_record.(adjust_time(meal_time, -1), "meal", nil)
-
-              existing ->
-                my_puts_meal(
-                  "Update existing record at meal_time - 1 min to make it a dose for id #{id}  ..."
-                )
-
-                update_record.(
-                  existing,
-                  %{
-                    dose_time: nil,
-                    doses: doses,
-                    meal_time: nil,
-                    event_type: "dose",
-                    dose_type: "meal",
-                    blood_sugar: nil
-                  }
-                )
-            end
-
-            # Create the reading record (add the blood_sugar)
-            create_new_reading_record.(event_time, blood_sugar)
-
-          # Case 4: Update to meal, add dose
-          event_time == meal_time and event_time != dose_time ->
-            my_puts_meal("Case 4 id = #{id} update to meal, add dose")
-
-            new_meal_id = id
-
-            # Update original record to be a meal and remove dose info
-            update_record.(
-              %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-              %{
-                dose_time: nil,
-                doses: nil,
-                event_type: "meal"
-              }
-            )
-
-            # Check and update/create the dose record
-            # Is there already a record at dose time?
-            case Repo.one(
-                   from t in DiabetesV1.Times.Time,
-                     where: t.day_id == ^day_id and t.event_time == ^dose_time
-                 ) do
-              nil ->
-                my_puts_meal(
-                  "No existing record found; creating a new dose record for id #{id} ..."
-                )
-
-                create_new_dose_record.(dose_time, "meal")
-
-              existing ->
-                my_puts_meal("Updating existing record to make it a dose for id #{id} ...")
-
-                update_record.(existing, %{
-                  event_type: "dose",
-                  dose_type: "meal",
-                  doses: doses,
-                  from_meal: new_meal_id
-                })
-            end
-
-          # Case 5: Update to meal, add dose, add reading
-          event_time != dose_time and event_time != meal_time and dose_time != meal_time ->
-            my_puts_meal("Case 5 id = #{id} update to meal, add dose, add reading")
-
-            # Update original record for meal at meal_time
-            # and remove dose info and meal_time and BS
-            # Is there already a record at meal time?
-            case Repo.one(
-                   from t in DiabetesV1.Times.Time,
-                     where: t.day_id == ^day_id and t.event_time == ^meal_time
-                 ) do
-              nil ->
-                my_puts_meal(
-                  "Update original record to make it a meal for id #{id} at meal_time ..."
-                )
-
-                update_record.(
-                  %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-                  %{
-                    dose_time: nil,
-                    doses: nil,
-                    meal_time: nil,
-                    event_type: "meal",
-                    event_time: meal_time,
-                    blood_sugar: nil
-                  }
-                )
-
-              existing ->
-                my_puts_meal(
-                  "Update original record to make it a meal for id #{id} at meal_time + 1 min ..."
-                )
-
-                update_record.(
-                  %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-                  %{
-                    dose_time: nil,
-                    doses: nil,
-                    meal_time: nil,
-                    event_type: "meal",
-                    event_time: adjust_time(meal_time, 1),
-                    blood_sugar: nil
-                  }
-                )
-            end
-
-            # Update existing record/add new record for dose at dose
-            # Is there already a record at dose time?
-            case Repo.one(
-                   from t in DiabetesV1.Times.Time,
-                     where: t.day_id == ^day_id and t.event_time == dose_time
-                 ) do
-              nil ->
-                my_puts_meal("Add new record for the dose for id #{id} at dose_time ...")
-                create_new_dose_record.(dose_time, "meal", nil)
-
-              existing ->
-                my_puts_meal("Update existing record to make it a dose for id #{id} at dose ...")
-
-                update_record.(
-                  existing,
-                  %{
-                    dose_time: nil,
-                    doses: doses,
-                    meal_time: nil,
-                    event_type: "dose",
-                    dose_type: "meal",
-                    blood_sugar: nil
-                  }
-                )
-            end
-
-            # Create the reading record (add the blood_sugar)
-            create_new_reading_record.(event_time, blood_sugar)
-
-          # Case 6: Update to meal
-          event_time == meal_time and doses == nil ->
-            my_puts_meal("Case 6 id = #{id} update to meal")
-
-            # Update original record to remove meal_time (event_time IS meal_time)
-            update_record.(
-              %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-              %{
-                meal_time: nil
-              }
-            )
-
-          # Case 7: Update to reading, add meal
-          event_time != meal_time and doses == nil ->
-            my_puts_meal("Case 7 id = #{id} update to reading, add meal")
-
-            # Update original record for meal at meal_time or meal_time + 1
-            # and remove dose info and meal_time and BS
-            # Is there already a record at meal time?
-            case Repo.one(
-                   from t in DiabetesV1.Times.Time,
-                     where: t.day_id == ^day_id and t.event_time == ^meal_time
-                 ) do
-              nil ->
-                my_puts_meal(
-                  "Update original record to make it a meal for id #{id} at meal_time ..."
-                )
-
-                update_record.(
-                  %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-                  %{
-                    dose_time: nil,
-                    doses: nil,
-                    meal_time: nil,
-                    event_type: "meal",
-                    event_time: meal_time,
-                    blood_sugar: nil
-                  }
-                )
-
-              existing ->
-                my_puts_meal(
-                  "Update original record at meal_time to make it a meal for id #{id} at meal_time + 1 min ..."
-                )
-
-                update_record.(
-                  %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-                  %{
-                    dose_time: nil,
-                    doses: nil,
-                    meal_time: nil,
-                    event_type: "meal",
-                    event_time: adjust_time(meal_time, 1),
-                    blood_sugar: nil
-                  }
-                )
-            end
-
-            # Create the reading record (add the blood_sugar)
-            create_new_reading_record.(event_time, blood_sugar)
-        end
-      else
-        # Case 8: Update to dose
-        if(event_time == dose_time and meal_time == nil) do
-          my_puts_meal("Case 8 id = #{id} update to dose")
-
-          # Update original record to remove dose_time (event_time IS dose_time)
-          update_record.(
-            %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-            %{
-              dose_time: nil,
-              dose_type: "boost"
-            }
-          )
-        end
-
-        # Case 9: Update to reading, add dose
-        if event_time != dose_time and meal_time == nil do
-          my_puts_meal("Case 9 id = #{id} update to reading, add dose")
-
-          # Update original record to be a reading and remove dose info
-          update_record.(
-            %DiabetesV1.Times.Time{id: id, day_id: day_id, event_time: event_time},
-            %{
-              doses: nil,
-              dose_time: nil,
-              event_type: "reading"
-            }
-          )
-
-          # Check and update/create the dose record
-          # Is there already a record at dose time?
-          new_dose_id =
-            case Repo.one(
-                   from t in DiabetesV1.Times.Time,
-                     where: t.day_id == ^day_id and t.event_time == ^dose_time
-                 ) do
-              nil ->
-                my_puts_meal(
-                  "No existing record found; creating a new dose record for id #{id} ..."
-                )
-
-                {:ok, dose_record} = create_new_dose_record.(dose_time, "boost")
-                dose_record.id
-
-              existing ->
-                my_puts_meal("Updating existing record to make it a dose for id #{id} ...")
-
-                update_record.(existing, %{event_type: "dose", doses: doses, dose_type: "boost"})
-
-                existing.id
-            end
+          nil ->
+            IO.puts("No record found for ID #{id}")
         end
       end
-    end)
-  end
-
-  def seed_times_data_separating_meals_in_transaction(csv_file) do
-    Repo.transaction(fn ->
-      seed_times_data_separating_meals(csv_file)
     end)
   end
 end
@@ -2236,10 +1993,11 @@ end
 # MySeeder.seed_meals_data()
 # MySeeder.add_event_type_for_times_data()
 # MySeeder.seed_times_data_adding_split_doses()
-
+#   * Fix exercise_id being missing
+MySeeder.seed_times_exercise_id()
 # todo NEXT!!!!!
 #      *insert test cases for exercises
-mySeeder.insert_time_test_data("priv/repo/times-test-exercise-cases.csv")
+# mySeeder.insert_time_test_data("priv/repo/times-test-exercise-cases.csv")
 #      *run the function on test exercise data
 # MySeeder.seed_times_data_separating_exercises_in_transaction("priv/repo/times-test-exercise-cases.csv")
 #      *remove test cases and new records added due to test cases
